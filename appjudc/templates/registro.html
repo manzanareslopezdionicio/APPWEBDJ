@@ -2,8 +2,13 @@
 {% block titulo %}Login JUDC{% endblock %}
 {% load static %}
 {% block contenido %}
-<div class="container">
-    <div class="row col-md-8 p-4 offset-md-2">
+<div class="row container">
+    <div class=" col-md-4">
+        <div class="p-4">
+            <img src="{% static 'img/registro.png' %}" width="100%" alt="logo">
+        </div>
+    </div>
+    <div class="row col-md-6 p-4 offset-md-2">
         <div class="card text-start shadow rounded-4 bg-primary-subtle">
             <div class="card-body">
        <!--          <div style="text-align: center;"><img src="{% static 'img/login.png' %}" width="40%" alt="logo"></div> -->
@@ -54,7 +59,7 @@
                             <label for="passwordf" class="form-label">Confirmar contraseña</label>
                         </div>
                     </div>
-                    <div style="text-align: center;">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="text-align: center;">
                         <button type="submit" class="btn btn-primary ">Registrarse</button>
                     </div>
                 </form>
