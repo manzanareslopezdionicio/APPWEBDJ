@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
-{% block titulo %}Inicio{% endblock %}
+{% block titulo %}Login JUDC{% endblock %}
 
 {% block contenido %}
 <div class="container mt-3">
     <div class="row col-md-6 p-4 offset-md-3">
         <div class="card text-start shadow rounded-4 bg-primary-subtle">
             <div class="card-body">
+                <div class=""><img src="{% static 'img/login.png'%}" alt=""></div>
                 <h5 class="card-title text-center mb-4">Iniciar sesión</h5>
-                <form action="" method="post">
+                <form actio method="post">
                     <!--  {% csrf_token %} -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="username" name="usuario" placeholder="Usuario" required>
