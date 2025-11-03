@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block titulo %}Login JUDC{% endblock %}
+{% load static %}
+{% block contenido %}
+<div class="container">
+    <div class="row col-md-8 p-4 offset-md-2">
+        <div class="card text-start shadow rounded-4 bg-primary-subtle">
+            <div class="card-body">
+       <!--          <div style="text-align: center;"><img src="{% static 'img/login.png' %}" width="40%" alt="logo"></div> -->
+                <h5 class="card-title text-center mb-4">Registro de Usuarios</h5>
+                <form class="row" action="" method="post">
+                    <!--  {% csrf_token %} -->
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="carnet" name="carnet"
+                                placeholder="Número de Carnet" required>
+                            <label for="carnet" class="form-label">Número de Carnet</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres"
+                                required>
+                            <label for="nombre" class="form-label">Nombre</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="apellidos" name="apellidos"
+                                placeholder="Apellidos" required>
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo Electrónico"
+                                required>
+                            <label for="email" class="form-label">Email</label>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Contraseña" required>
+                            <label for="password" class="form-label">Contraseña</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="passwordf" name="passwordf"
+                                placeholder="Confirmar contraseña" required>
+                            <label for="passwordf" class="form-label">Confirmar contraseña</label>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary ">Registrarse</button>
+                    </div>
+                </form>
+                <div>
+                    <p class="text-center m-3">¿Tiene una cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
