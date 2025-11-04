@@ -6,3 +6,4 @@ def login(request):
 
 def registro(request):
     return render(request, 'registro.html')
+

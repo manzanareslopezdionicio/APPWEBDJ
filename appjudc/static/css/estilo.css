@@ -1,0 +1,13 @@
+/* Estilos por defecto del input */
+.mi-input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.5s ease; /* Añade una transición suave al cambio de color del borde */
+}
+
+/* Estilos al pasar el mouse sobre el input */
+.mi-input:hover {
+  border-color: rgb(2, 197, 28); /* Cambia el color del borde a azul */
+  box-shadow: 0 0 10px rgb(2, 143, 30); /* Añade una sombra sutil */
+}
