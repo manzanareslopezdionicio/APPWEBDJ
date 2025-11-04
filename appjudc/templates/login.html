@@ -3,7 +3,7 @@
 {% load static %}
 {% block contenido %}
 <div class="container">
-   
+
     <div class="row col-md-6 p-4 offset-md-3">
         <div class="card text-start shadow rounded-4 bg-primary-subtle">
             <div class="card-body">
@@ -12,19 +12,24 @@
                 <form action="" method="post">
                     <!--  {% csrf_token %} -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control mi-input" id="username" name="usuario" placeholder="Usuario"
-                            required>
+                        <input type="text" class="form-control mi-input" id="username" name="usuario"
+                            placeholder="Usuario" required autofocus>
                         <label for="username" class="form-label">Usuario</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control mi-input" id="password" name="password"
                             placeholder="Contraseña" required>
                         <label for="password" class="form-label">Contraseña</label>
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor:pointer;"
+                            onclick="topass()">
+                            <i class="bi bi-eye-slash-fill" id="topass" style="color:green; font-size:1.3rem;"></i>
+                        </span>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
                 </form>
                 <div>
-                    <p class="text-center m-3">¿No tienes una cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a></p>
+                    <p class="text-center m-3">¿No tienes una cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a>
+                    </p>
                 </div>
             </div>
         </div>

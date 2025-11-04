@@ -17,14 +17,14 @@
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control mi-input" id="carnet" name="carnet"
-                                placeholder="Número de Carnet" required>
+                                placeholder="Número de Carnet" required autofocus>
                             <label for="carnet" class="form-label">Número de Carnet</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control mi-input" id="nombre" name="nombre" placeholder="Nombres"
-                                required>
+                            <input type="text" class="form-control mi-input" id="nombre" name="nombre"
+                                placeholder="Nombres" required>
                             <label for="nombre" class="form-label">Nombre</label>
                         </div>
                     </div>
@@ -44,20 +44,28 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control mi-input" id="password" name="password"
+                            <input type="password" class="form-control mi-input" id="password1" name="password"
                                 placeholder="Contraseña" required>
                             <label for="password" class="form-label">Contraseña</label>
+                            <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor:pointer;"
+                                onclick="topass1()">
+                                <i class="bi bi-eye-slash-fill" id="topass1" style="color:green; font-size:1.3rem;"></i>
+                            </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control mi-input" id="passwordf" name="passwordf"
                                 placeholder="Confirmar contraseña" required>
-                            <label for="passwordf" class="form-label">Confirmar contraseña</label>
+                            <label for="password" class="form-label">Confirmar contraseña</label>
+                            <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor:pointer;"
+                                onclick="topass2()">
+                                <i class="bi bi-eye-slash-fill" id="topass2" style="color:green; font-size:1.3rem;"></i>
+                            </span>
                         </div>
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="text-align: center;">
-                        <button type="submit" class="btn btn-primary ">Registrarse</button>
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
                     </div>
                 </form>
                 <div>
