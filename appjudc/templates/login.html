@@ -9,15 +9,13 @@
             <div class="card-body">
                 <div style="text-align: center;"><img src="{% static 'img/login.png' %}" width="40%" alt="logo"></div>
                 <h5 class="card-title text-center mb-4">Iniciar sesión</h5>
-                
+
                 <form action="" method="post">
-                    <!--  {% csrf_token %} -->
+                    {% csrf_token %}
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control mi-input" id="carnet" name="carnet"
                             placeholder="12-34567-8" inputmode="numeric" pattern="\d{2}-\d{5}-\d"
-                            title="Formato: 99-99999-9"
-                            maxlength="10"
-                            required autofocus>
+                            title="Formato: 99-99999-9" maxlength="10" required autofocus>
                         <label for="carnet" class="form-label">Número de Carnet</label>
                         <div class="invalid-feedback">Formato inválido. Use 12-34567-8</div>
                     </div>
