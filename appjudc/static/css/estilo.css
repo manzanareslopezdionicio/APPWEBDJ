@@ -8,6 +8,12 @@
 
 /* Estilos al pasar el mouse sobre el input */
 .mi-input:hover {
-  border-color: rgb(2, 197, 28); /* Cambia el color del borde a azul */
-  box-shadow: 0 0 10px rgb(2, 143, 30); /* Añade una sombra sutil */
+  border-color: rgb(240, 213, 60); /* Cambia el color del borde a rojo */
+  box-shadow: 0 0 10px rgb(59, 103, 249); /* Añade una sombra sutil */
+}
+
+/* Fondo azul oscuro personalizado para la plantilla */
+.bg-azul-oscuro {
+  background-color: #02116F; /* azul oscuro */
+  color: #ffffff; /* texto blanco para contraste */
 }
