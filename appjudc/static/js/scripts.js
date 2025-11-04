@@ -85,3 +85,42 @@ $(document).ready(function () {
         }
     });
 });
+
+// Máscara simple para formato 99-99999-9 en #carnet (sin librerías externas)
+$(document).ready(function () {
+    var $c = $('#carnet');
+    if ($c.length) {
+        // Asegurar atributos HTML básicos
+        $c.attr('maxlength', 10).attr('inputmode', 'numeric').attr('placeholder', '12-34567-8');
+
+        $c.on('input', function () {
+            var v = $(this).val().replace(/\D/g, '').slice(0, 8); // solo dígitos, máximo 8
+            var p1 = v.slice(0, 2);
+            var p2 = v.slice(2, 7);
+            var p3 = v.slice(7, 8);
+            var out = '';
+            if (p1) out += p1;
+            if (p2) out += '-' + p2;
+            if (p3) out += '-' + p3;
+            $(this).val(out);
+            // quitar estado inválido al corregir
+            if (/^\d{2}-\d{5}-\d$/.test(out)) {
+                $(this).removeClass('is-invalid');
+            }
+        });
+
+        // Validación al enviar el formulario: impedir submit si formato inválido
+        $c.closest('form').on('submit', function (e) {
+            var val = $c.val();
+            var re = /^\d{2}-\d{5}-\d$/;
+            if (!re.test(val)) {
+                e.preventDefault();
+                $c.addClass('is-invalid');
+                $c.focus();
+            } else {
+                $c.removeClass('is-invalid');
+            }
+        });
+    }
+});
+
