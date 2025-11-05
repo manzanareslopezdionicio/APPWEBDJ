@@ -15,5 +15,8 @@ def login(request):
 def registro(request):
     return render(request, 'registro.html')
 
+def index(request):
+    return render(request, 'index.html')
+
 def estudiante(request):
     return render(request, 'estudiante.html')
