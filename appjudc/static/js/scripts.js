@@ -123,4 +123,21 @@ $(document).ready(function () {
         });
     }
 });
-
+/* Validación de coincidencia de contraseñas */
+function validatePasswordMatch(){
+    const p = document.getElementById('password1');
+    const pf = document.getElementById('passwordf');
+    const feedback = document.getElementById('pw-match-feedback');
+    if(!pf) return;
+    if(pf.value && pf.value !== p.value){
+        pf.setCustomValidity('Las contraseñas no coinciden');
+        if(feedback) feedback.style.display = 'block';
+    } else {
+        pf.setCustomValidity('');
+        if(feedback) feedback.style.display = '';
+    }
+}
+document.addEventListener('DOMContentLoaded', function(){
+    const p = document.getElementById('password1');
+    if(p) p.addEventListener('input', validatePasswordMatch);
+});

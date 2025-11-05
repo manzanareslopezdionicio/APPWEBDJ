@@ -26,14 +26,20 @@
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control mi-input" id="nombre" name="nombre"
-                                placeholder="Nombres" required>
+                                placeholder="Nombres" required
+                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+"
+                                title="Solo letras, espacios y guiones"
+                                oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ \-]/g,'');">
                             <label for="nombre" class="form-label">Nombre</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control mi-input" id="apellidos" name="apellidos"
-                                placeholder="Apellidos" required>
+                                placeholder="Apellidos" required
+                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+"
+                                title="Solo letras, espacios y guiones"
+                                oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ \-]/g,'');">
                             <label for="apellidos" class="form-label">Apellidos</label>
                         </div>
                     </div>
@@ -47,7 +53,10 @@
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control mi-input" id="password1" name="password"
-                                placeholder="Contraseña" required>
+                                placeholder="Contraseña" required
+                                pattern="(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s]).{8,}"
++                                title="Mínimo 8 caracteres, al menos una letra mayúscula, un número y un símbolo"
++                                oninput="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); validatePasswordMatch();">
                             <label for="password" class="form-label">Contraseña</label>
                             <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor:pointer;"
                                 onclick="topass1()">
@@ -58,7 +67,10 @@
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control mi-input" id="passwordf" name="passwordf"
-                                placeholder="Confirmar contraseña" required>
+                                placeholder="Confirmar contraseña" required
+                                pattern="(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s]).{8,}"
++                                title="Mínimo 8 caracteres, al menos una letra mayúscula, un número y un símbolo"
++                                oninput="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); validatePasswordMatch();">
                             <label for="password" class="form-label">Confirmar contraseña</label>
                             <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor:pointer;"
                                 onclick="topass2()">
