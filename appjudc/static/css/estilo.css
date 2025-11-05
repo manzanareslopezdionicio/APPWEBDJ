@@ -1,3 +1,4 @@
+
 /* Estilos por defecto del input */
 .mi-input {
   padding: 6px;
@@ -23,56 +24,3 @@
   /* texto blanco para contraste */
 }
 
-/* Estilos adicionales para la plantilla */
-.sidebar {
-  min-height: 100vh;
-  background-color: #f8f9fa;
-  transition: all 0.3s;
-}
-
-.accordion-button:not(.collapsed) {
-  background-color: #007bff;
-  color: white;
-}
-
-.navbar-toggler {
-  border: none;
-  font-size: 1.5rem;
-}
-
-.offcanvas {
-  max-width: 300px;
-}
-
-.menu-header {
-  background-color: #343a40;
-  color: white;
-  padding: 15px;
-  text-align: center;
-}
-
-.list-group-item {
-  border: none;
-  border-radius: 0;
-  padding-left: 2rem;
-}
-
-.list-group-item:hover {
-  background-color: #e9ecef;
-}
-
-.content-area {
-  transition: all 0.3s;
-}
-
-@media (max-width: 768px) {
-  .sidebar-desktop {
-    display: none;
-  }
-}
-
-@media (min-width: 769px) {
-  .mobile-toggle {
-    display: none;
-  }
-}

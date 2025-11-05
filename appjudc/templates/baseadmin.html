@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +11,100 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'estilos.css' %}">
+
     <style>
-        
+        /* Estilos adicionales para la plantilla */
+        .sidebar {
+            min-height: 100vh;
+            background-color: #354d63;
+            transition: all 0.3s;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .navbar-toggler {
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        .offcanvas {
+            max-width: 200px;
+        }
+
+        .menu-header {
+            background-color: #343a40;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Opción simple (sin caret) y estilos de subopciones */
+        .menu-simple-link {
+            background: transparent;
+            color: #ffffff;
+            border: none;
+            padding-left: 2rem;
+            display: block;
+        }
+        .menu-simple-link:hover {
+            background: transparent;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* Subopciones: color y transición en hover */
+        .sidebar .suboption {
+            padding-left: 3rem;
+            color: rgba(0, 0, 0, 0.9);
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar .suboption:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        /* Offcanvas (móvil) subopciones hover */
+        .offcanvas .suboption:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .list-group-item {
+            border: none;
+            border-radius: 0;
+            padding-left: 2rem;
+        }
+
+        .list-group-item:hover {
+            background-color: #e9ecef;
+        }
+
+        .content-area {
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-desktop {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-toggle {
+                display: none;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Navbar con botón hamburguesa para móviles -->
     <nav class="navbar navbar-dark bg-dark mobile-toggle">
         <div class="container-fluid">
-            <span class="navbar-brand">Mi Aplicación</span>
+            <span class="navbar-brand d-flex justify-content-center flex-grow-1">JUDC</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
                 <i class="bi bi-list"></i>
             </button>
@@ -33,18 +119,18 @@
                     <h5>Menú Principal</h5>
                 </div>
                 <div class="accordion mt-3" id="menuAccordion">
-                    
+
                     <!-- Opción 1 -->
                     <div class="accordion-item">
+                        
                         <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" 
-                                    data-bs-target="#collapseOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne">
                                 <i class="bi bi-folder me-2"></i> Opción 1
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" 
-                             data-bs-parent="#menuAccordion">
-                            <div class="accordion-body p-0">
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
+                            <div class="accordion-body p-0 accordion-primary">
                                 <div class="list-group list-group-flush">
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <i class="bi bi-file-earmark me-2"></i> Subopción 1.1
@@ -60,13 +146,12 @@
                     <!-- Opción 2 -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" 
-                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo">
                                 <i class="bi bi-bar-chart me-2"></i> Opción 2
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" 
-                             data-bs-parent="#menuAccordion">
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
                             <div class="accordion-body p-0">
                                 <div class="list-group list-group-flush">
                                     <a href="#" class="list-group-item list-group-item-action">
@@ -83,13 +168,12 @@
                     <!-- Opción 3 -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" 
-                                    data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree">
                                 <i class="bi bi-gear me-2"></i> Opción 3
                             </button>
                         </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" 
-                             data-bs-parent="#menuAccordion">
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
                             <div class="accordion-body p-0">
                                 <div class="list-group list-group-flush">
                                     <a href="#" class="list-group-item list-group-item-action">
@@ -102,7 +186,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action suboption">
+                            <i class="bi bi-bar-chart me-2"></i> Subopción A
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action suboption">
+                            <i class="bi bi-bar-chart me-2"></i> Subopción B
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Opción Simple (sin caret) con subopciones visibles -->
+                <div class="mt-3">
+
+                    
+                </div>
+
             </div>
 
             <!-- Contenido Principal -->
@@ -110,22 +209,23 @@
                 <h1>Contenido Principal</h1>
                 <p class="lead">Este es el contenido principal de la aplicación.</p>
                 <div class="alert alert-info">
-                    <i class="bi bi-info-circle me-2"></i> 
+                    <i class="bi bi-info-circle me-2"></i>
                     En dispositivos móviles, utiliza el botón de hamburguesa en la parte superior para abrir el menú.
                 </div>
-                <p>Selecciona una opción del menú para ver su contenido. El menú es completamente responsivo y se adapta a diferentes tamaños de pantalla.</p>
-                
+                <p>Selecciona una opción del menú para ver su contenido. El menú es completamente responsivo y se adapta
+                    a diferentes tamaños de pantalla.</p>
+
                 <div class="row mt-4">
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="card shadow">
                             <div class="card-body">
                                 <h5 class="card-title">Tarjeta 1</h5>
-                                <p class="card-text">Contenido de ejemplo para la primera tarjeta.</p>
+                                <p class="card-text">Contenido de para la primera tarjeta.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="card shadow">
                             <div class="card-body">
                                 <h5 class="card-title">Tarjeta 2</h5>
                                 <p class="card-text">Contenido de ejemplo para la segunda tarjeta.</p>
@@ -133,13 +233,25 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="card shadow">
                             <div class="card-body">
                                 <h5 class="card-title">Tarjeta 3</h5>
                                 <p class="card-text">Contenido de ejemplo para la tercera tarjeta.</p>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- Opción Simple (sin caret) en offcanvas móvil con subopciones -->
+            <div class="mt-3">
+
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-dot me-2"></i> Subopción A
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-dot me-2"></i> Subopción B
+                    </a>
                 </div>
             </div>
         </div>
@@ -153,17 +265,17 @@
         </div>
         <div class="offcanvas-body">
             <div class="accordion" id="mobileMenuAccordion">
-                
+
                 <!-- Opción 1 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" 
-                                data-bs-target="#mobileCollapseOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#mobileCollapseOne">
                             <i class="bi bi-folder me-2"></i> Opción 1
                         </button>
                     </h2>
-                    <div id="mobileCollapseOne" class="accordion-collapse collapse" 
-                         data-bs-parent="#mobileMenuAccordion">
+                    <div id="mobileCollapseOne" class="accordion-collapse collapse"
+                        data-bs-parent="#mobileMenuAccordion">
                         <div class="accordion-body p-0">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
@@ -180,13 +292,13 @@
                 <!-- Opción 2 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" 
-                                data-bs-toggle="collapse" data-bs-target="#mobileCollapseTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#mobileCollapseTwo">
                             <i class="bi bi-bar-chart me-2"></i> Opción 2
                         </button>
                     </h2>
-                    <div id="mobileCollapseTwo" class="accordion-collapse collapse" 
-                         data-bs-parent="#mobileMenuAccordion">
+                    <div id="mobileCollapseTwo" class="accordion-collapse collapse"
+                        data-bs-parent="#mobileMenuAccordion">
                         <div class="accordion-body p-0">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
@@ -203,13 +315,13 @@
                 <!-- Opción 3 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" 
-                                data-bs-toggle="collapse" data-bs-target="#mobileCollapseThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#mobileCollapseThree">
                             <i class="bi bi-gear me-2"></i> Opción 3
                         </button>
                     </h2>
-                    <div id="mobileCollapseThree" class="accordion-collapse collapse" 
-                         data-bs-parent="#mobileMenuAccordion">
+                    <div id="mobileCollapseThree" class="accordion-collapse collapse"
+                        data-bs-parent="#mobileMenuAccordion">
                         <div class="accordion-body p-0">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
@@ -229,4 +341,5 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
