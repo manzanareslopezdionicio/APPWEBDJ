@@ -49,6 +49,7 @@
             padding-left: 2rem;
             display: block;
         }
+
         .menu-simple-link:hover {
             background: transparent;
             color: #ffffff;
@@ -57,25 +58,26 @@
 
         /* Subopciones: color y transición en hover */
         .sidebar .suboption {
-            padding-left: 3rem;
+            padding-left: 1.5rem;
             color: rgba(0, 0, 0, 0.9);
             transition: background-color 0.15s ease, color 0.15s ease;
         }
+
         .sidebar .suboption:hover {
-            background-color: #007bff;
-            color: #ffffff;
+            background-color: #abaeb0;
+            color: #000000;
         }
 
         /* Offcanvas (móvil) subopciones hover */
         .offcanvas .suboption:hover {
-            background-color: #007bff;
-            color: #ffffff;
+            background-color: #abaeb0;
+            color: #000000;
         }
 
         .list-group-item {
             border: none;
             border-radius: 0;
-            padding-left: 2rem;
+            padding-left: 3rem;
         }
 
         .list-group-item:hover {
@@ -122,7 +124,7 @@
 
                     <!-- Opción 1 -->
                     <div class="accordion-item">
-                        
+
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseOne">
@@ -195,13 +197,6 @@
                         </a>
                     </div>
                 </div>
-
-                <!-- Opción Simple (sin caret) con subopciones visibles -->
-                <div class="mt-3">
-
-                    
-                </div>
-
             </div>
 
             <!-- Contenido Principal -->
@@ -243,17 +238,9 @@
                 </div>
             </div>
             <!-- Opción Simple (sin caret) en offcanvas móvil con subopciones -->
-            <div class="mt-3">
 
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
-                        <i class="bi bi-dot me-2"></i> Subopción A
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
-                        <i class="bi bi-dot me-2"></i> Subopción B
-                    </a>
-                </div>
-            </div>
+
+
         </div>
     </div>
 
@@ -333,6 +320,15 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-dot me-2"></i> Subopción A
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-dot me-2"></i> Subopción B
+                    </a>
                 </div>
             </div>
         </div>
