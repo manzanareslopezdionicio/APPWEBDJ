@@ -69,7 +69,7 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-primary">
                         <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="#" class="collapsed" aria-expanded="false">
+                            <a  href="{% url 'index' %}" >
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -95,7 +95,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{% url 'estudiante' %}">
                                             <span class="sub-item">Estudiantes</span>
                                         </a>
                                     </li>
@@ -109,7 +109,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#rep">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="bi bi-file-earmark-bar-graph-fill"></i>
                                 <p>Reportes</p>
                                 <span class="caret" style="color: #fff"></span>
                             </a>
@@ -134,7 +134,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="#">
+                            <a href="{% url 'index' %}">
                                <i class="bi bi-clipboard2-plus-fill"></i>
                                 <p>Incripciones</p>
                             </a>

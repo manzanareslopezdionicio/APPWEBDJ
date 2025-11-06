@@ -19,7 +19,7 @@ def index(request):
     return render(request, 'index.html')
 
 def estudiante(request):
-    return render(request, 'estudiante.html')
+    return render(request, 'vistas/estudiante.html')
 
 def indexUsuario(request):
     return render(request, 'indexusuario.html')
