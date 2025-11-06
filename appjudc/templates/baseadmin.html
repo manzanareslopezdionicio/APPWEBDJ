@@ -1,341 +1,290 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Vertical Responsivo</title>
-    <!-- Bootstrap CSS -->
-    <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% block title %}{% endblock %}</title>
 
-    <style>
-        /* Estilos adicionales para la plantilla */
-        .sidebar {
-            min-height: 100vh;
-            background-color: #354d63;
-            transition: all 0.3s;
-        }
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="{% static 'assets/img/kaiadmin/favicon.ico' %}" type="image/x-icon" />
 
-        .accordion-button:not(.collapsed) {
-            background-color: #007bff;
-            color: white;
-        }
+    <!-- Fonts and icons -->
+    <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["{% static 'assets/css/fonts.min.css' %}"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
 
-        .navbar-toggler {
-            border: none;
-            font-size: 1.5rem;
-        }
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/plugins.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/kaiadmin.min.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-        .offcanvas {
-            max-width: 200px;
-        }
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
 
-        .menu-header {
-            background-color: #343a40;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        /* Opción simple (sin caret) y estilos de subopciones */
-        .menu-simple-link {
-            background: transparent;
-            color: #ffffff;
-            border: none;
-            padding-left: 2rem;
-            display: block;
-        }
-
-        .menu-simple-link:hover {
-            background: transparent;
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        /* Subopciones: color y transición en hover */
-        .sidebar .suboption {
-            padding-left: 1.5rem;
-            color: rgba(0, 0, 0, 0.9);
-            transition: background-color 0.15s ease, color 0.15s ease;
-        }
-
-        .sidebar .suboption:hover {
-            background-color: #abaeb0;
-            color: #000000;
-        }
-
-        /* Offcanvas (móvil) subopciones hover */
-        .offcanvas .suboption:hover {
-            background-color: #abaeb0;
-            color: #000000;
-        }
-
-        .list-group-item {
-            border: none;
-            border-radius: 0;
-            padding-left: 3rem;
-        }
-
-        .list-group-item:hover {
-            background-color: #e9ecef;
-        }
-
-        .content-area {
-            transition: all 0.3s;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar-desktop {
-                display: none;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .mobile-toggle {
-                display: none;
-            }
-        }
-    </style>
 </head>
 
 <body>
-    <!-- Navbar con botón hamburguesa para móviles -->
-    <nav class="navbar navbar-dark bg-dark mobile-toggle">
-        <div class="container-fluid">
-            <span class="navbar-brand d-flex justify-content-center flex-grow-1">JUDC</span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
-                <i class="bi bi-list"></i>
-            </button>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a href="index.html" class="logo">
+                        <img src="{% static 'assets/img/kaiadmin/logo_light1.png' %}" alt="navbar brand"
+                            class="navbar-brand" height="20" />
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-primary">
+                        <li class="nav-item active">
+                            <a data-bs-toggle="collapse" href="#" class="collapsed" aria-expanded="false">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                            </a>
+
+                        </li>
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon ">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Componentes</h4>
+                        </li>
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#reg">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Registros</p>
+                                <span class="caret" style="color: #fff"></span>
+                            </a>
+                            <div class="collapse" id="reg">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="#">
+                                            <span class="sub-item">Docentes</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="sub-item">Estudiantes</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="sub-item">Asignaturas</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#rep">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Reportes</p>
+                                <span class="caret" style="color: #fff"></span>
+                            </a>
+                            <div class="collapse" id="rep">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="#">
+                                            <span class="sub-item">Informe de Docentes</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="sub-item">Informe de Estudiantes</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="sub-item">Jurados</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">
+                               <i class="bi bi-clipboard2-plus-fill"></i>
+                                <p>Incripciones</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">
+                                <i class="bi bi-clipboard-check-fill"></i>
+                                <p>Evaluaciones</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
         </div>
-    </nav>
+        <!-- End Sidebar -->
 
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Menú Vertical para Desktop -->
-            <div class="col-md-3 sidebar sidebar-desktop">
-                <div class="menu-header">
-                    <h5>Menú Principal</h5>
+        <div class="main-panel">
+            <div class="main-header">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="index.html" class="logo">
+                            <img src="{% static 'assets/img/kaiadmin/logo_light.svg' %}" alt="navbar brand"
+                                class="navbar-brand" height="20" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                    <!-- End Logo Header -->
                 </div>
-                <div class="accordion mt-3" id="menuAccordion">
-
-                    <!-- Opción 1 -->
-                    <div class="accordion-item">
-
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne">
-                                <i class="bi bi-folder me-2"></i> Opción 1
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
-                            <div class="accordion-body p-0 accordion-primary">
-                                <div class="list-group list-group-flush">
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-file-earmark me-2"></i> Subopción 1.1
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-file-earmark me-2"></i> Subopción 1.2
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Navbar Header -->
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom shadow"
+                    style="background: linear-gradient(180deg, #363636,#ffffff);">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <li class="nav-item topbar-user dropdown hidden-caret">
+                                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
+                                    aria-expanded="false">
+                                    <div class="avatar-sm">
+                                        <img src="{% static 'assets/img/profile.jpg' %}" alt="..."
+                                            class="avatar-img rounded-circle" />
+                                    </div>
+                                    <span class="profile-username">
+                                        <span class="op-7">Hola,</span>
+                                        <span class="fw-bold">Usuario</span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                    <div class="dropdown-user-scroll scrollbar-outer">
+                                        <li>
+                                            <div class="user-box">
+                                                <div class="avatar-lg">
+                                                    <img src="{% static 'assets/img/profile.jpg' %}" alt="image profile"
+                                                        class="avatar-img rounded" />
+                                                </div>
+                                                <div class="u-text">
+                                                    <h4>Usuario</h4>
+                                                    <p class="text-muted">usuario@example.com</p>
+                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
+                                                        Profile</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">My Profile</a>
+                                            <a class="dropdown-item" href="#">My Balance</a>
+                                            <a class="dropdown-item" href="#">Inbox</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Account Setting</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Salir...</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
 
-                    <!-- Opción 2 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo">
-                                <i class="bi bi-bar-chart me-2"></i> Opción 2
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
-                            <div class="accordion-body p-0">
-                                <div class="list-group list-group-flush">
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-graph-up me-2"></i> Subopción 2.1
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-pie-chart me-2"></i> Subopción 2.2
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="container">
+                <div class="page-inner">
 
-                    <!-- Opción 3 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree">
-                                <i class="bi bi-gear me-2"></i> Opción 3
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
-                            <div class="accordion-body p-0">
-                                <div class="list-group list-group-flush">
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-tools me-2"></i> Subopción 3.1
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-sliders me-2"></i> Subopción 3.2
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action suboption">
-                            <i class="bi bi-bar-chart me-2"></i> Subopción A
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action suboption">
-                            <i class="bi bi-bar-chart me-2"></i> Subopción B
-                        </a>
+                    <div class="page-category">
+                        {% block contenido %} {% endblock %}
                     </div>
                 </div>
             </div>
 
-            <!-- Contenido Principal -->
-            <div class="col-md-9 content-area p-4">
-                <h1>Contenido Principal</h1>
-                <p class="lead">Este es el contenido principal de la aplicación.</p>
-                <div class="alert alert-info">
-                    <i class="bi bi-info-circle me-2"></i>
-                    En dispositivos móviles, utiliza el botón de hamburguesa en la parte superior para abrir el menú.
+            <footer class="footer" style="background-color: #e3f2fd;">
+                <div class="container-fluid d-flex justify-content-between">
+                    <nav class="pull-left">
+
+                    </nav>
+                    <div class="copyright">
+                        &copy; 2025,Todos los derechos reservados.
+                        <a href="#">UNAN Managua</a>
+                    </div>
+
                 </div>
-                <p>Selecciona una opción del menú para ver su contenido. El menú es completamente responsivo y se adapta
-                    a diferentes tamaños de pantalla.</p>
-
-                <div class="row mt-4">
-                    <div class="col-md-4">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 1</h5>
-                                <p class="card-text">Contenido de para la primera tarjeta.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 2</h5>
-                                <p class="card-text">Contenido de ejemplo para la segunda tarjeta.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 3</h5>
-                                <p class="card-text">Contenido de ejemplo para la tercera tarjeta.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Opción Simple (sin caret) en offcanvas móvil con subopciones -->
-
-
-
+            </footer>
         </div>
     </div>
+    <!--   Core JS Files   -->
+    <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 
-    <!-- Offcanvas Menu para Móviles -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Menú Principal</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="accordion" id="mobileMenuAccordion">
+    <!-- jQuery Scrollbar -->
+    <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 
-                <!-- Opción 1 -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#mobileCollapseOne">
-                            <i class="bi bi-folder me-2"></i> Opción 1
-                        </button>
-                    </h2>
-                    <div id="mobileCollapseOne" class="accordion-collapse collapse"
-                        data-bs-parent="#mobileMenuAccordion">
-                        <div class="accordion-body p-0">
-                            <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-file-earmark me-2"></i> Subopción 1.1
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-file-earmark me-2"></i> Subopción 1.2
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Chart JS -->
+    <script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
 
-                <!-- Opción 2 -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#mobileCollapseTwo">
-                            <i class="bi bi-bar-chart me-2"></i> Opción 2
-                        </button>
-                    </h2>
-                    <div id="mobileCollapseTwo" class="accordion-collapse collapse"
-                        data-bs-parent="#mobileMenuAccordion">
-                        <div class="accordion-body p-0">
-                            <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-graph-up me-2"></i> Subopción 2.1
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-pie-chart me-2"></i> Subopción 2.2
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- jQuery Sparkline -->
+    <script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
 
-                <!-- Opción 3 -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#mobileCollapseThree">
-                            <i class="bi bi-gear me-2"></i> Opción 3
-                        </button>
-                    </h2>
-                    <div id="mobileCollapseThree" class="accordion-collapse collapse"
-                        data-bs-parent="#mobileMenuAccordion">
-                        <div class="accordion-body p-0">
-                            <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-tools me-2"></i> Subopción 3.1
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-sliders me-2"></i> Subopción 3.2
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Chart Circle -->
+    <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
 
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
-                        <i class="bi bi-dot me-2"></i> Subopción A
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
-                        <i class="bi bi-dot me-2"></i> Subopción B
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Datatables -->
+    <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Notify -->
+    <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+
+    <!-- Google Maps Plugin -->
+    <script src="{% static 'assets/js/plugin/gmaps/gmaps.js' %}"></script>
+
+    <!-- Sweet Alert -->
+    <script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
 </body>
 
 </html>
