@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Vertical Responsivo</title>
+    <title>{% block titulo %}{% endblock  %}</title>
     <!-- Bootstrap CSS -->
     <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -199,46 +199,9 @@
             </div>
 
             <!-- Contenido Principal -->
-            <div class="col-md-9 content-area p-4">
-                <h1>Contenido Principal</h1>
-                <p class="lead">Este es el contenido principal de la aplicación.</p>
-                <div class="alert alert-info">
-                    <i class="bi bi-info-circle me-2"></i>
-                    En dispositivos móviles, utiliza el botón de hamburguesa en la parte superior para abrir el menú.
-                </div>
-                <p>Selecciona una opción del menú para ver su contenido. El menú es completamente responsivo y se adapta
-                    a diferentes tamaños de pantalla.</p>
-
-                <div class="row mt-4">
-                    <div class="col-md-4">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 1</h5>
-                                <p class="card-text">Contenido de para la primera tarjeta.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 2</h5>
-                                <p class="card-text">Contenido de ejemplo para la segunda tarjeta.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 3</h5>
-                                <p class="card-text">Contenido de ejemplo para la tercera tarjeta.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Opción Simple (sin caret) en offcanvas móvil con subopciones -->
-
-
+             {% block contenido %}
+                
+             {% endblock  %}
 
         </div>
     </div>
