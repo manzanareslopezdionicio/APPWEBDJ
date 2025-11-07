@@ -1,6 +1,43 @@
 {% extends 'baseadmin.html' %}
-{% block title %}Registro - Estudiante{% endblock  %}
+{% block title %}Registro - Estudiante{% endblock %}
+
+<script>
+        fieldset {
+        padding - left: 8rem;
+        margin: 1rem 0;
+        position: relative;
+    }
+    fieldset::before {
+        position: absolute;
+        content: '';
+        width: 0;
+        height: 0;
+        top: 0.4rem;
+        left: 0;
+        border - width: 1rem;
+        border - color: currentColor;
+        border - style: solid;
+        border - bottom - color: transparent;
+        border - right - color: transparent;
+    }
+    fieldset > legend {
+        margin - left: -6rem;
+        color: currentColor;
+        padding: 0 1rem;
+        font - size: 1rem;
+        line - height: 1;
+    }
+</script>
 
 {% block contenido %}
-    <h1>Registro de estudiantes</h1>
-{% endblock  %}
+<fieldset>
+    <legend>Texto de prueba</legend>
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname"><br><br>
+    <label for="lname">Last name:</label>
+    <input type="text" id="lname" name="lname"><br><br>
+    <fieldset>
+        <legend>Dentro</legend>
+    </fieldset>
+</fieldset>
+{% endblock %}
