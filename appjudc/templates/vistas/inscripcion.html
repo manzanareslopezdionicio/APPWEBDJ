@@ -7,30 +7,36 @@
     <div class="alert alert-info text-center">
         <h3>Inscripcion de JUDC</h3>
     </div>
+    <div class="card text-start shadow">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="carnet" name="carnet" placeholder>
+                        <label for="carnet" class="form-label">Carnet</label>
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder>
+                        <label for="nombre" class="form-label">Nombres</label>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 ">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder>
+                        <label for="nombre" class="form-label">Apellidos</label>
+                    </div>
+                </div>
+                <div class="col-md-3 p-2 justify-content-center text-center">
+                    <a class="btn btn-primary" href="#">Agregar</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-3 mb-3">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="carnet" name="carnet" placeholder>
-                <label for="carnet" class="form-label">Carnet</label>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder>
-                <label for="nombre" class="form-label">Nombres</label>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="apellido" name="apellido" placeholder>
-                <label for="nombre" class="form-label">Apellidos</label>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3 justify-content-center text-center">
-            <a class="btn btn-primary" href="#">Agregar</a>
-        </div>
-        <h3 style="text-shadow: 2px 2px 4px gray;">Autores:</h3>
-        <div class="row mt-2">
+        <h3 class="p-3" style="text-shadow: 2px 2px 4px gray;">Autores:</h3>
+        <div class="row mt-">
             <div class="col-md-4 mb-3">
                 <div class="card shadow">
                     <div class="card-body">
@@ -47,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="card shadow">
                     <div class="card-body">
                         <h5 class="card-title">3</h5>
@@ -56,23 +62,47 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <select class="form-select form-select" aria-label="Small select example">
-                <option selected>Seleccionar tipo de Investigación </option>
-                <option value="1">Articulo Cientifico</option>
-                <option value="2">Informe final</option>
-                <option value="3">Trabajo de innovación cientifica</option>
-            </select>
-        </div>
-        <div class="col-md-4 mb-3">
-            <select class="form-select form-select" aria-label="Small select example">
-                <option selected>Seleccionar la carrera </option>
-                <option value="1">Ingenieri en Sistema</option>
-                <option value="2">Contaduria publica y finanzas</option>
-                <option value="3">Administración de empresas</option>
-            </select>
-        </div>
+    </div>
+    <div class="card mt-3 text-start shadow">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <select class="form-select form-select" aria-label="Small select example">
+                        <option selected>Seleccionar tipo de Investigación </option>
+                        <option value="1">Articulo Cientifico</option>
+                        <option value="2">Informe final</option>
+                        <option value="3">Trabajo de innovación cientifica</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <select class="form-select form-select" aria-label="Small select example">
+                        <option selected>Seleccionar la carrera </option>
+                        <option value="1">Ingenieri en Sistema</option>
+                        <option value="2">Contaduria publica y finanzas</option>
+                        <option value="3">Administración de empresas</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="fechaInput" class="form-label">Fecha de inscripción:</label>
+                    <input type="date" class="form-control" id="fechaInput">
 
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating ">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                            style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Descripción:</label>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="formFile" class="form-label">Agregar el archivo</label>
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mt-3 justify-content-end text-center">
+        <button class="btn btn-primary" type="submit">Enviar</button>
     </div>
 </div>
 {% endblock %}
