@@ -21,5 +21,8 @@ def index(request):
 def estudiante(request):
     return render(request, 'vistas/estudiante.html')
 
+def inscripcion(request):
+    return render(request, 'vistas/inscripcion.html')
+
 def indexUsuario(request):
     return render(request, 'indexusuario.html')

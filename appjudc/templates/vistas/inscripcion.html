@@ -1,0 +1,78 @@
+{% extends 'baseusuario.html' %}
+{%load static%}
+{% block titulo %}Incripción{% endblock %}
+
+{% block contenido %}
+<div class="col-md-9 content-area p-4">
+    <div class="alert alert-info text-center">
+        <h3>Inscripcion de JUDC</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="carnet" name="carnet" placeholder>
+                <label for="carnet" class="form-label">Carnet</label>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder>
+                <label for="nombre" class="form-label">Nombres</label>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="apellido" name="apellido" placeholder>
+                <label for="nombre" class="form-label">Apellidos</label>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3 justify-content-center text-center">
+            <a class="btn btn-primary" href="#">Agregar</a>
+        </div>
+        <h3 style="text-shadow: 2px 2px 4px gray;">Autores:</h3>
+        <div class="row mt-2">
+            <div class="col-md-4 mb-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">1</h5>
+                        <p class="card-text">Nombre </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">2</h5>
+                        <p class="card-text">Nombre 2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">3</h5>
+                        <p class="card-text">Nombre 3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <select class="form-select form-select" aria-label="Small select example">
+                <option selected>Seleccionar tipo de Investigación </option>
+                <option value="1">Articulo Cientifico</option>
+                <option value="2">Informe final</option>
+                <option value="3">Trabajo de innovación cientifica</option>
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <select class="form-select form-select" aria-label="Small select example">
+                <option selected>Seleccionar la carrera </option>
+                <option value="1">Ingenieri en Sistema</option>
+                <option value="2">Contaduria publica y finanzas</option>
+                <option value="3">Administración de empresas</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
