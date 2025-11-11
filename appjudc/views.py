@@ -26,3 +26,6 @@ def inscripcion(request):
 
 def indexUsuario(request):
     return render(request, 'indexusuario.html')
+
+def inicio(request):
+    return render(request, 'vistas/webapp/inicio.html')
