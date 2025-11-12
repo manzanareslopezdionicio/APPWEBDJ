@@ -10,7 +10,7 @@
                 aria-label="First slide"></li>
             <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
             <li data-bs-target="#carouselId" data-bs-slide-to="2" aria-label="Third slide"></li>
-             <li data-bs-target="#carouselId" data-bs-slide-to="3" aria-label="Third slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="3" aria-label="Third slide"></li>
         </div>
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
@@ -22,7 +22,7 @@
             <div class="carousel-item">
                 <img src="{% static '/img/2.jpg'%}" class="w-100 d-block" alt="Third slide" />
             </div>
-             <div class="carousel-item">
+            <div class="carousel-item">
                 <img src="{% static '/img/3.jpg'%}" class="w-100 d-block" alt="Third slide" />
             </div>
         </div>
@@ -34,6 +34,22 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+    </div>
+</div>
+
+<div class="container ">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Presentación de actividad central de Reconomientos</h1>
+        </div>
+        <div class="col-md-8 p-3">
+            <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/OztB0NCXk0w?si=K8ptau8BNligJ8c2" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
