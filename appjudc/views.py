@@ -29,3 +29,9 @@ def indexUsuario(request):
 
 def inicio(request):
     return render(request, 'vistas/webapp/inicio.html')
+
+def acercade(request):
+    return render(request, 'vistas/webapp/acercade.html')
+
+def organizador(request):
+    return render(request, 'vistas/webapp/organizador.html')

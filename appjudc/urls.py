@@ -10,5 +10,7 @@ urlpatterns = [
     path('indexU/', views.indexUsuario, name='indexUsuario'),
     path('estudiante/', views.estudiante,  name='estudiante'),
     path('inscripcion/', views.inscripcion, name='inscripcion'),
-    path('inicio/', views.inicio, name='inicio')
+    path('inicio/', views.inicio, name='inicio'),
+    path('acercade/', views.acercade, name='acercade'),
+    path('organizador/', views.organizador, name='organizador'),
 ]
