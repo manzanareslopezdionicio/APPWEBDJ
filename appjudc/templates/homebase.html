@@ -18,8 +18,8 @@
 <body>
     <header>
         <!-- place navbar here -->
-        <div class="container-full">
-            <nav class="navbar navbar-expand-lg bg-success-subtle shadow">
+        <div class="container-ful">
+            <nav class="navbar navbar-expand-lg fixed-top bg-success-subtle">
                 <div class="container">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
@@ -43,10 +43,13 @@
                 </div>
             </nav>
         </div>
+    
     </header>
     <main>
 
-        {% block contenido %} {% endblock %}
+        {% block contenido %}
+        
+        {% endblock %}
 
     </main>
 
@@ -72,9 +75,6 @@
                             <i class="bi bi-pencil-square"> </i>
                             Incripciones</a>
                     </p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <img src="{% static 'img/logojudc.png' %}" class=" img-fluid" alt="logo">
                     <div class="p-3">
                         <a class="btn btn-primary" href="#" title="Facebook">
                             <i class="bi bi-facebook fs-4"></i>  
@@ -86,6 +86,10 @@
                             <i class="bi bi-tiktok fs-4"></i>
                         </a>
                     </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="{% static 'img/logojudc.png' %}" class=" img-fluid" alt="logo">
+                    
                 </div>
                 <div class="text-center d-flex justify-content-center">
                     <div class="">
