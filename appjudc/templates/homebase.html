@@ -18,7 +18,7 @@
 <body>
     <header>
         <!-- place navbar here -->
-        <div class="container-fluid">
+        <div class="container-full">
             <nav class="navbar navbar-expand-lg bg-success-subtle shadow">
                 <div class="container">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -53,8 +53,8 @@
     <footer>
         <!-- place footer here -->
         <div class="container-fluid text-white" style=" background: linear-gradient(to bottom, #141e30, #243b55);">
-            <div class="row">
-                <div class=" col-md-4">
+            <div class="row p-3">
+                <div class="col-md-4">
                     <h4>Contacto</h4>
                     <p>Gasolinera PUMA 800 mts al Oeste, Juigalpa Chontales.</p>
                     <p>Telefonos: (+505) XXXX-XXXX</p>
@@ -73,8 +73,19 @@
                             Incripciones</a>
                     </p>
                 </div>
-                <div class="col-md-4">
-                    <img src="{% static 'img/logojudc.png' %}" alt="logo">
+                <div class="col-md-4 text-center">
+                    <img src="{% static 'img/logojudc.png' %}" class=" img-fluid" alt="logo">
+                    <div class="p-3">
+                        <a class="btn btn-primary" href="#" title="Facebook">
+                            <i class="bi bi-facebook fs-4"></i>  
+                        </a>
+                        <a class="btn btn-danger" href="#">
+                            <i class="bi bi-youtube fs-4"></i>
+                        </a>
+                        <a class="btn btn-dark" href="#">
+                            <i class="bi bi-tiktok fs-4"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="text-center d-flex justify-content-center">
                     <div class="">
@@ -82,7 +93,6 @@
                         <a class="text-decoration-none" href="{% url 'login'%}">APP - JUDC</a>
                     </div>
                 </div>
-
             </div>
         </div>
         <!-- text-center rounded-3 bg-secondary bg-gradient p-2 text-white  bg-opacity-25 p-3 mt-4 -->
