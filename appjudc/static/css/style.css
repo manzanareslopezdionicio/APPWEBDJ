@@ -1,0 +1,16 @@
+/* hover  */
+.center {
+    overflow: hidden;
+    /* margin: auto; */
+    cursor: pointer;
+    /* transition: all 0.3s; */
+}
+
+.center img {
+    transition: all 1.5s ease;
+   /*  transition: 2s; */
+}
+
+.center:hover img {
+    transform: scale(1.1);
+}
