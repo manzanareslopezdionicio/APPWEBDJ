@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block titulo %}{% endblock  %}</title>
+    <title>{% block titulo %}{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -123,16 +123,16 @@
                 <div class="accordion mt-3" id="menuAccordion">
                     <!-- Opción 1 -->
                     <div class="accordion-item">
-                            <div class="p-3">
-                                <a href="/" class="btn btn-primary btn-lg w-100 active" aria-current="true">
-                                    <i class="bi bi-house-door-fill me-2"></i> Inicio
-                                </a>
-                            </div>
-                        
+                        <div class="p-3">
+                            <a href="/" class="btn btn-primary btn-lg w-100 active" aria-current="true">
+                                🏠 Inicio
+                            </a>
+                        </div>
+
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseOne">
-                                <i class="bi bi-folder me-2"></i> Registrar
+                                🗂️ Registrar
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
@@ -140,13 +140,7 @@
 
                                 <div class="list-group list-group-flush">
                                     <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-file-earmark me-2"></i> Docentes
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-file-earmark me-2"></i> Estudiantes
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-file-earmark me-2"></i> Asignaturas
+                                        ✍🏻 Inscripciones
                                     </a>
                                 </div>
                             </div>
@@ -154,7 +148,7 @@
                     </div>
 
                     <!-- Opción 2 -->
-                    <div class="accordion-item">
+                    <!-- <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseTwo">
@@ -176,30 +170,30 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Opción 3 -->
                     <div class="accordion-item p-2">
                         <div class="list-group list-group-flush">
                             <a href="#" class="list-group-item list-group-item-action suboption ">
-                                <i class="bi bi-bar-chart me-2"></i> Inscripciones
+                                🙍🏻‍♂️ Perfil
                             </a>
                         </div>
                     </div>
-                    <div class="accordion-item p-2">
+                    <!-- <div class="accordion-item p-2">
                         <div class="list-group list-group-flush">
                             <a href="#" class="list-group-item list-group-item-action suboption ">
                                 <i class="bi bi-bar-chart me-2"></i> Evaluaciones
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
             <!-- Contenido Principal -->
-             {% block contenido %}
-                
-             {% endblock  %}
+            {% block contenido %}
+
+            {% endblock %}
 
         </div>
     </div>
@@ -207,7 +201,7 @@
     <!-- Offcanvas Menu para Móviles -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Menú Principal</h5>
+            <h5 class="offcanvas-title">⋆. ⌬ ˚ ⚛ 🧪 𒉭 ⋆ Menú Principal</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
@@ -218,7 +212,7 @@
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#mobileCollapseOne">
-                            <i class="bi bi-folder me-2"></i> Registrar
+                            🗂️ Registrar
                         </button>
                     </h2>
                     <div id="mobileCollapseOne" class="accordion-collapse collapse"
@@ -226,21 +220,16 @@
                         <div class="accordion-body p-0">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-file-earmark me-2"></i> Docentes
+                                    ✍🏻 Inscripciones
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-file-earmark me-2"></i> Estudiantes
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-file-earmark me-2"></i> Asignaturas
-                                </a>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Opción 2 -->
-                <div class="accordion-item">
+                <!-- <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#mobileCollapseTwo">
@@ -263,16 +252,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Opción 3 -->
 
                 <div class="list-group list-group-flush">
                     <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
-                        <i class="bi bi-dot me-2"></i> Incripciones
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
-                        <i class="bi bi-dot me-2"></i> Evaluaciones
+                        🙍🏻‍♂️ Perfil
                     </a>
                 </div>
             </div>
