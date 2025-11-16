@@ -35,3 +35,6 @@ def acercade(request):
 
 def organizador(request):
     return render(request, 'vistas/webapp/organizador.html')
+
+def perfil(request):
+    return render(request, 'vistas/perfil.html')

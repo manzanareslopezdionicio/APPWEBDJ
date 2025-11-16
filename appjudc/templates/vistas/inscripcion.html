@@ -9,47 +9,46 @@
     <div class="alert bg-body-secondary text-center">
         <h3>Inscripcion de JUDC</h3>
     </div>
-    <fieldset class="border bg-body-secondary rounded-3 shadow ">
-        <div class="col-md-12 p-1 d-flex justify-content-end ">
-            <a href="#">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </a>
-        </div>
-        <legend class="float-none w-auto px-3 text-primary-emphasis">Datos del estudiante:</legend>
-        <div class="row ">
-            <div class="col-6 col-md-4 mb-3 ">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="carnet" name="carnet" autofocus placeholder>
-                    <label for="carnet" class="form-label">Carnet</label>
+    <form action="#" method="post">
+        <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
+            <div class="col-md-12 mb-3 p-2 d-flex justify-content-end ">
+                <a href="#">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </a>
+            </div>
+            <legend class="float-none w-auto px-3 text-primary-emphasis">Datos del estudiante:</legend>
+            <div class="row ">
+                <div class="col-6 col-md-4 mb-3 ">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="carnet" name="carnet" autofocus placeholder>
+                        <label for="carnet" class="form-label">Carnet</label>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder>
+                        <label for="nombre" class="form-label">Nombres</label>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder>
+                        <label for="nombre" class="form-label">Apellidos</label>
+                    </div>
+                </div>
+                <div class="col-6 col-md-6 mb-3">
+                    <select class="form-select form-select" aria-label="Small select example">
+                        <option selected>Seleccionar la carrera </option>
+                        <option value="1">Ingenieri en Sistema</option>
+                        <option value="2">Contaduria publica y finanzas</option>
+                        <option value="3">Administración de empresas</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-6 col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder>
-                    <label for="nombre" class="form-label">Nombres</label>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder>
-                    <label for="nombre" class="form-label">Apellidos</label>
-                </div>
-            </div>
+        </fieldset>
 
-            <div class="col-6 col-md-6 mb-3">
-                <select class="form-select form-select" aria-label="Small select example">
-                    <option selected>Seleccionar la carrera </option>
-                    <option value="1">Ingenieri en Sistema</option>
-                    <option value="2">Contaduria publica y finanzas</option>
-                    <option value="3">Administración de empresas</option>
-                </select>
-            </div>
-
-        </div>
-    </fieldset>
-    <div class="row">
         <h3 class="p-3" style="text-shadow: 2px 2px 4px gray;">Autores:</h3>
-        <div class="row mt-2">
+        <div class="row">
             <div class="col-md-4 mb-3">
                 <div class="card shadow">
                     <div class="card-body">
@@ -75,47 +74,47 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
-        <legend class="float-none w-auto px-3 text-primary-emphasis">Origen - investigación:</legend>
-        <div class="row">
-            <div class="col-6 col-md-6 mb-3">
-                <select class="form-select form-select" aria-label="Small select example">
-                    <option selected>Seleccionar tutor </option>
-                    <option value="1">Miriam Tellez</option>
-                    <option value="2">Dionicio Manzanares López</option>
-                    <option value="3">Karla Acevedo</option>
-                </select>
-            </div>
-            <div class="col-6 col-md-6 mb-3">
-                <select class="form-select form-select" aria-label="Small select example">
-                    <option selected>Seleccionar tipo de Investigación </option>
-                    <option value="1">Articulo Cientifico</option>
-                    <option value="2">Informe final</option>
-                    <option value="3">Trabajo de innovación cientifica</option>
-                </select>
-            </div>
+        <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
+            <legend class="float-none w-auto px-3 text-primary-emphasis">Origen - investigación:</legend>
+            <div class="row">
+                <div class="col-6 col-md-6 mb-3">
+                    <select class="form-select form-select" aria-label="Small select example">
+                        <option selected>Seleccionar tutor </option>
+                        <option value="1">Miriam Tellez</option>
+                        <option value="2">Dionicio Manzanares López</option>
+                        <option value="3">Karla Acevedo</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-6 mb-3">
+                    <select class="form-select form-select" aria-label="Small select example">
+                        <option selected>Seleccionar tipo de Investigación </option>
+                        <option value="1">Articulo Cientifico</option>
+                        <option value="2">Informe final</option>
+                        <option value="3">Trabajo de innovación cientifica</option>
+                    </select>
+                </div>
 
-            <div class="col-6 col-md-6 mb-3">
-                <label for="fechaInput" class="form-label">Fecha de inscripción:</label>
-                <input type="date" class="form-control" id="fechaInput">
-            </div>
-            <div class="col-6 col-md-6 mb-3">
-                <label for="formFile" class="form-label">Agregar el archivo</label>
-                <input class="form-control" type="file" id="formFile">
-            </div>
-            <div class="col-md-6 mb-3">
-                <div class="form-floating ">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                        style="height: 100px"></textarea>
-                    <label for="floatingTextarea2">Descripción:</label>
+                <div class="col-6 col-md-6 mb-3">
+                    <label for="fechaInput" class="form-label">Fecha de inscripción:</label>
+                    <input type="date" class="form-control" id="fechaInput">
+                </div>
+                <div class="col-6 col-md-6 mb-3">
+                    <label for="formFile" class="form-label">Agregar el archivo</label>
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating ">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                            style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Descripción:</label>
+                    </div>
                 </div>
             </div>
+        </fieldset>
+        <div class="col-md-12 mt-3 p-3 justify-content-end text-center">
+            <button class="btn btn-primary" type="submit">💾 Guardar</button>
         </div>
-    </fieldset>
-    <div class="col-md-12 mt-3 p-3 justify-content-end text-center">
-        <button class="btn btn-primary" type="submit">Enviar</button>
-    </div>
+    </form>
 </div>
 {% endblock %}
