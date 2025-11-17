@@ -10,8 +10,9 @@
     <div class="container p-3 ">
         <div class="card shadow">
             <div class="card-body">
+                  {% csrf_token %}
                 <form action="#" method="post">
-                    {% csrf_token %}
+                  
                     <div class="row">
                         <div class="col-md-6 p-2">
                             <label for="carnet" class="form-label">Número de carnet:</label>

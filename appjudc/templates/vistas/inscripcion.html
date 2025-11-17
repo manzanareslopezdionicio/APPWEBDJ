@@ -7,13 +7,14 @@
 
 <div class="col-md-9 content-area p-3">
     <div class="alert bg-body-secondary text-center">
-        <h3>Inscripcion de JUDC</h3>
+        <h3>Inscripción de JUDC</h3>
     </div>
     <form action="#" method="post">
+        {% csrf_token %}
         <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
             <div class="col-md-12 mb-3 p-2 d-flex justify-content-end ">
                 <a href="#">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    <button class="btn btn-outline-success btn-lg" type="submit">🔎 Buscar</button>
                 </a>
             </div>
             <legend class="float-none w-auto px-3 text-primary-emphasis">Datos del estudiante:</legend>
