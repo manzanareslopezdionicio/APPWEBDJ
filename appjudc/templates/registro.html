@@ -29,7 +29,7 @@
                                 placeholder="Nombres" required
                                 pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+"
                                 title="Solo letras, espacios y guiones"
-                                oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ \-]/g,'');">
+                                oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g, '');">
                             <label for="nombre" class="form-label">Nombre</label>
                         </div>
                     </div>
