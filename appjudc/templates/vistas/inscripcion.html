@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-6 col-md-4 mb-3 ">
                     <div class="form-floating">
-                        <input type="text" class="form-control mi-input" id="orcid" name="orcid"
+                        <input type="text" class="form-control mi-input" id="orcid" name="orcidestudiante"
                             placeholder="0009-0004-8628-1583" inputmode="numeric" pattern="\d{4}-\d{4}-\d{4}-\d{4}"
                             title="Formato: 0000-0000-0000-0000" maxlength="19" required>
                         <label for="orcid" class="form-label">Número de ORCID</label>
@@ -59,11 +59,11 @@
                 </div>
                 <div class="col-6 col-md-4 mb-3 ">
                     <div class="form-floating">
-                        <input type="text" class="form-control mi-input" id="tel" name="telefono"
-                            placeholder="12-34567-8" inputmode="numeric" pattern="\d{2}-\d{5}-\d"
-                            title="Formato: 99-99999-9" maxlength="10" required autofocus>
-                        <label for="carnet" class="form-label">Número de Teléfono</label>
-                        <div class="invalid-feedback">Formato inválido. Use 12-34567-8</div>
+                        <input type="tel" class="form-control mi-input" id="telefono" name="telefono"
+                            placeholder="9999-9999" pattern="\d{4}-\d{4}" title="Formato: 9999-9999" maxlength="9"
+                            required>
+                        <label for="telefono" class="form-label">Número de Teléfono</label>
+                        <div class="invalid-feedback">Formato inválido. Use 9999-9999</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
@@ -110,21 +110,23 @@
         <div class="row">
             <div class="col-6 col-md-4 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control mi-input" id="nombre" name="nombretutor" placeholder
-                        required>
-                    <label for="nombre" class="form-label">Nombres del Tutor</label>
+                    <input type="text" class="form-control mi-input" id="solo-letras" name="nombre"
+                        placeholder="Ingrese solo letras" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                        title="Solo se permiten letras y espacios" required>
+                    <label for="solo-letras" class="form-label">Nombre completo</label>
+                    <div class="invalid-feedback">Solo se permiten letras y espacios</div>
                 </div>
             </div>
             <div class="col-6 col-md-4 mb-3 ">
                 <div class="form-floating">
-                    <input type="text" class="form-control mi-input" id="orcid" name="orcid"
+                    <input type="text" class="form-control mi-input" id="orcidt" name="orcidtutor"
                         placeholder="0009-0004-8628-1583" inputmode="numeric" pattern="\d{4}-\d{4}-\d{4}-\d{4}"
                         title="Formato: 0000-0000-0000-0000" maxlength="19" required>
                     <label for="orcid" class="form-label">Número de ORCID del Tutor</label>
                     <div class="invalid-feedback">Formato inválido. Use 0009-0004-8628-1583</div>
                 </div>
             </div>
-            
+
             <div class="col-6 col-md-4 mb-3">
                 <select class="form-select form-select mi-input" aria-label="Small select example" required>
                     <option selected>Seleccionar tipo de Investigación </option>
