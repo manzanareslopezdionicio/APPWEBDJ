@@ -91,7 +91,9 @@ $(document).ready(function () {
     var $c = $('#carnet');
     if ($c.length) {
         // Asegurar atributos HTML básicos
-        $c.attr('maxlength', 10).attr('inputmode', 'numeric').attr('placeholder', '12-34567-8');
+        $c.attr('maxlength', 10)
+            .attr('inputmode', 'numeric')
+            .attr('placeholder', '12-34567-8');
 
         $c.on('input', function () {
             var v = $(this).val().replace(/\D/g, '').slice(0, 8); // solo dígitos, máximo 8
@@ -124,20 +126,91 @@ $(document).ready(function () {
     }
 });
 /* Validación de coincidencia de contraseñas */
-function validatePasswordMatch(){
+function validatePasswordMatch() {
     const p = document.getElementById('password1');
     const pf = document.getElementById('passwordf');
     const feedback = document.getElementById('pw-match-feedback');
-    if(!pf) return;
-    if(pf.value && pf.value !== p.value){
+    if (!pf) return;
+    if (pf.value && pf.value !== p.value) {
         pf.setCustomValidity('Las contraseñas no coinciden');
-        if(feedback) feedback.style.display = 'block';
+        if (feedback) feedback.style.display = 'block';
     } else {
         pf.setCustomValidity('');
-        if(feedback) feedback.style.display = '';
+        if (feedback) feedback.style.display = '';
     }
 }
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     const p = document.getElementById('password1');
-    if(p) p.addEventListener('input', validatePasswordMatch);
+    if (p) p.addEventListener('input', validatePasswordMatch);
 });
+
+
+// Máscara simple para formato ORCID en (sin librerías externas)
+$(document).ready(function () {
+    var $c = $('#orcid');
+    if ($c.length) {
+        // Asegurar atributos HTML básicos
+        $c.attr('maxlength', 19)
+            .attr('inputmode', 'numeric')
+            .attr('placeholder', '0000-0000-0000-0000');
+
+        function validateORCID(value) {
+            return /^\d{4}-\d{4}-\d{4}-\d{4}$/.test(value);
+        }
+
+        function updateValidationState(value) {
+            if (validateORCID(value)) {
+                $c.removeClass('is-invalid').addClass('is-valid');
+            } else {
+                $c.removeClass('is-valid').addClass('is-invalid');
+            }
+        }
+
+        $c.on('input', function () {
+            var v = $(this).val().replace(/\D/g, '').slice(0, 16); // solo dígitos, máximo 16
+            var p1 = v.slice(0, 4);
+            var p2 = v.slice(4, 8);
+            var p3 = v.slice(8, 12);
+            var p4 = v.slice(12, 16);
+            var out = '';
+
+            if (p1) out += p1;
+            if (p2) out += '-' + p2;
+            if (p3) out += '-' + p3;
+            if (p4) out += '-' + p4;
+
+            $(this).val(out);
+
+            // Validar en tiempo real
+            updateValidationState(out);
+        });
+
+        // Validar también cuando el campo pierde el foco
+        $c.on('blur', function () {
+            updateValidationState($(this).val());
+        });
+
+        // Validación inicial si ya tiene valor
+        if ($c.val()) {
+            updateValidationState($c.val());
+        }
+
+        // Validación al enviar el formulario
+        $c.closest('form').on('submit', function (e) {
+            var val = $c.val();
+            if (!validateORCID(val)) {
+                e.preventDefault();
+                $c.addClass('is-invalid');
+                $c.focus();
+
+                // Mostrar mensaje de error si es necesario
+                if (!$c.next('.invalid-feedback').length) {
+                    $c.after('<div class="invalid-feedback">Por favor, ingrese un ORCID válido (formato: 0000-0000-0000-0000)</div>');
+                }
+            } else {
+                $c.removeClass('is-invalid');
+            }
+        });
+    }
+});
+
