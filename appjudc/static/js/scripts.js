@@ -204,7 +204,7 @@ $(document).ready(function () {
 
                 // Mostrar mensaje de error si es necesario
                 if (!$c.next('.invalid-feedback').length) {
-                    $c.after('<div class="invalid-feedback">Por favor, ingrese un ORCID válido (formato: 0000-0000-0000-0000)</div>');
+                    // $c.after('<div class="invalid-feedback">Por favor, ingrese un ORCID válido (formato: 0000-0000-0000-0000)</div>');
                 }
             } else {
                 $c.removeClass('is-invalid');
@@ -273,7 +273,7 @@ $(document).ready(function () {
 
                 // Mostrar mensaje de error si es necesario
                 if (!$c.next('.invalid-feedback').length) {
-                    $c.after('<div class="invalid-feedback">Por favor, ingrese un ORCID válido (formato: 0000-0000-0000-0000)</div>');
+                    // $c.after('<div class="invalid-feedback">Por favor, ingrese un ORCID válido (formato: 0000-0000-0000-0000)</div>');
                 }
             } else {
                 $c.removeClass('is-invalid');
@@ -286,19 +286,19 @@ $(document).ready(function () {
 $(document).ready(function () {
     var $telefono = $('#telefono');
     if ($telefono.length) {
-        
+
         // Máscara de formato automático
         $telefono.on('input', function () {
             var valor = $(this).val().replace(/\D/g, '').slice(0, 8); // solo dígitos, máximo 8
             var parte1 = valor.slice(0, 4);
             var parte2 = valor.slice(4, 8);
             var resultado = '';
-            
+
             if (parte1) resultado += parte1;
             if (parte2) resultado += '-' + parte2;
-            
+
             $(this).val(resultado);
-            
+
             // Validación visual en tiempo real
             var esValido = this.checkValidity();
             if (esValido && resultado.length === 9) {
@@ -309,14 +309,14 @@ $(document).ready(function () {
         });
 
         // Validación al perder el foco
-        $telefono.on('blur', function() {
+        $telefono.on('blur', function () {
             var esValido = this.checkValidity();
             $(this).toggleClass('is-invalid', !esValido);
             $(this).toggleClass('is-valid', esValido);
         });
 
         // Limpiar estilos al enfocar
-        $telefono.on('focus', function() {
+        $telefono.on('focus', function () {
             $(this).removeClass('is-invalid is-valid');
         });
 
@@ -334,16 +334,16 @@ $(document).ready(function () {
 $(document).ready(function () {
     var $inputLetras = $('#solo-letras');
     if ($inputLetras.length) {
-        
+
         // Máscara: solo permitir letras en tiempo real
         $inputLetras.on('input', function () {
             var valor = $(this).val();
-            
+
             // Remover cualquier carácter que no sea letra, espacio o letra acentuada
             var soloLetras = valor.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g, '');
-            
+
             $(this).val(soloLetras);
-            
+
             // Validación visual en tiempo real
             var esValido = this.checkValidity() && soloLetras.length > 0;
             if (esValido) {
@@ -354,19 +354,19 @@ $(document).ready(function () {
         });
 
         // Validación al perder el foco
-        $inputLetras.on('blur', function() {
+        $inputLetras.on('blur', function () {
             var esValido = this.checkValidity() && $(this).val().length > 0;
             $(this).toggleClass('is-invalid', !esValido);
             $(this).toggleClass('is-valid', esValido);
         });
 
         // Limpiar estilos al enfocar
-        $inputLetras.on('focus', function() {
+        $inputLetras.on('focus', function () {
             $(this).removeClass('is-invalid is-valid');
         });
 
         // Prevenir pegado de texto no válido
-        $inputLetras.on('paste', function(e) {
+        $inputLetras.on('paste', function (e) {
             var textoPegado = (e.originalEvent || e).clipboardData.getData('text/plain');
             if (!/^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$/.test(textoPegado)) {
                 e.preventDefault();

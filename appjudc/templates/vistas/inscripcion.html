@@ -11,13 +11,14 @@
     </div>
 
     {% csrf_token %}
-    <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
-        <div class="col-md-12 mb-3 p-2 d-flex justify-content-end ">
-            <a href="#">
-                <button class="btn btn-outline-success btn-lg" type="#">🔎 Buscar</button>
-            </a>
-        </div>
-        <form action="#" method="post">
+    <form class="needs-validation" action="#" method="post" novalidate>
+        <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
+            <div class="col-md-12 mb-3 p-2 d-flex justify-content-end ">
+                <a href="#">
+                    <button class="btn btn-outline-success btn-lg" type="button">🔎 Buscar</button>
+                </a>
+            </div>
+
             <legend class="float-none w-auto px-3 text-primary-emphasis">Datos del estudiante:</legend>
             <div class="row ">
                 <div class="col-6 col-md-4 mb-3 ">
@@ -31,14 +32,14 @@
                 </div>
                 <div class="col-6 col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control mi-input" id="nombre" name="nombre" placeholder readonly>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder readonly>
                         <label for="nombre" class="form-label">Nombres</label>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control mi-input" id="apellido" name="apellido" placeholder
-                            readonly required>
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder readonly
+                            required>
                         <label for="nombre" class="form-label">Apellidos</label>
                     </div>
                 </div>
@@ -67,95 +68,110 @@
                     </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
-                    <select class="form-select form-select mi-input" aria-label="Small select example" required>
-                        <option selected>Seleccionar la carrera </option>
+                    <label for="carrera">Seleccionar la Carrera:</label>
+                    <select name="carrera" id="carrera" class="form-select mi-input" aria-label="Small select example"
+                        required>
+                        <option selected disabled value="">Elejir...</option>
                         <option value="1">Ingenieri en Sistema</option>
                         <option value="2">Contaduria publica y finanzas</option>
                         <option value="3">Administración de empresas</option>
                     </select>
-                </div>
-            </div>
-    </fieldset>
+                    <div class="invalid-feedback">Seleccione una carrera.</div>
 
-    <h3 class="p-3" style="text-shadow: 2px 2px 4px gray;">Autores:</h3>
-    <div class="row">
-        <div class="col-md-4 mb-3">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title">1</h5>
-                    <p class="card-text">Nombre </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title">2</h5>
-                    <p class="card-text">Nombre 2</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title">3</h5>
-                    <p class="card-text">Nombre 3</p>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select" id="estado" required>
+                        <option selected disabled value="">Elejir...</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                    </select>
+                    <div class="invalid-feedback">Seleccione un estado.</div>
 
-    <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
-        <legend class="float-none w-auto px-3 text-primary-emphasis">Origen - investigación:</legend>
+                </div>
+            </div>
+        </fieldset>
+
+        <h3 class="p-3" style="text-shadow: 2px 2px 4px gray;">Autores:</h3>
         <div class="row">
-            <div class="col-6 col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control mi-input" id="solo-letras" name="nombre"
-                        placeholder="Ingrese solo letras" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
-                        title="Solo se permiten letras y espacios" required>
-                    <label for="solo-letras" class="form-label">Nombre completo</label>
-                    <div class="invalid-feedback">Solo se permiten letras y espacios</div>
+            <div class="col-md-4 mb-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">1</h5>
+                        <p class="card-text">Nombre </p>
+                    </div>
                 </div>
             </div>
-            <div class="col-6 col-md-4 mb-3 ">
-                <div class="form-floating">
-                    <input type="text" class="form-control mi-input" id="orcidt" name="orcidtutor"
-                        placeholder="0009-0004-8628-1583" inputmode="numeric" pattern="\d{4}-\d{4}-\d{4}-\d{4}"
-                        title="Formato: 0000-0000-0000-0000" maxlength="19" required>
-                    <label for="orcid" class="form-label">Número de ORCID del Tutor</label>
-                    <div class="invalid-feedback">Formato inválido. Use 0009-0004-8628-1583</div>
+            <div class="col-md-4 mb-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">2</h5>
+                        <p class="card-text">Nombre 2</p>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-6 col-md-4 mb-3">
-                <select class="form-select form-select mi-input" aria-label="Small select example" required>
-                    <option selected>Seleccionar tipo de Investigación </option>
-                    <option value="1">Articulo Cientifico</option>
-                    <option value="2">Informe final</option>
-                    <option value="3">Trabajo de innovación cientifica</option>
-                </select>
-            </div>
-
-            <div class="col-6 col-md-6 mb-3">
-                <label for="fechaInput" class="form-label">Fecha de inscripción:</label>
-                <input type="date" class="form-control mi-input" id="fechaInput" name="fechainscripcion" required>
-            </div>
-            <div class="col-6 col-md-6 mb-3">
-                <label for="formFile" class="form-label">Agregar el archivo</label>
-                <input class="form-control mi-input" type="file" id="formFile" name="filejudc">
-            </div>
-            <div class="col-md-6 mb-3">
-                <div class="form-floating ">
-                    <textarea class="form-control mi-input" placeholder="Leave a comment here" id="floatingTextarea2"
-                        style="height: 100px" name="descripcion" required></textarea>
-                    <label for="floatingTextarea2">Descripción:</label>
+            <div class="col-md-4 mb-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">3</h5>
+                        <p class="card-text">Nombre 3</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </fieldset>
-    <div class="col-md-12 mt-3 p-3 justify-content-end text-center">
-        <button class="btn btn-primary" type="submit">💾 Guardar</button>
-    </div>
+
+        <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
+            <legend class="float-none w-auto px-3 text-primary-emphasis">Origen - investigación:</legend>
+            <div class="row">
+                <div class="col-6 col-md-4 mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control mi-input" id="solo-letras" name="nombre"
+                            placeholder="Ingrese solo letras" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                            title="Solo se permiten letras y espacios" required>
+                        <label for="solo-letras" class="form-label">Nombre completo del Tutor</label>
+                        <div class="invalid-feedback">Solo se permiten letras y espacios</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 mb-3 ">
+                    <div class="form-floating">
+                        <input type="text" class="form-control mi-input" id="orcidt" name="orcidtutor"
+                            placeholder="0009-0004-8628-1583" inputmode="numeric" pattern="\d{4}-\d{4}-\d{4}-\d{4}"
+                            title="Formato: 0000-0000-0000-0000" maxlength="19" required>
+                        <label for="orcid" class="form-label">Número de ORCID del Tutor</label>
+                        <div class="invalid-feedback">Formato inválido. Use 0009-0004-8628-1583</div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 mb-3">
+                    <!-- <label for="tipoInvestigacion">Seleccionar tipo de Investigación:</label> -->
+                    <select name="tipoInvestigacion" id="tipoInvestigacion" class="form-select mi-input"
+                        aria-label="Small select example" required>
+                        <option selected>Seleccionar tipo de Investigación</option>
+                        <option value="1">Articulo Cientifico</option>
+                        <option value="2">Informe final</option>
+                        <option value="3">Trabajo de innovación cientifica</option>
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-6 mb-3">
+                    <label for="fechaInscripcion" class="form-label">Fecha de inscripción:</label>
+                    <input type="date" class="form-control mi-input" id="fechaInscripcion" name="fechaInscripcion"
+                        required>
+                </div>
+                <div class="col-6 col-md-6 mb-3">
+                    <label for="fileJudc" class="form-label">Agregar el archivo</label>
+                    <input class="form-control mi-input" type="file" id="fileJudc" name="fileJudc">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating ">
+                        <textarea class="form-control mi-input" placeholder="Ingrese la descripción de la investigación"
+                            id="descripcion" style="height: 100px" name="descripcion" required></textarea>
+                        <label for="descripcion">Descripción:</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="col-md-12 mt-3 p-3 justify-content-end text-center">
+            <button type="submit" class="btn btn-primary">💾 Guardar</button>
+        </div>
     </form>
 </div>
 {% endblock %}
