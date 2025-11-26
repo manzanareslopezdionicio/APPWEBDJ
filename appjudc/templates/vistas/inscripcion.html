@@ -71,21 +71,12 @@
                     <label for="carrera">Seleccionar la Carrera:</label>
                     <select name="carrera" id="carrera" class="form-select mi-input" aria-label="Small select example"
                         required>
-                        <option selected disabled value="">Elejir...</option>
+                        <option selected disabled value="">Elejir ..</option>
                         <option value="1">Ingenieri en Sistema</option>
                         <option value="2">Contaduria publica y finanzas</option>
                         <option value="3">Administración de empresas</option>
                     </select>
                     <div class="invalid-feedback">Seleccione una carrera.</div>
-
-                    <label for="estado" class="form-label">Estado</label>
-                    <select class="form-select" id="estado" required>
-                        <option selected disabled value="">Elejir...</option>
-                        <option value="1">Activo</option>
-                        <option value="2">Inactivo</option>
-                    </select>
-                    <div class="invalid-feedback">Seleccione un estado.</div>
-
                 </div>
             </div>
         </fieldset>
@@ -144,11 +135,12 @@
                     <!-- <label for="tipoInvestigacion">Seleccionar tipo de Investigación:</label> -->
                     <select name="tipoInvestigacion" id="tipoInvestigacion" class="form-select mi-input"
                         aria-label="Small select example" required>
-                        <option selected>Seleccionar tipo de Investigación</option>
+                        <option selected disabled value="">Seleccionar tipo de Investigación</option>
                         <option value="1">Articulo Cientifico</option>
                         <option value="2">Informe final</option>
                         <option value="3">Trabajo de innovación cientifica</option>
                     </select>
+                    <div class="invalid-feedback">Seleccione un tipo de investigación.</div>
                 </div>
 
                 <div class="col-6 col-md-6 mb-3">
@@ -158,7 +150,7 @@
                 </div>
                 <div class="col-6 col-md-6 mb-3">
                     <label for="fileJudc" class="form-label">Agregar el archivo</label>
-                    <input class="form-control mi-input" type="file" id="fileJudc" name="fileJudc">
+                    <input class="form-control mi-input" type="file" id="fileJudc" name="fileJudc" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="form-floating ">
@@ -174,4 +166,19 @@
         </div>
     </form>
 </div>
+<script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
 {% endblock %}

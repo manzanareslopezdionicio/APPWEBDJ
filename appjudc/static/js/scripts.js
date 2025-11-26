@@ -148,6 +148,57 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
     var $c = $('#orcid');
     if ($c.length) {
+        $c.on('input', function () {
+            var v = $(this).val().replace(/\D/g, '').slice(0, 19); // solo dígitos, máximo 19
+            var p1 = v.slice(0, 4);
+            var p2 = v.slice(4, 8);
+            var p3 = v.slice(8, 12);
+            var p4 = v.slice(12, 16);
+            var out = '';
+            if (p1) out += p1;
+            if (p2) out += '-' + p2;
+            if (p3) out += '-' + p3;
+            if (p4) out += '-' + p4;
+            $(this).val(out);
+            
+            // Validación en tiempo real usando el pattern nativo
+            var isValid = this.checkValidity();
+            if (isValid) {
+                $(this).removeClass('is-invalid').addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                // No agregamos 'is-invalid' aquí para no mostrar el error mientras escribe
+            }
+        });
+
+        // Validar al perder el foco
+        $c.on('blur', function() {
+            var isValid = this.checkValidity();
+            if (!isValid) {
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        // Limpiar validación al enfocar
+        $c.on('focus', function() {
+            $(this).removeClass('is-invalid is-valid');
+        });
+
+        // Validación personalizada en submit (como respaldo)
+        $c.closest('form').on('submit', function (e) {
+            var isValid = $c[0].checkValidity();
+            if (!isValid) {
+                e.preventDefault();
+                $c.addClass('is-invalid');
+                $c.focus();
+            }
+        });
+    }
+});
+
+/* $(document).ready(function () {
+    var $c = $('#orcid');
+    if ($c.length) {
         // Asegurar atributos HTML básicos
         $c.attr('maxlength', 19)
             .attr('inputmode', 'numeric')
@@ -212,9 +263,60 @@ $(document).ready(function () {
         });
     }
 });
-
+ */
 // Máscara simple para formato ORCID TUTOR
 $(document).ready(function () {
+    var $c = $('#orcidt');
+    if ($c.length) {
+        $c.on('input', function () {
+            var v = $(this).val().replace(/\D/g, '').slice(0, 19); // solo dígitos, máximo 19
+            var p1 = v.slice(0, 4);
+            var p2 = v.slice(4, 8);
+            var p3 = v.slice(8, 12);
+            var p4 = v.slice(12, 16);
+            var out = '';
+            if (p1) out += p1;
+            if (p2) out += '-' + p2;
+            if (p3) out += '-' + p3;
+            if (p4) out += '-' + p4;
+            $(this).val(out);
+            
+            // Validación en tiempo real usando el pattern nativo
+            var isValid = this.checkValidity();
+            if (isValid) {
+                $(this).removeClass('is-invalid').addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                // No agregamos 'is-invalid' aquí para no mostrar el error mientras escribe
+            }
+        });
+
+        // Validar al perder el foco
+        $c.on('blur', function() {
+            var isValid = this.checkValidity();
+            if (!isValid) {
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        // Limpiar validación al enfocar
+        $c.on('focus', function() {
+            $(this).removeClass('is-invalid is-valid');
+        });
+
+        // Validación personalizada en submit (como respaldo)
+        $c.closest('form').on('submit', function (e) {
+            var isValid = $c[0].checkValidity();
+            if (!isValid) {
+                e.preventDefault();
+                $c.addClass('is-invalid');
+                $c.focus();
+            }
+        });
+    }
+});
+
+/* $(document).ready(function () {
     var $c = $('#orcidt');
     if ($c.length) {
         // Asegurar atributos HTML básicos
@@ -281,7 +383,7 @@ $(document).ready(function () {
         });
     }
 });
-
+ */
 /* Mascara del Telefono */
 $(document).ready(function () {
     var $telefono = $('#telefono');
