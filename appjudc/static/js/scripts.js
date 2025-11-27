@@ -487,6 +487,51 @@ $(document).ready(function () {
     }
 });
 
+/* Validación del email */
+$(document).ready(function () {
+    var $email = $('#email');
+    var $feedback = $email.next('.invalid-feedback');
+
+    function validarEmailCompleto(email) {
+        if (email === '') {
+            return { valido: false, mensaje: 'El email es requerido' };
+        }
+
+        // Verificar formato básico
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return { valido: false, mensaje: 'Formato de email inválido' };
+        }
+
+        // Verificar que no empiece o termine con punto
+        if (email.startsWith('.') || email.endsWith('.')) {
+            return { valido: false, mensaje: 'El email no puede empezar o terminar con punto' };
+        }
+
+        // Verificar que el dominio tenga al menos 2 caracteres
+        var dominio = email.split('@')[1];
+        if (!dominio || dominio.length < 3) {
+            return { valido: false, mensaje: 'El dominio del email es muy corto' };
+        }
+
+        return { valido: true, mensaje: '' };
+    }
+
+    $email.on('blur', function () {
+        var email = $(this).val().trim();
+        var validacion = validarEmailCompleto(email);
+
+        if (email === '') {
+            $(this).removeClass('is-invalid is-valid');
+            $feedback.text('Por favor, ingrese un email válido');
+        } else if (validacion.valido) {
+            $(this).removeClass('is-invalid').addClass('is-valid');
+        } else {
+            $(this).removeClass('is-valid').addClass('is-invalid');
+            $feedback.text(validacion.mensaje);
+        }
+    });
+});
+
 /* Validación de formulario */
 (function () {
     'use strict'
