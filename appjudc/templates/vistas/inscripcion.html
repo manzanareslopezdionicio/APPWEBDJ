@@ -16,7 +16,6 @@
                     <button class="btn btn-outline-success btn-lg" type="button">🔎 Buscar</button>
                 </a>
             </div>
-
             <legend class="float-none w-auto px-3 text-primary-emphasis">Datos del estudiante:</legend>
             <div class="row ">
                 <div class="col-6 col-md-4 mb-3 ">
@@ -69,13 +68,39 @@
                     <label for="carrera">Seleccionar la Carrera:</label>
                     <select name="carrera" id="carrera" class="form-select mi-input" aria-label="Small select example"
                         required>
-                        <option selected disabled value="">Elejir ..</option>
-                        <option value="1">Ingenieri en Sistema</option>
+                        <option selected disabled value="">Elegir...</option>
+                        <option value="1">Ingenieria en Sistema</option>
                         <option value="2">Contaduria publica y finanzas</option>
                         <option value="3">Administración de empresas</option>
                     </select>
                     <div class="invalid-feedback">Seleccione una carrera.</div>
                 </div>
+                <div class="col-6 col-md-4 mb-3">
+                     <label for="tipoInvestigacion">Seleccionar el Tipo de Investigación:</label>
+                    <select name="tipoInvestigacion" id="tipoInvestigacion" class="form-select mi-input"
+                        aria-label="Small select example" required>
+                        <option selected disabled value="">Elegir...</option>
+                        <option value="1">Articulo Cientifico</option>
+                        <option value="2">Informe final</option>
+                        <option value="3">Trabajo de innovación cientifica</option>
+                    </select>
+                    <div class="invalid-feedback">Seleccione un tipo de investigación.</div>
+                </div>
+
+                <!-- <div class="col-12 col-md-4 mb-3 form-check">
+                        <input type="radio" class="form-check-input" id="articulo" name="radio-informe" required>
+                        <label class="form-check-label" for="articulo">Informe de Investigación Finalizado</label>
+                    </div>
+                    <div class="col-12 col-md-4 mb-3 form-check">
+                        <input type="radio" class="form-check-input" id="articulo" name="radio-informe" required>
+                        <label class="form-check-label" for="articulo">Articulo Cientifico</label>
+                    </div>
+                    <div class="col-12 col-md-4 mb-3 form-check">
+                        <input type="radio" class="form-check-input" id="proyecto" name="radio-informe" required>
+                        <label class="form-check-label" for="proyecto">Proyecto de Investigación</label>
+                                <div class="invalid-feedback">Seleccionar el tipo de investigación.</div> 
+                    </div> -->
+
             </div>
         </fieldset>
 
@@ -128,26 +153,13 @@
                         <div class="invalid-feedback">Formato inválido. Use 0009-0004-8628-1583</div>
                     </div>
                 </div>
-
                 <div class="col-6 col-md-4 mb-3">
-                    <!-- <label for="tipoInvestigacion">Seleccionar tipo de Investigación:</label> -->
-                    <select name="tipoInvestigacion" id="tipoInvestigacion" class="form-select mi-input"
-                        aria-label="Small select example" required>
-                        <option selected disabled value="">Seleccionar tipo de Investigación</option>
-                        <option value="1">Articulo Cientifico</option>
-                        <option value="2">Informe final</option>
-                        <option value="3">Trabajo de innovación cientifica</option>
-                    </select>
-                    <div class="invalid-feedback">Seleccione un tipo de investigación.</div>
-                </div>
-
-                <div class="col-6 col-md-6 mb-3">
                     <label for="fechaInscripcion" class="form-label">Fecha de inscripción:</label>
                     <input type="date" class="form-control mi-input" id="fechaInscripcion" name="fechaInscripcion"
                         required>
                     <div class="invalid-feedback">Seleccione una fecha válida.</div>
                 </div>
-                <div class="col-6 col-md-6 mb-3">
+                <div class="col-6 col-md-4 mb-3">
                     <label for="fileJudc" class="form-label">Agregar el archivo</label>
                     <input class="form-control mi-input" type="file" id="fileJudc" name="fileJudc" required>
                     <div class="invalid-feedback">Seleccione un archivo válido.</div>
