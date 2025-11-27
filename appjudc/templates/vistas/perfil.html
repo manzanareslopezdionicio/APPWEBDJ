@@ -11,45 +11,55 @@
         <div class="card shadow">
             <div class="card-body">
                 {% csrf_token %}
-                <form action="#" method="post">
+                <form action="#" method="post" class="needs-validation" novalidate>
                     <div class="row">
                         <div class="col-md-6 p-2">
-                            <label for="carnet" class="form-label">Número de carnet:</label>
-                            <input type="text" class="form-control" id="carnet" name="carnet" disabled required>
+                            <div class="form-floating">
+                                <label for="carnet" class="form-label">Número de carnet:</label>
+                                <input type="text" class="form-control" name="carnet" disabled>
+                            </div>
                         </div>
                         <div class="col-md-6 p-2">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control mi-input" id="nombre" name="nombre"
-                                placeholder="Nombres" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+"
-                                title="Solo letras, espacios y guiones"
-                                oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ \-]/g,'');">
-
-                            <!-- <label for="nombre" class="form-label">Nombres:</label>
-                            <input type="text" class="form-control mi-input" id="nombre" name="nombre"
-                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-]+" title="Solo letras, espacios y guiones"
-                                oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ \-]/g,'');" autofocus
-                                required> -->
-
+                            <div class="form-floating">
+                                <input type="text" class="form-control mi-input" id="nombre" name="nombre"
+                                    placeholder="Nombres" required pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                                    title="Solo letras, espacios y guiones"
+                                    oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g,'');" required>
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <div class="invalid-feedback">Formato inválido. Use solo letras, espacios y guiones
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 p-2">
                             <label for="apellido" class="form-label">Apellidos:</label>
-                            <input type="text" class="form-control mi-input" id="apellido" name="apellido" required>
+                            <input type="text" class="form-control mi-input" id="apellido" name="apellido" required
+                                pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+" title="Solo letras, espacios y guiones"
+                                oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g,'');">
                         </div>
                         <div class="col-md-6 p-2">
                             <label for="email" class="form-label">Correo electrónico:</label>
-                            <input type="email" class="form-control mi-input" id="email" name="email" required>
+                            <input type="email" class="form-control mi-input" id="email" name="email" required
+                                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                title="Formato de correo electrónico inválido">
                         </div>
                         <div class="col-md-4 p-2">
-                            <label for="tel" class="form-label">Telefono:</label>
-                            <input type="text" class="form-control" id="tel" name="tel" required>
+                            <input type="text" class="form-control mi-input" id="telefono" name="telefono"
+                                placeholder="9999-9999" title="Formato: 9999-9999" required pattern="^\d{4}-\d{4}$"
+                                required>
+                            <label for="telefono" class="form-label">Telefono:</label>
                         </div>
                         <div class="col-md-4 p-2">
+                            <input type="password" class="form-control mi-input" id="password" name="password"
+                                placeholder="Contraseña" title="Formato de contraseña inválido" required
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                title="Formato de contraseña inválido">
                             <label for="password" class="form-label">Password:</label>
-                            <input type="password" class="form-control mi-input" id="password" name="password" required>
                         </div>
                         <div class="col-md-4 p-2">
+                            <input type="password" class="form-control mi-input" id="passwordc" name="passwordc"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                title="Formato de contraseña inválido" required>
                             <label for="passwordc" class="form-label">Confirmar Password:</label>
-                            <input type="password" class="form-control mi-input" id="passwordc" name="passwordc" required>
                         </div>
                         <div class=" col-md-12 p-2">
                             <label for="Textarea">Dirección:</label>
@@ -65,5 +75,20 @@
         </div>
     </div>
 </div>
+<script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
 
 {% endblock %}

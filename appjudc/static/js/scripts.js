@@ -160,7 +160,7 @@ $(document).ready(function () {
             if (p3) out += '-' + p3;
             if (p4) out += '-' + p4;
             $(this).val(out);
-            
+
             // Validación en tiempo real usando el pattern nativo
             var isValid = this.checkValidity();
             if (isValid) {
@@ -172,7 +172,7 @@ $(document).ready(function () {
         });
 
         // Validar al perder el foco
-        $c.on('blur', function() {
+        $c.on('blur', function () {
             var isValid = this.checkValidity();
             if (!isValid) {
                 $(this).addClass('is-invalid');
@@ -180,7 +180,7 @@ $(document).ready(function () {
         });
 
         // Limpiar validación al enfocar
-        $c.on('focus', function() {
+        $c.on('focus', function () {
             $(this).removeClass('is-invalid is-valid');
         });
 
@@ -280,7 +280,7 @@ $(document).ready(function () {
             if (p3) out += '-' + p3;
             if (p4) out += '-' + p4;
             $(this).val(out);
-            
+
             // Validación en tiempo real usando el pattern nativo
             var isValid = this.checkValidity();
             if (isValid) {
@@ -292,7 +292,7 @@ $(document).ready(function () {
         });
 
         // Validar al perder el foco
-        $c.on('blur', function() {
+        $c.on('blur', function () {
             var isValid = this.checkValidity();
             if (!isValid) {
                 $(this).addClass('is-invalid');
@@ -300,7 +300,7 @@ $(document).ready(function () {
         });
 
         // Limpiar validación al enfocar
-        $c.on('focus', function() {
+        $c.on('focus', function () {
             $(this).removeClass('is-invalid is-valid');
         });
 
@@ -434,7 +434,7 @@ $(document).ready(function () {
     }
 });
 $(document).ready(function () {
-    var $inputLetras = $('#solo-letras');
+    var $inputLetras = $('#nombre');
     if ($inputLetras.length) {
 
         // Máscara: solo permitir letras en tiempo real
@@ -486,3 +486,18 @@ $(document).ready(function () {
         });
     }
 });
+
+/* Validación de formulario */
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()

@@ -76,7 +76,7 @@
                     <div class="invalid-feedback">Seleccione una carrera.</div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
-                     <label for="tipoInvestigacion">Seleccionar el Tipo de Investigación:</label>
+                    <label for="tipoInvestigacion">Seleccionar el Tipo de Investigación:</label>
                     <select name="tipoInvestigacion" id="tipoInvestigacion" class="form-select mi-input"
                         aria-label="Small select example" required>
                         <option selected disabled value="">Elegir...</option>
@@ -86,47 +86,60 @@
                     </select>
                     <div class="invalid-feedback">Seleccione un tipo de investigación.</div>
                 </div>
-
-                <!-- <div class="col-12 col-md-4 mb-3 form-check">
-                        <input type="radio" class="form-check-input" id="articulo" name="radio-informe" required>
-                        <label class="form-check-label" for="articulo">Informe de Investigación Finalizado</label>
-                    </div>
-                    <div class="col-12 col-md-4 mb-3 form-check">
-                        <input type="radio" class="form-check-input" id="articulo" name="radio-informe" required>
-                        <label class="form-check-label" for="articulo">Articulo Cientifico</label>
-                    </div>
-                    <div class="col-12 col-md-4 mb-3 form-check">
-                        <input type="radio" class="form-check-input" id="proyecto" name="radio-informe" required>
-                        <label class="form-check-label" for="proyecto">Proyecto de Investigación</label>
-                                <div class="invalid-feedback">Seleccionar el tipo de investigación.</div> 
-                    </div> -->
-
             </div>
         </fieldset>
 
         <h3 class="p-3" style="text-shadow: 2px 2px 4px gray;">Autores:</h3>
+        <!-- Tabla de Autores -->
         <div class="row">
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 mb-3">
                 <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="card-title">Autor </h5>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">1</h5>
-                        <p class="card-text">Nombre </p>
+                        <table class="table table-hover table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">N°. Carnet</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
+            <!-- Tabla de Autores seleccionados -->
+            <div class="col-md-6 mb-3">
                 <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">2</h5>
-                        <p class="card-text">Nombre 2</p>
+                    <div class="card-header">
+                        <h5 class="card-title">Autores participantes</h5>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card shadow">
                     <div class="card-body">
-                        <h5 class="card-title">3</h5>
-                        <p class="card-text">Nombre 3</p>
+                        <table class="table table-hover table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">N°. Carnet</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -137,10 +150,10 @@
             <div class="row">
                 <div class="col-6 col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control mi-input" id="solo-letras" name="nombre"
+                        <input type="text" class="form-control mi-input" id="nombre" name="nombre"
                             placeholder="Ingrese solo letras" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
                             title="Solo se permiten letras y espacios" required>
-                        <label for="solo-letras" class="form-label">Nombre completo del Tutor</label>
+                        <label for="nombre" class="form-label">Nombre completo del Tutor</label>
                         <div class="invalid-feedback">Solo se permiten letras y espacios</div>
                     </div>
                 </div>
@@ -175,7 +188,7 @@
             </div>
         </fieldset>
         <div class="col-md-12 mt-3 p-3 justify-content-end text-center">
-            <button type="submit" class="btn btn-primary">💾 Guardar</button>
+            <button type="submit" class="btn btn-outline-success btn-lg">💾 Guardar</button>
         </div>
     </form>
 </div>
