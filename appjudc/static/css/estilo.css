@@ -10,7 +10,7 @@
 /* Estilos al pasar el mouse sobre el input */
 .mi-input:hover {
   border-color: rgb(240, 213, 60);
-  /* Cambia el color del borde a rojo */
+  /* Cambia el color del borde a azul */
   box-shadow: 0 0 10px rgb(59, 103, 249);
   /* Añade una sombra sutil */
 }
@@ -21,4 +21,50 @@
   /* azul oscuro */
   color: #ffffff;
   /* texto blanco para contraste */
+}
+
+.password-strength {
+  font-size: 0.8em;
+  margin-top: 5px;
+  font-weight: bold;
+  height: 20px;
+}
+
+.password-strength.weak {
+  color: #dc3545;
+}
+
+.password-strength.medium {
+  color: #ffc107;
+}
+
+.password-strength.strong {
+  color: #198754;
+}
+
+.password-strength.match {
+  color: #198754;
+}
+
+.password-strength.mismatch {
+  color: #dc3545;
+}
+
+.password-toggle {
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+  z-index: 5;
+  font-size: 1.2em;
+}
+
+.password-toggle:hover {
+  color: #495057;
+}
+
+/* Ajuste para que el texto no se solape con el icono */
+.form-floating .form-control {
+  padding-right: 45px;
 }

@@ -1,4 +1,41 @@
-// Mostrar y ocultar contraseña login
+/* $(document).ready(function () {
+    // Función reutilizable para cualquier toggle de password
+    function initPasswordToggle(toggleSelector, passwordSelector) {
+        var $toggle = $(toggleSelector);
+        var $password = $(passwordSelector);
+
+        $toggle.hover(
+            function () { $(this).css('color', 'blue'); },
+            function () {
+                var isVisible = $password.attr('type') === 'text';
+                $(this).css('color', isVisible ? 'red' : 'green');
+            }
+        );
+
+        $toggle.click(function () {
+            var isVisible = $password.attr('type') === 'text';
+
+            if (isVisible) {
+                $password.attr('type', 'password');
+                $toggle.removeClass('bi-eye-fill').addClass('bi-eye-slash-fill');
+            } else {
+                $password.attr('type', 'text');
+                $toggle.removeClass('bi-eye-slash-fill').addClass('bi-eye-fill');
+            }
+
+            // Actualizar color después del cambio
+            var newIsVisible = !isVisible;
+            $toggle.css('color', newIsVisible ? 'red' : 'green');
+        });
+    }
+
+    // Inicializar para diferentes campos
+    initPasswordToggle('#topass', '#password');
+    initPasswordToggle('#toggle-confirm', '#confirm-password');
+});
+ */
+
+// MOSTRAR Y OCULTAR CONTRASEÑA LOGIN
 $(document).ready(function () {
     $('#topass').on('mouseenter', function () {
         $(this).css('color', 'blue');
@@ -86,7 +123,7 @@ $(document).ready(function () {
     });
 });
 
-// Máscara simple para formato 99-99999-9 en #carnet (sin librerías externas)
+// MOSTRAR SIMPLE PARA FORMATO 99-99999-9 EN #CARNET (SIN LIBRERÍAS EXTERNAS)
 $(document).ready(function () {
     var $c = $('#carnet');
     if ($c.length) {
@@ -144,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (p) p.addEventListener('input', validatePasswordMatch);
 });
 
-// Máscara simple para formato ORCID ESTUDIANTE
+// MOSTRAR SIMPLE PARA FORMATO ORCID ESTUDIANTE
 $(document).ready(function () {
     var $c = $('#orcid');
     if ($c.length) {
@@ -264,7 +301,7 @@ $(document).ready(function () {
     }
 });
  */
-// Máscara simple para formato ORCID TUTOR
+// MOSTRAR SIMPLE PARA FORMATO ORCID TUTOR
 $(document).ready(function () {
     var $c = $('#orcidt');
     if ($c.length) {
@@ -384,7 +421,7 @@ $(document).ready(function () {
     }
 });
  */
-/* Mascara del Telefono */
+// MOSTRAR SIMPLE PARA FORMATO TELEFONO
 $(document).ready(function () {
     var $telefono = $('#telefono');
     if ($telefono.length) {
@@ -433,6 +470,8 @@ $(document).ready(function () {
         });
     }
 });
+
+// MOSTRAR SIMPLE PARA FORMATO NOMBRE
 $(document).ready(function () {
     var $inputLetras = $('#nombre');
     if ($inputLetras.length) {
@@ -487,7 +526,7 @@ $(document).ready(function () {
     }
 });
 
-/* Validación del email */
+// MOSTRAR SIMPLE PARA FORMATO EMAIL
 $(document).ready(function () {
     var $email = $('#email');
     var $feedback = $email.next('.invalid-feedback');
@@ -532,7 +571,7 @@ $(document).ready(function () {
     });
 });
 
-/* Validación de formulario */
+// MOSTRAR SIMPLE PARA VALIDACIÓN DE FORMULARIO DE BOOTSTRAP
 (function () {
     'use strict'
     var forms = document.querySelectorAll('.needs-validation')
@@ -546,3 +585,256 @@ $(document).ready(function () {
         }, false)
     })
 })()
+
+/* VALIDACIÓN DE CONTRASEÑA */
+/* $(document).ready(function () {
+    var $password = $('#password');
+    var $confirmPassword = $('#confirm-password');
+    var $passwordFeedback = $('#password-feedback');
+    var $confirmFeedback = $('#confirm-feedback');
+
+    // Elementos para mostrar requisitos
+    var $length = $('#length');
+    var $uppercase = $('#uppercase');
+    var $lowercase = $('#lowercase');
+    var $number = $('#number');
+    var $special = $('#special');
+ */
+// Función para validar fortaleza de password
+/* function validarFortalezaPassword(password) {
+    var requisitos = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[@$!%*?&]/.test(password)
+    };
+
+    // Actualizar visualización de requisitos
+    $length.toggleClass('text-success', requisitos.length).toggleClass('text-danger', !requisitos.length);
+    $uppercase.toggleClass('text-success', requisitos.uppercase).toggleClass('text-danger', !requisitos.uppercase);
+    $lowercase.toggleClass('text-success', requisitos.lowercase).toggleClass('text-danger', !requisitos.lowercase);
+    $number.toggleClass('text-success', requisitos.number).toggleClass('text-danger', !requisitos.number);
+    $special.toggleClass('text-success', requisitos.special).toggleClass('text-danger', !requisitos.special);
+
+    return requisitos.length && requisitos.uppercase && requisitos.lowercase &&
+        requisitos.number && requisitos.special;
+}
+
+// Función para validar coincidencia
+function validarCoincidencia() {
+    var password = $password.val();
+    var confirmacion = $confirmPassword.val();
+
+    if (confirmacion === '') {
+        $confirmPassword.removeClass('is-invalid is-valid');
+        return false;
+    }
+
+    var coinciden = password === confirmacion;
+
+    $confirmPassword.toggleClass('is-valid', coinciden && confirmacion.length > 0);
+    $confirmPassword.toggleClass('is-invalid', !coinciden && confirmacion.length > 0);
+
+    return coinciden;
+}
+
+// Validación en tiempo real para password
+$password.on('input', function () {
+    var password = $(this).val();
+    var esValido = validarFortalezaPassword(password);
+
+    if (password === '') {
+        $(this).removeClass('is-invalid is-valid');
+        // Resetear requisitos
+        $length.removeClass('text-success').addClass('text-danger');
+        $uppercase.removeClass('text-success').addClass('text-danger');
+        $lowercase.removeClass('text-success').addClass('text-danger');
+        $number.removeClass('text-success').addClass('text-danger');
+        $special.removeClass('text-success').addClass('text-danger');
+    } else if (esValido) {
+        $(this).removeClass('is-invalid').addClass('is-valid');
+        $passwordFeedback.text('Contraseña segura');
+    } else {
+        $(this).removeClass('is-valid').addClass('is-invalid');
+        $passwordFeedback.text('La contraseña no cumple con todos los requisitos');
+    }
+
+    // Validar confirmación también cuando cambia el password
+    if ($confirmPassword.val().length > 0) {
+        validarCoincidencia();
+    }
+});
+
+// Validación en tiempo real para confirmación
+$confirmPassword.on('input', function () {
+    validarCoincidencia();
+});
+
+// Validación al perder el foco
+$password.add($confirmPassword).on('blur', function () {
+    var esPassword = $(this).attr('id') === 'password';
+
+    if (esPassword) {
+        var password = $password.val();
+        if (password.length > 0) {
+            validarFortalezaPassword(password);
+        }
+    } else {
+        validarCoincidencia();
+    }
+});
+
+// Limpiar estilos al enfocar
+$password.add($confirmPassword).on('focus', function () {
+    $(this).removeClass('is-invalid');
+});
+
+// Mostrar/ocultar password (opcional)
+function togglePasswordVisibility($input, $icon) {
+    var type = $input.attr('type') === 'password' ? 'text' : 'password';
+    $input.attr('type', type);
+    $icon.toggleClass('fa-eye fa-eye-slash');
+}
+
+// Agregar botones para mostrar/ocultar (opcional)
+$password.after('<span class="password-toggle"><i class="fas fa-eye"></i></span>');
+$confirmPassword.after('<span class="password-toggle"><i class="fas fa-eye"></i></span>');
+
+$('.password-toggle').on('click', function () {
+    var $input = $(this).prev('input');
+    var $icon = $(this).find('i');
+    togglePasswordVisibility($input, $icon);
+});
+
+// Validación en el submit del formulario
+$password.closest('form').on('submit', function (e) {
+    var password = $password.val();
+    var confirmacion = $confirmPassword.val();
+
+    var passwordValido = validarFortalezaPassword(password);
+    var coinciden = password === confirmacion;
+
+    if (!passwordValido || !coinciden) {
+        e.preventDefault();
+
+        if (!passwordValido) {
+            $password.addClass('is-invalid');
+            $password.focus();
+        } else if (!coinciden) {
+            $confirmPassword.addClass('is-invalid');
+            $confirmFeedback.text('Las contraseñas no coinciden');
+            $confirmPassword.focus();
+        }
+    }
+});
+}); */
+
+/* $(document).ready(function () {
+    // Toggle mostrar/ocultar
+    $('.password-toggle').click(function () {
+        const $input = $(this).siblings('.password-input');
+        const $icon = $(this).find('i');
+        const type = $input.attr('type') === 'password' ? 'text' : 'password';
+        $input.attr('type', type);
+        $icon.toggleClass('bi-eye-slash-fill bi-eye-fill');
+    });
+    // Validación de fortaleza y coincidencia
+    $('.password-input').on('input', function () {
+        const password = $(this).val();
+        const $feedback = $(this).siblings('.password-strength');
+
+        if ($(this).attr('id') === 'password-confirm') {
+            const match = password === $('#password-registro').val();
+            $feedback.html(match ? '✓ Coinciden' : '✗ No coinciden').toggleClass('match mismatch', match);
+            return;
+        }
+
+        if (!password) {
+            $feedback.html('').removeClass('weak medium strong');
+            return;
+        }
+
+        const strength = password.length < 6 ? 'Débil' :
+            password.length < 8 ? 'Medio' : 'Fuerte';
+        const clase = strength.toLowerCase();
+        $feedback.html(`Fortaleza: ${strength}`).removeClass('weak medium strong').addClass(clase);
+    });
+});
+ */
+
+// MOSTRAR SIMPLE PARA VALIDACIÓN DE CONTRASEÑA Y COINCIDENCIA DE CONTRASEÑA
+$(document).ready(function () {
+    // Función para verificar fortaleza
+    function checkPasswordStrength(password) {
+        let score = 0;
+
+        if (password.length >= 6) score++;
+        if (password.length >= 8) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[0-9]/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+
+        if (score <= 2) return { nivel: 'Débil', clase: 'weak' };
+        if (score <= 4) return { nivel: 'Medio', clase: 'medium' };
+        return { nivel: 'Fuerte', clase: 'strong' };
+    }
+
+    // Función para verificar coincidencia
+    function checkPasswordMatch() {
+        const passRegistro = $('#password-registro').val();
+        const passConfirm = $('#password-confirm').val();
+        const $strengthDiv = $('#password-confirm').siblings('.password-strength');
+
+        if (!passConfirm) {
+            $strengthDiv.html('').removeClass('weak medium strong match mismatch');
+            return;
+        }
+
+        if (passRegistro === passConfirm) {
+            $strengthDiv.html('✓ Las contraseñas coinciden').addClass('match').removeClass('mismatch');
+        } else {
+            $strengthDiv.html('✗ Las contraseñas no coinciden').addClass('mismatch').removeClass('match');
+        }
+    }
+
+    // Función para toggle mostrar/ocultar password
+    function togglePassword($input, $icon) {
+        const isPassword = $input.attr('type') === 'password';
+        $input.attr('type', isPassword ? 'text' : 'password');
+        $icon.toggleClass('bi-eye-slash-fill bi-eye-fill');
+    }
+
+    // Evento para mostrar/ocultar password
+    $('.password-toggle').click(function () {
+        const $input = $(this).siblings('.password-input');
+        const $icon = $(this).find('i');
+        togglePassword($input, $icon);
+    });
+
+    // Evento para todos los inputs de password
+    $('.password-input').on('input', function () {
+        const password = $(this).val();
+        const $strengthDiv = $(this).siblings('.password-strength');
+        const inputId = $(this).attr('id');
+
+        // Si es confirmación, verificar coincidencia
+        if (inputId === 'password-confirm') {
+            checkPasswordMatch();
+            return;
+        }
+
+        if (!password) {
+            $strengthDiv.html('').removeClass('weak medium strong');
+            return;
+        }
+
+        const strength = checkPasswordStrength(password);
+        $strengthDiv.html(`Fortaleza: ${strength.nivel}`).removeClass('weak medium strong').addClass(strength.clase);
+
+        // Si cambia el password de registro, verificar confirmación
+        if (inputId === 'password-registro') {
+            checkPasswordMatch();
+        }
+    });
+});
