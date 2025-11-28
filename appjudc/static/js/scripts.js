@@ -803,6 +803,8 @@ $(document).ready(function () {
         const isPassword = $input.attr('type') === 'password';
         $input.attr('type', isPassword ? 'text' : 'password');
         $icon.toggleClass('bi-eye-slash-fill bi-eye-fill');
+        $icon.css('color', isPassword ? 'green' : 'rgba(0, 57, 201, 1)');
+        $font - zize.css()
     }
 
     // Evento para mostrar/ocultar password
