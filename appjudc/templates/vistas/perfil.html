@@ -106,10 +106,12 @@
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating mb-3 position-relative">
                                 <input type="password" class="form-control password-input mi-input"
-                                    id="password-registro" placeholder="Contraseña">
+                                    id="password-registro"
+                                    title="Se requiere letra mayuscula, numeros y caracter especial"
+                                    placeholder="Contraseña" required>
                                 <label for="password-registro">Contraseña</label>
-                                <span class="password-toggle position-absolute top-50 end-0 translate-middle-y me-3"
-                                    style="cursor:pointer;">
+                                <span class="password-toggle position-absolute top-25 end-0 translate-middle-y me-3"
+                                    style="cursor:pointer;" onclick="togglePasswordRegistro()">
                                     <i class="bi bi-eye-slash-fill" id="togglePasswordRegistro"
                                         style="color:blue; font-size: 1.3rem;"></i>
                                 </span>
@@ -121,10 +123,11 @@
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating mb-3 position-relative">
                                 <input type="password" class="form-control password-input mi-input"
-                                    id="password-confirm" placeholder="Confirmar Contraseña">
+                                    id="password-confirm" placeholder="Confirmar Contraseña"
+                                    title="Se requiere confirmar Contraseña" required>
                                 <label for="password-confirm">Confirmar Contraseña</label>
-                                <span class="password-toggle position-absolute top-50 end-0 translate-middle-y me-3"
-                                    style="cursor:pointer;">
+                                <span class="password-toggle position-absolute top-25 end-0 translate-middle-y me-3"
+                                    style="cursor:pointer; " onclick="togglePasswordConfirm()">
                                     <i class="bi bi-eye-slash-fill" id="togglePasswordConfirm"
                                         style="color:blue; font-size:1.3rem;"></i>
                                 </span>
