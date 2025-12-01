@@ -472,59 +472,6 @@ $(document).ready(function () {
 });
 
 // MOSTRAR SIMPLE PARA FORMATO NOMBRE
-$(document).ready(function () {
-    var $inputLetras = $('#nombres, #apellidos');
-    if ($inputLetras.length) {
-
-        // Máscara: solo permitir letras en tiempo real
-        $inputLetras.on('input', function () {
-            var valor = $(this).val();
-
-            // Remover cualquier carácter que no sea letra, espacio o letra acentuada
-            var soloLetras = valor.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g, '');
-
-            $(this).val(soloLetras);
-
-            // Validación visual en tiempo real
-            var esValido = this.checkValidity() && soloLetras.length > 0;
-            if (esValido) {
-                $(this).removeClass('is-invalid').addClass('is-valid');
-            } else {
-                $(this).removeClass('is-valid');
-            }
-        });
-
-        // Validación al perder el foco
-        $inputLetras.on('blur', function () {
-            var esValido = this.checkValidity() && $(this).val().length > 0;
-            $(this).toggleClass('is-invalid', !esValido);
-            $(this).toggleClass('is-valid', esValido);
-        });
-
-        // Limpiar estilos al enfocar
-        $inputLetras.on('focus', function () {
-            $(this).removeClass('is-invalid is-valid');
-        });
-
-        // Prevenir pegado de texto no válido
-        $inputLetras.on('paste', function (e) {
-            var textoPegado = (e.originalEvent || e).clipboardData.getData('text/plain');
-            if (!/^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$/.test(textoPegado)) {
-                e.preventDefault();
-            }
-        });
-
-        // Validación en el submit
-        $inputLetras.closest('form').on('submit', function (e) {
-            var esValido = $inputLetras[0].checkValidity() && $inputLetras.val().length > 0;
-            if (!esValido) {
-                e.preventDefault();
-                $inputLetras.addClass('is-invalid');
-                $inputLetras.focus();
-            }
-        });
-    }
-});
  
 
 
