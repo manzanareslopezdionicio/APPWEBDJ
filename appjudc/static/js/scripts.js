@@ -1,39 +1,3 @@
-/* $(document).ready(function () {
-    // Función reutilizable para cualquier toggle de password
-    function initPasswordToggle(toggleSelector, passwordSelector) {
-        var $toggle = $(toggleSelector);
-        var $password = $(passwordSelector);
-
-        $toggle.hover(
-            function () { $(this).css('color', 'blue'); },
-            function () {
-                var isVisible = $password.attr('type') === 'text';
-                $(this).css('color', isVisible ? 'red' : 'green');
-            }
-        );
-
-        $toggle.click(function () {
-            var isVisible = $password.attr('type') === 'text';
-
-            if (isVisible) {
-                $password.attr('type', 'password');
-                $toggle.removeClass('bi-eye-fill').addClass('bi-eye-slash-fill');
-            } else {
-                $password.attr('type', 'text');
-                $toggle.removeClass('bi-eye-slash-fill').addClass('bi-eye-fill');
-            }
-
-            // Actualizar color después del cambio
-            var newIsVisible = !isVisible;
-            $toggle.css('color', newIsVisible ? 'red' : 'green');
-        });
-    }
-
-    // Inicializar para diferentes campos
-    initPasswordToggle('#topass', '#password');
-    initPasswordToggle('#toggle-confirm', '#confirm-password');
-});
- */
 
 // MOSTRAR Y OCULTAR CONTRASEÑA LOGIN
 $(document).ready(function () {
@@ -472,9 +436,114 @@ $(document).ready(function () {
 });
 
 // MOSTRAR SIMPLE PARA FORMATO NOMBRE
- 
+$(document).ready(function () {
+    var $inputLetras = $('#nombre');
+    if ($inputLetras.length) {
+
+        // Máscara: solo permitir letras en tiempo real
+        $inputLetras.on('input', function () {
+            var valor = $(this).val();
+
+            // Remover cualquier carácter que no sea letra, espacio o letra acentuada
+            var soloLetras = valor.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g, '');
+
+            $(this).val(soloLetras);
+
+            // Validación visual en tiempo real
+            var esValido = this.checkValidity() && soloLetras.length > 0;
+            if (esValido) {
+                $(this).removeClass('is-invalid').addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+            }
+        });
+
+        // Validación al perder el foco
+        $inputLetras.on('blur', function () {
+            var esValido = this.checkValidity() && $(this).val().length > 0;
+            $(this).toggleClass('is-invalid', !esValido);
+            $(this).toggleClass('is-valid', esValido);
+        });
+
+        // Limpiar estilos al enfocar
+        $inputLetras.on('focus', function () {
+            $(this).removeClass('is-invalid is-valid');
+        });
+
+        // Prevenir pegado de texto no válido
+        $inputLetras.on('paste', function (e) {
+            var textoPegado = (e.originalEvent || e).clipboardData.getData('text/plain');
+            if (!/^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$/.test(textoPegado)) {
+                e.preventDefault();
+            }
+        });
+
+        // Validación en el submit
+        $inputLetras.closest('form').on('submit', function (e) {
+            var esValido = $inputLetras[0].checkValidity() && $inputLetras.val().length > 0;
+            if (!esValido) {
+                e.preventDefault();
+                $inputLetras.addClass('is-invalid');
+                $inputLetras.focus();
+            }
+        });
+    }
+});
 
 
+$(document).ready(function () {
+    var $inputLetras = $('#apellido');
+    if ($inputLetras.length) {
+
+        // Máscara: solo permitir letras en tiempo real
+        $inputLetras.on('input', function () {
+            var valor = $(this).val();
+
+            // Remover cualquier carácter que no sea letra, espacio o letra acentuada
+            var soloLetras = valor.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g, '');
+
+            $(this).val(soloLetras);
+
+            // Validación visual en tiempo real
+            var esValido = this.checkValidity() && soloLetras.length > 0;
+            if (esValido) {
+                $(this).removeClass('is-invalid').addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+            }
+        });
+
+        // Validación al perder el foco
+        $inputLetras.on('blur', function () {
+            var esValido = this.checkValidity() && $(this).val().length > 0;
+            $(this).toggleClass('is-invalid', !esValido);
+            $(this).toggleClass('is-valid', esValido);
+        });
+
+        // Limpiar estilos al enfocar
+        $inputLetras.on('focus', function () {
+            $(this).removeClass('is-invalid is-valid');
+        });
+
+        // Prevenir pegado de texto no válido
+        $inputLetras.on('paste', function (e) {
+            var textoPegado = (e.originalEvent || e).clipboardData.getData('text/plain');
+            if (!/^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$/.test(textoPegado)) {
+                e.preventDefault();
+            }
+        });
+
+        // Validación en el submit
+        $inputLetras.closest('form').on('submit', function (e) {
+            var esValido = $inputLetras[0].checkValidity() && $inputLetras.val().length > 0;
+            if (!esValido) {
+                e.preventDefault();
+                $inputLetras.addClass('is-invalid');
+                $inputLetras.focus();
+            }
+        });
+    }
+});
 
 
 // MOSTRAR SIMPLE PARA FORMATO EMAIL
