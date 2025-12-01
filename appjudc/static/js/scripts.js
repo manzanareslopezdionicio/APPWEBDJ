@@ -473,7 +473,7 @@ $(document).ready(function () {
 
 // MOSTRAR SIMPLE PARA FORMATO NOMBRE
 $(document).ready(function () {
-    var $inputLetras = $('#nombre');
+    var $inputLetras = $('#nombres, #apellidos');
     if ($inputLetras.length) {
 
         // Máscara: solo permitir letras en tiempo real
@@ -525,6 +525,10 @@ $(document).ready(function () {
         });
     }
 });
+ 
+
+
+
 
 // MOSTRAR SIMPLE PARA FORMATO EMAIL
 $(document).ready(function () {
@@ -842,7 +846,7 @@ $(document).ready(function () {
 });
 
 /* ACTIVAR  Y DESACTIVAR BOTON ACTUALIZAR */
-$(document).ready(function () {
+/* $(document).ready(function () {
     const $campos = $('.required-field');
     const $btnEnviar = $('#btnEnviar');
 
@@ -879,4 +883,8 @@ $(document).ready(function () {
         }
         $btnEnviar.prop('disabled', true).text('Enviando...');
     });
-});
+}); */
+
+// HABILITAR/DESHABILITAR BOTON "ACTUALIZAR" SEGÚN VALIDEZ DEL FORMULARIO
+    
+// VALIDAR NOMBRES Y APELLIDOS PARA QUE SOLO CONTENGAN LETRAS Y ESPACIOS

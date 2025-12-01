@@ -21,8 +21,8 @@
                         </div>
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating">
-                                <input type="text" class="form-control mi-input" id="nombre" name="nombre"
-                                    placeholder="Nombres" required pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                                <input type="text" class="form-control mi-input" id="nombres" name="nombre"
+                                    placeholder="Nombres" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
                                     title="Solo letras, espacios y guiones"
                                     oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g,'');" autofocus
                                     required>
@@ -34,10 +34,10 @@
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating">
 
-                                <input type="text" class="form-control mi-input" id="apellido" name="apellido"
-                                    placeholder="Apellidos" required pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
+                                <input type="text" class="form-control mi-input" id="apellidos" name="apellido"
+                                    placeholder="Apellidos" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
                                     title="Solo letras, espacios y guiones"
-                                    oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g,'');">
+                                    oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g,'');" required>
                                 <label for="apellido" class="form-label">Apellidos:</label>
                                 <div class="invalid-feedback">Formato inválido. Use solo letras, espacios y guiones
                                 </div>
@@ -156,7 +156,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center p-3">
-                            <button type="submit" id="btnEnviar" class="btn btn-outline-primary">Actualizar</button>
+                            <button type="submit" id="btnEnviar" class="btn btn-outline-primary" disabled>Actualizar</button>
                         </div>
                     </div>
                 </form>
@@ -179,6 +179,56 @@
         })
     })()
 
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.getElementById('formActualizar')
+        var btn = document.getElementById('btnEnviar')
+        var pwd = document.getElementById('password-registro')
+        var pwdConfirm = document.getElementById('password-confirm')
+
+        function checkPasswordMatch() {
+            if (pwd && pwdConfirm) {
+                if (pwd.value !== '' || pwdConfirm.value !== '') {
+                    if (pwd.value !== pwdConfirm.value) {
+                        pwdConfirm.setCustomValidity('Las contraseñas no coinciden')
+                        return false
+                    } else {
+                        pwdConfirm.setCustomValidity('')
+                        return true
+                    }
+                } else {
+                    // si están vacías, no bloqueamos por coincidencia (pero required seguirá actuando si aplica)
+                    pwdConfirm.setCustomValidity('')
+                    return true
+                }
+            }
+            return true
+        }
+
+        function updateButtonState() {
+            // comprueba validez del formulario y coincidencia de contraseñas
+            var formValid = form.checkValidity()
+            var passwordsOk = checkPasswordMatch()
+            if (formValid && passwordsOk) {
+                btn.disabled = false
+            } else {
+                btn.disabled = true
+            }
+        }
+
+        // inicial
+        updateButtonState()
+
+        // añadir listeners a todos los inputs, selects y textareas
+        var inputs = form.querySelectorAll('input, textarea, select')
+        inputs.forEach(function (el) {
+            el.addEventListener('input', updateButtonState)
+            el.addEventListener('change', updateButtonState)
+        })
+
+        // listeners específicos para contraseñas (si existen) para mostrar feedback inmediato
+        if (pwd) pwd.addEventListener('input', function () { checkPasswordMatch(); updateButtonState() })
+        if (pwdConfirm) pwdConfirm.addEventListener('input', function () { checkPasswordMatch(); updateButtonState() })
+    })()
 
 </script>
 
