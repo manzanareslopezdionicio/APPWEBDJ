@@ -768,3 +768,19 @@ $password.closest('form').on('submit', function (e) {
 // HABILITAR/DESHABILITAR BOTON "ACTUALIZAR" SEGÚN VALIDEZ DEL FORMULARIO
     
 // VALIDAR NOMBRES Y APELLIDOS PARA QUE SOLO CONTENGAN LETRAS Y ESPACIOS
+
+/* VALIDAR FECHA FECHA ACTUAL */
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener la fecha actual
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const fechaActual = `${year}-${month}-${day}`;
+    
+    // Establecer la fecha en el input
+    const fechaInput = document.getElementById('fechaInscripcion');
+    if (fechaInput && !fechaInput.value) {
+        fechaInput.value = fechaActual;
+    }
+});

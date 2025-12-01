@@ -29,14 +29,13 @@
                 </div>
                 <div class="col-6 col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder readonly>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder desabled>
                         <label for="nombre" class="form-label">Nombres</label>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder readonly
-                            required>
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder desabled>
                         <label for="nombre" class="form-label">Apellidos</label>
                     </div>
                 </div>
@@ -167,10 +166,12 @@
                     </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
-                    <label for="fechaInscripcion" class="form-label">Fecha de inscripción:</label>
-                    <input type="date" class="form-control mi-input" id="fechaInscripcion" name="fechaInscripcion"
-                        required>
-                    <div class="invalid-feedback">Seleccione una fecha válida.</div>
+                    <div class="form-floating">
+                        <input type="date" class="form-control mi-input" id="fechaInscripcion" name="fechaInscripcion"
+                            value="" placeholder="" required>
+                        <label for="fechaInscripcion" class="form-label">Fecha de inscripción:</label>
+                        <div class="invalid-feedback">Seleccione una fecha válida.</div>
+                    </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
                     <label for="fileJudc" class="form-label">Agregar el archivo</label>
@@ -188,7 +189,7 @@
             </div>
         </fieldset>
         <div class="col-md-12 mt-3 p-3 justify-content-end text-center">
-            <button type="submit" class="btn btn-outline-success btn-lg">💾 Guardar</button>
+            <button type="submit" id="btnGuardar" class="btn btn-outline-success btn-lg" disabled>💾 Guardar</button>
         </div>
     </form>
 </div>
@@ -204,6 +205,34 @@
                 }
                 form.classList.add('was-validated')
             }, false)
+        })
+    })()
+
+    // Habilitar/deshabilitar botón Guardar según validez del formulario
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('.needs-validation')
+        var btn = document.getElementById('btnGuardar')
+        if (!form || !btn) return
+
+        // Inicialmente deshabilitado (atributo HTML), actualizar según validez
+        function updateButtonState() {
+            try {
+                var valid = form.checkValidity()
+                btn.disabled = !valid
+            } catch (e) {
+                // si ocurre algún error, mantener botón deshabilitado
+                btn.disabled = true
+            }
+        }
+
+        // Ejecutar inicialmente
+        updateButtonState()
+
+        // Añadir listeners a inputs, selects y textareas para actualizar en tiempo real
+        var inputs = form.querySelectorAll('input, select, textarea')
+        inputs.forEach(function (el) {
+            el.addEventListener('input', updateButtonState)
+            el.addEventListener('change', updateButtonState)
         })
     })()
 </script>
