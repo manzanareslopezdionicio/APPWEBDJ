@@ -599,9 +599,9 @@ $(document).ready(function () {
     var $lowercase = $('#lowercase');
     var $number = $('#number');
     var $special = $('#special');
- */
+ 
 // Función para validar fortaleza de password
-/* function validarFortalezaPassword(password) {
+function validarFortalezaPassword(password) {
     var requisitos = {
         length: password.length >= 8,
         uppercase: /[A-Z]/.test(password),
@@ -728,9 +728,9 @@ $password.closest('form').on('submit', function (e) {
         }
     }
 });
-}); */
+}); 
 
-/* $(document).ready(function () {
+ $(document).ready(function () {
     // Toggle mostrar/ocultar
     $('.password-toggle').click(function () {
         const $input = $(this).siblings('.password-input');
@@ -761,7 +761,7 @@ $password.closest('form').on('submit', function (e) {
         $feedback.html(`Fortaleza: ${strength}`).removeClass('weak medium strong').addClass(clase);
     });
 });
- */
+  */
 
 // MOSTRAR SIMPLE PARA VALIDACIÓN DE CONTRASEÑA Y COINCIDENCIA DE CONTRASEÑA
 $(document).ready(function () {
@@ -838,5 +838,45 @@ $(document).ready(function () {
         if (inputId === 'password-registro') {
             checkPasswordMatch();
         }
+    });
+});
+
+/* ACTIVAR  Y DESACTIVAR BOTON ACTUALIZAR */
+$(document).ready(function () {
+    const $campos = $('.required-field');
+    const $btnEnviar = $('#btnEnviar');
+
+    function validarFormulario() {
+        let todosValidos = true;
+
+        // Verificar que todos los campos tengan valor
+        $campos.each(function () {
+            if (!$(this).val().trim()) {
+                todosValidos = false;
+                return false; // Salir del each
+            }
+        });
+
+        // Verificar que las contraseñas coincidan
+        const pass1 = $('#password').val();
+        const pass2 = $('#confirm-password').val();
+        if (pass1 !== pass2 || pass1.length < 6) {
+            todosValidos = false;
+        }
+
+        // Actualizar botón
+        $btnEnviar.prop('disabled', !todosValidos);
+    }
+
+    // Validar en cada cambio
+    $campos.on('input', validarFormulario);
+
+    // Manejar envío
+    $('#formActualizar').on('submit', function (e) {
+        if ($btnEnviar.prop('disabled')) {
+            e.preventDefault();
+            return false;
+        }
+        $btnEnviar.prop('disabled', true).text('Enviando...');
     });
 });
