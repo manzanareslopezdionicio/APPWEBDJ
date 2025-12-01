@@ -60,49 +60,10 @@
                                     placeholder="9999-9999" title="Formato: 9999-9999" required pattern="^\d{4}-\d{4}$"
                                     required>
                                 <label for="telefono" class="form-label">Telefono:</label>
-                                <div class="invalid-feedback">Formato inválido. Use solo números y guiones</div>
+                                <div class="invalid-feedback">Formato inválido. Use solo números</div>
                             </div>
                         </div>
-                        <!--  <div class="col-md-4 p-2">
-                            <div class="form-floating">
-                                <input type="password" class="form-control mi-input" id="password" name="password"
-                                    placeholder="Contraseña" required>
-                                <label for="password" class="form-label">Contraseña</label>
-                                <span class="position-absolute top-50 end-0 translate-middle-y me-3"
-                                    style="cursor:pointer;" onclick="topass()">
-                                    <i class="bi bi-eye-slash-fill" id="topass"
-                                        style="color:green; font-size:1.3rem;"></i>
-                                </span>
-                            </div>
-                        </div> -->
-                        <!--  <div class="col-md-4 p-2">
-                            <div class="form-floating">
-                                <input type="password" class="form-control mi-input" id="toggle-confirm"
-                                    name="confirm-password" placeholder="Contraseña" required>
-                                <label for="confirm-password" class="form-label">Confirmar Contraseña</label>
-                                <span class="position-absolute top-50 end-0 translate-middle-y me-3"
-                                    style="cursor:pointer;" onclick="toggleConfirm()">
-                                    <i class="bi bi-eye-slash-fill" id="toggle-Confirm"
-                                        style="color:green; font-size:1.3rem;"></i>
-                                </span>
-                            </div>
-                        </div> -->
-
-                        <!-- Password Login -->
-                        <!--  <div class="col-md-4 p-2">
-                            <div class="form-floating mb-3 position-relative">
-                                <input type="password" class="form-control password-input" id="password-login"
-                                    placeholder="Contraseña">
-                                <label for="password-login">Contraseña</label>
-                                <span class="password-toggle position-absolute top-50 end-0 translate-middle-y me-3"
-                                    style="cursor:pointer;" onclick="togglePasswordLogin()">
-                                    <i class="bi bi-eye-slash-fill" id="togglePasswordLogin"
-                                        style="color:green; font-size:1.3rem;"></i>
-                                </span>
-                                <div class="password-strength"></div>
-                            </div>
-                        </div> -->
-
+                        
                         <!-- Password Registro -->
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating mb-3 position-relative">
@@ -117,6 +78,7 @@
                                         style="color:blue; font-size: 1.3rem;"></i>
                                 </span>
                                 <div class="password-strength"></div>
+                                 <div class="invalid-feedback">Formato inválido. Use solo letras mayúsculas, números y caracteres especiales</div>
                             </div>
                         </div>
 
@@ -133,6 +95,7 @@
                                         style="color:blue; font-size:1.3rem;"></i>
                                 </span>
                                 <div class="password-strength"></div>
+                                <div class="invalid-feedback">Las contraseñas no coinciden.</div>
                             </div>
                         </div>
                         <!--                         <div class="col-md-4 p-2">
@@ -150,7 +113,7 @@
                         </div> -->
                         <div class="col-12 col-md-8 p-2">
                             <div class="form-floating">
-                                <textarea class="form-control mi-input" name="direccion" id="direccion" placeholder
+                                <textarea class="form-control mi-input" name="direccion" id="direccion" placeholder=""
                                     required style="height: 70px"></textarea>
                                 <label for="direccion">Dirección:</label>
                             </div>
