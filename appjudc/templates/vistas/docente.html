@@ -11,39 +11,65 @@
     </div>
     <h2 style="text-shadow: 2px 2px 4px gray;">Gestion de Docentes:</h2>
 
-    <form action="" method="post">
+    <form action="" method="post" class="mt-4 needs-validation" novalidate>
         {% csrf_token %}
         <div class="row">
             <div class="col-6 col-md-2 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="codigo" name="codigo"
+                    <input type="text" class="form-control mi-input" id="codigo" name="codigo"
                         placeholder="Ingrese el codigo del docente" required>
                     <label for="codigo" class="form-label">Codigo del Docente</label>
+                    <div class="invalid-feedback">Por favor ingrese un código válido.</div>
                 </div>
             </div>
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="nombre" name="nombre"
+                    <input type="text" class="form-control mi-input" id="nombre" name="nombre"
                         placeholder="Ingrese el nombre del docente" required>
                     <label for="nombre" class="form-label">Nombre del Docente</label>
+                    <div class="invalid-feedback">Por favor ingrese un nombre válido.</div>
                 </div>
             </div>
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="email" name="email"
+                    <input type="email" class="form-control mi-input" id="email" name="email"
                         placeholder="Ingrese el correo del docente" required>
                     <label for="email" class="form-label">Correo del Docente</label>
+                    <div class="invalid-feedback">Por favor ingrese un correo válido.</div>
                 </div>
             </div>
             <div class="col-6 col-md-2 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="telefono" name="telefono"
-                        placeholder="Ingrese el telefono del docente" required>
-                    <label for="telefono" class="form-label">Telefono del Docente</label>
+                    <input type="text" class="form-control mi-input" id="telefono" name="telefono"
+                        placeholder="9999-9999" title="Formato: 9999-9999" required pattern="^\d{4}-\d{4}$" required>
+                    <label for="telefono" class="form-label">Telefono:</label>
+                    <div class="invalid-feedback">Formato inválido. Use solo números</div>
                 </div>
             </div>
-            <div class="col-12 col-md-2 mb-3 d-flex align-items-end">
-                <button type="submit" class="btn btn-outline-primary w-100">Agregar Docente</button>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control mi-input" id="especialidad" name="especialidad"
+                        placeholder="Ingrese la especialidad del docente" required>
+                    <label for="especialidad" class="form-label">Especialidad del Docente</label>
+                    <div class="invalid-feedback">Por favor ingrese una especialidad válida.</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 mb-3">
+                <div class="form-floating">
+                    <select class="form-select mi-input" id="areaconocimiento" required>
+                        <option selected disabled value="">Elegir...</option>
+                        <option value="1">Departamento de Ciencias y Tecnología</option>
+                        <option value="2">Departamento de Ciencias Economicas y Administrativas</option>
+                        <option value="3">Departamento de Educación y Humanidades</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor seleccione un área válida.
+                    </div>
+                    <label for="areaconocimiento" class="form-label">Area del conocimiento</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-2 mb-4 d-flex align-items-end ">
+                <button type="submit" class="btn btn-secondary w-100">Agregar Docente</button>
             </div>
         </div>
     </form>
@@ -52,7 +78,36 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Lista de Docentes</h5>
-                    <p class="card-text">Aqui se mostrara la lista de docentes registrados en el sistema.</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Especialidad</th>
+                                    <th>Area de Conocimiento</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Ejemplo de fila de datos -->
+                                <tr>
+                                    <td>DOC001</td>
+                                    <td>Juan Perez</td>
+                                    <td>juan.perez@example.com</td>
+                                    <td>9999-9999</td>
+                                    <td>Matemáticas</td>
+                                    <td>Departamento de Ciencias y Tecnología</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm"><a href="#"></a><i class="bi bi-pencil-square"></i></button>
+                                        <button class="btn btn-danger btn-sm"><a href="#"></a><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
