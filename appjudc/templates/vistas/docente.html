@@ -16,13 +16,13 @@
         <div class="row">
             <div class="col-6 col-md-2 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control mi-input" id="codigo" name="codigo"
-                        placeholder="Ingrese el codigo del docente" required>
-                    <label for="codigo" class="form-label">Codigo del Docente</label>
+                    <input type="text" class="form-control mi-input" id="codigodocente" name="codigodocente"
+                        placeholder="Ingrese el codigo del docente" autofocus required>
+                    <label for="codigodocente" class="form-label">Codigo del Docente</label>
                     <div class="invalid-feedback">Por favor ingrese un código válido.</div>
                 </div>
             </div>
-            <div class="col-6 col-md-3 mb-3">
+            <div class="col-6 col-md-4 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="nombre" name="nombre"
                         placeholder="Ingrese el nombre del docente" required>
@@ -30,7 +30,7 @@
                     <div class="invalid-feedback">Por favor ingrese un nombre válido.</div>
                 </div>
             </div>
-            <div class="col-6 col-md-3 mb-3">
+            <div class="col-6 col-md-4 mb-3">
                 <div class="form-floating">
                     <input type="email" class="form-control mi-input" id="email" name="email"
                         placeholder="Ingrese el correo del docente" required>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-2 mb-4 d-flex align-items-end ">
-                <button type="submit" class="btn btn-secondary w-100">Agregar Docente</button>
+                <button type="submit" id="btnAgregarDocente" class="btn btn-secondary w-100">Agregar Docente</button>
             </div>
         </div>
     </form>
@@ -101,8 +101,10 @@
                                     <td>Matemáticas</td>
                                     <td>Departamento de Ciencias y Tecnología</td>
                                     <td>
-                                        <button class="btn btn-primary btn-sm"><a href="#"></a><i class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-danger btn-sm"><a href="#"></a><i class="bi bi-trash"></i></button>
+                                        <button class="btn btn-primary btn-sm"><a href="#"></a><i
+                                                class="bi bi-pencil-square"></i></button>
+                                        <button class="btn btn-danger btn-sm"><a href="#"></a><i
+                                                class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -113,5 +115,50 @@
         </div>
     </div>
 </div>
+<script>
+    (function () {
+        const form = document.querySelector('form.needs-validation');
+        if (!form) return;
+        const btn = document.getElementById('btnAgregarDocente');
+        const inputs = Array.from(form.querySelectorAll('.mi-input, select'));
+
+        const allValid = () => {
+            return inputs.every(el => {
+                // Para selects: comprobar que tenga valor distinto de vacío
+                if (el.tagName === 'SELECT') return el.value && el.value !== '';
+                // Para inputs: usar checkValidity (pattern, required, type, etc.)
+                return el.value && el.checkValidity();
+            });
+        };
+
+        const updateButton = () => {
+            btn.disabled = !allValid();
+        };
+
+        // Escuchar cambios
+        inputs.forEach(i => {
+            i.addEventListener('input', updateButton);
+            i.addEventListener('change', updateButton);
+            i.addEventListener('blur', updateButton);
+        });
+
+        // Prevención de envío si el formulario no es válido (comportamiento HTML5)
+        form.addEventListener('submit', function (e) {
+            if (!form.checkValidity()) {
+                e.preventDefault();
+                e.stopPropagation();
+                form.classList.add('was-validated');
+                updateButton();
+            }
+        });
+
+        // Comprobación inicial al cargar el DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateButton);
+        } else {
+            updateButton();
+        }
+    })();
+</script>
 
 {% endblock %}

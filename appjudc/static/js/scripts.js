@@ -784,3 +784,47 @@ document.addEventListener('DOMContentLoaded', function() {
         fechaInput.value = fechaActual;
     }
 });
+/* DESACTIVAR EL BOTON "AGREGAR DOCENTE" HASTA QUE EL FORMULARIO SEA VALIDO */
+(function () {
+  const form = document.querySelector('form.needs-validation');
+  if (!form) return;
+  const btn = document.getElementById('btnAgregarDocente');
+  const inputs = Array.from(form.querySelectorAll('.mi-input, select'));
+
+  const allValid = () => {
+    return inputs.every(el => {
+      // Para selects: comprobar que tenga valor distinto de vacío
+      if (el.tagName === 'SELECT') return el.value && el.value !== '';
+      // Para inputs: usar checkValidity (pattern, required, type, etc.)
+      return el.value && el.checkValidity();
+    });
+  };
+
+  const updateButton = () => {
+    btn.disabled = !allValid();
+  };
+
+  // Escuchar cambios
+  inputs.forEach(i => {
+    i.addEventListener('input', updateButton);
+    i.addEventListener('change', updateButton);
+    i.addEventListener('blur', updateButton);
+  });
+
+  // Prevención de envío si el formulario no es válido (comportamiento HTML5)
+  form.addEventListener('submit', function (e) {
+    if (!form.checkValidity()) {
+      e.preventDefault();
+      e.stopPropagation();
+      form.classList.add('was-validated');
+      updateButton();
+    }
+  });
+
+  // Comprobación inicial al cargar el DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateButton);
+  } else {
+    updateButton();
+  }
+})();
