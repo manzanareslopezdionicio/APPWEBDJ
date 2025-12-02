@@ -783,7 +783,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (fechaInput && !fechaInput.value) {
         fechaInput.value = fechaActual;
     }
-});
+})();
+
 /* DESACTIVAR EL BOTON "AGREGAR DOCENTE" HASTA QUE EL FORMULARIO SEA VALIDO */
 (function () {
   const form = document.querySelector('form.needs-validation');
