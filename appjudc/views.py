@@ -38,3 +38,6 @@ def organizador(request):
 
 def perfil(request):
     return render(request, 'vistas/perfil.html')
+
+def docente(request):
+    return render(request, 'vistas/docente.html')

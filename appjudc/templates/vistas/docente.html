@@ -1,0 +1,62 @@
+{% extends 'baseadmin.html' %}
+{% load static %}
+{% block titulo %}Docente{% endblock %}
+
+{% block contenido %}
+
+<div class="col-md-12 content-area p-4">
+
+    <div class="alert alert-info text-center">
+        <h3 style="text-shadow: 2px 2px 5px gray;">Jornada de Desarrollo Cientifico - JUDC </h3>
+    </div>
+    <h2 style="text-shadow: 2px 2px 4px gray;">Gestion de Docentes:</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="codigo" name="codigo"
+                        placeholder="Ingrese el codigo del docente" required>
+                    <label for="codigo" class="form-label">Codigo del Docente</label>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="nombre" name="nombre"
+                        placeholder="Ingrese el nombre del docente" required>
+                    <label for="nombre" class="form-label">Nombre del Docente</label>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="email" name="email"
+                        placeholder="Ingrese el correo del docente" required>
+                    <label for="email" class="form-label">Correo del Docente</label>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="telefono" name="telefono"
+                        placeholder="Ingrese el telefono del docente" required>
+                    <label for="telefono" class="form-label">Telefono del Docente</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-2 mb-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-outline-primary w-100">Agregar Docente</button>
+            </div>
+        </div>
+    </form>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Lista de Docentes</h5>
+                    <p class="card-text">Aqui se mostrara la lista de docentes registrados en el sistema.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
