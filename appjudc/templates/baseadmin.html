@@ -1,14 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>{% block title %}{% endblock %}</title>
-
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="{% static 'assets/img/kaiadmin/favicon.ico' %}" type="image/x-icon" />
-
     <!-- Fonts and icons -->
     <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
     <script>
@@ -32,13 +29,11 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/plugins.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/kaiadmin.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/estilo.min.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
-
 </head>
 
 <body>
@@ -70,11 +65,10 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-primary">
                         <li class="nav-item active">
-                            <a  href="{% url 'index' %}" >
+                            <a href="{% url 'index' %}">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
-
                         </li>
                         <li class="nav-section">
                             <span class="sidebar-mini-icon ">
@@ -136,7 +130,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{% url 'index' %}">
-                               <i class="bi bi-clipboard2-plus-fill"></i>
+                                <i class="bi bi-clipboard2-plus-fill"></i>
                                 <p>Incripciones</p>
                             </a>
                         </li>
@@ -204,14 +198,14 @@
                                                 <div class="u-text">
                                                     <h4>Usuario</h4>
                                                     <p class="text-muted">usuario@example.com</p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
-                                                        Profile</a>
+                                                    <a href="#" class="btn btn-xs btn-secondary btn-sm">Ver
+                                                        Perfil </a>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">My Profile</a>
+                                            <a class="dropdown-item" href="#">Mi Perfil</a>
                                             <a class="dropdown-item" href="#">My Balance</a>
                                             <a class="dropdown-item" href="#">Inbox</a>
                                             <div class="dropdown-divider"></div>
@@ -254,7 +248,18 @@
     <!--   Core JS Files   -->
     <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+     <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script> 
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script> -->
 
     <!-- jQuery Scrollbar -->
     <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
