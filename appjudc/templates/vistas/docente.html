@@ -8,9 +8,6 @@
     <div class="alert bg-primary-subtle text-center">
         <h2 style="text-shadow: 2px 2px 5px gray;">Jornada de Desarrollo Cientifico - JUDC </h2>
     </div>
-<!--     <div class="alert alert-info text-center">
-        <h2 style="text-shadow: 2px 2px 5px gray;">Jornada de Desarrollo Cientifico - JUDC </h2>
-    </div> -->
     <h3 style="text-shadow: 2px 2px 4px gray;">Gestion de Docentes:</h3>
 
     <form action="" method="post" class="mt-4 needs-validation" novalidate>
@@ -58,7 +55,7 @@
             </div>
             <div class="col-6 col-md-4 mb-3">
                 <div class="form-floating">
-                    <select class="form-select mi-input" id="areaconocimiento" required>
+                    <select class="form-select mi-input" id="areaconocimiento" name="areaconocimiento" required>
                         <option selected disabled value="">Elegir...</option>
                         <option value="1">Departamento de Ciencias y Tecnología</option>
                         <option value="2">Departamento de Ciencias Economicas y Administrativas</option>
@@ -94,21 +91,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Ejemplo de fila de datos -->
+                                {% for docente in docentes %}
                                 <tr>
-                                    <td>DOC001</td>
-                                    <td>Juan Perez</td>
-                                    <td>juan.perez@example.com</td>
-                                    <td>9999-9999</td>
-                                    <td>Matemáticas</td>
-                                    <td>Departamento de Ciencias y Tecnología</td>
+                                    <td>{{ docente.codigo_docente }}</td>
+                                    <td>{{ docente.nombre }}</td>
+                                    <td>{{ docente.email }}</td>
+                                    <td>{{ docente.telefono }}</td>
+                                    <td>{{ docente.especialidad }}</td>
+                                    <td>{{ docente.get_area_conocimiento_display }}</td>
                                     <td>
-                                        <button class="btn btn-primary btn-sm"><a href="#"></a><i
+                                        <button class="btn btn-primary btn-sm"><i
                                                 class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-danger btn-sm"><a href="#"></a><i
-                                                class="bi bi-trash"></i></button>
+                                        <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="7">No hay docentes registrados</td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -126,9 +127,7 @@
 
         const allValid = () => {
             return inputs.every(el => {
-                // Para selects: comprobar que tenga valor distinto de vacío
                 if (el.tagName === 'SELECT') return el.value && el.value !== '';
-                // Para inputs: usar checkValidity (pattern, required, type, etc.)
                 return el.value && el.checkValidity();
             });
         };
@@ -137,24 +136,83 @@
             btn.disabled = !allValid();
         };
 
-        // Escuchar cambios
         inputs.forEach(i => {
             i.addEventListener('input', updateButton);
             i.addEventListener('change', updateButton);
             i.addEventListener('blur', updateButton);
         });
 
-        // Prevención de envío si el formulario no es válido (comportamiento HTML5)
+        const agregarDocenteATabla = (docente) => {
+            const tbody = document.querySelector('table tbody');
+            // Eliminar mensaje "No hay docentes" si existe
+            const emptyRow = tbody.querySelector('tr td[colspan="7"]');
+            if (emptyRow) {
+                emptyRow.parentElement.remove();
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${docente.codigo_docente}</td>
+                <td>${docente.nombre}</td>
+                <td>${docente.email}</td>
+                <td>${docente.telefono}</td>
+                <td>${docente.especialidad}</td>
+                <td>${docente.area_conocimiento}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
+                    <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        };
+
         form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
             if (!form.checkValidity()) {
-                e.preventDefault();
-                e.stopPropagation();
                 form.classList.add('was-validated');
                 updateButton();
+                return;
             }
+
+            const docenteData = {
+                codigodocente: document.getElementById('codigodocente').value,
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                telefono: document.getElementById('telefono').value,
+                especialidad: document.getElementById('especialidad').value,
+                areaconocimiento: document.getElementById('areaconocimiento').value
+            };
+
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(docenteData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('✅ ' + data.message + '\n\nCódigo: ' + data.docente.codigo_docente);
+                        agregarDocenteATabla(data.docente);
+                        form.reset();
+                        form.classList.remove('was-validated');
+                        updateButton();
+                    } else {
+                        alert('❌ Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('❌ Error al registrar el docente: ' + error);
+                    console.error('Error:', error);
+                });
         });
 
-        // Comprobación inicial al cargar el DOM
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', updateButton);
         } else {

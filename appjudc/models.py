@@ -11,6 +11,29 @@ class estudiante(models.Model):
 class usuario(models.Model):
     carnet=models.CharField()  
 
+class Docente(models.Model):
+    AREA_CHOICES = [
+        ('1', 'Departamento de Ciencias y Tecnología'),
+        ('2', 'Departamento de Ciencias Economicas y Administrativas'),
+        ('3', 'Departamento de Educación y Humanidades'),
+    ]
+    
+    codigo_docente = models.CharField(max_length=20, unique=True, verbose_name="Código del Docente")
+    nombre = models.CharField(max_length=200, verbose_name="Nombre del Docente")
+    email = models.EmailField(unique=True, verbose_name="Correo Electrónico")
+    telefono = models.CharField(max_length=9, verbose_name="Teléfono")
+    especialidad = models.CharField(max_length=200, verbose_name="Especialidad")
+    area_conocimiento = models.CharField(max_length=1, choices=AREA_CHOICES, verbose_name="Área de Conocimiento")
+    fecha_registro = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Registro")
+    
+    class Meta:
+        verbose_name = "Docente"
+        verbose_name_plural = "Docentes"
+        ordering = ['nombre']
+    
+    def __str__(self):
+        return f"{self.codigo_docente} - {self.nombre}"
+
 class EvaluacionArticuloCientifico(models.Model):
     # Información general
     area_conocimiento = models.CharField(max_length=100, verbose_name="Área de Conocimiento")

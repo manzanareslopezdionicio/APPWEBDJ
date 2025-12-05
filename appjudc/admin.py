@@ -1,7 +1,18 @@
 from django.contrib import admin
-from .models import estudiante, EvaluacionArticuloCientifico
+from .models import estudiante, EvaluacionArticuloCientifico, Docente
 
 # Register your models here.
+
+@admin.register(Docente)
+class DocenteAdmin(admin.ModelAdmin):
+    list_display = ['codigo_docente', 'nombre', 'email', 'telefono', 'especialidad', 'get_area_display', 'fecha_registro']
+    list_filter = ['area_conocimiento', 'fecha_registro']
+    search_fields = ['codigo_docente', 'nombre', 'email', 'especialidad']
+    readonly_fields = ['fecha_registro']
+    
+    def get_area_display(self, obj):
+        return obj.get_area_conocimiento_display()
+    get_area_display.short_description = 'Área de Conocimiento'
 
 @admin.register(EvaluacionArticuloCientifico)
 class EvaluacionArticuloCientificoAdmin(admin.ModelAdmin):
