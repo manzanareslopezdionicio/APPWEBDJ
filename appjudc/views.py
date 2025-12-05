@@ -45,7 +45,10 @@ def perfil(request):
     return render(request, 'vistas/perfil.html')
 
 def docente(request):
-    if request.method == 'POST':
+    docentes = Docente.objects.all()
+    return render(request, 'vistas/docente.html', {'docentes': docentes})
+
+    """ if request.method == 'POST':
         try:
             # Obtener datos del request
             data = json.loads(request.body)
@@ -85,7 +88,7 @@ def docente(request):
     
     # GET request - obtener lista de docentes
     docentes = Docente.objects.all()
-    return render(request, 'vistas/docente.html', {'docentes': docentes})
+    return render(request, 'vistas/docente.html', {'docentes': docentes}) """
 
 def articuloCientifico(request):
     if request.method == 'POST':

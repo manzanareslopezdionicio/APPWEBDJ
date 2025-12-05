@@ -16,12 +16,12 @@
             <div class="col-6 col-md-2 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="codigodocente" name="codigodocente"
-                        placeholder="121-230371-0003A" autofocus
-                        pattern="^\d{3}-\d{6}-\d{4}[A-Za-z]$"
-                        title="Formato: 121-230371-0003A (último carácter letra, mayúscula o minúscula)"
-                        maxlength="16" required>
+                        placeholder="121-230371-0003A" autofocus pattern="^\d{3}-\d{6}-\d{4}[A-Za-z]$"
+                        title="Formato: 121-230371-0003A (último carácter letra, mayúscula o minúscula)" maxlength="16"
+                        required>
                     <label for="codigodocente" class="form-label">Codigo del Docente</label>
-                    <div class="invalid-feedback">Por favor ingrese un código válido. Ej: 121-230371-0003A (la letra final puede ser mayúscula o minúscula).</div>
+                    <div class="invalid-feedback">Por favor ingrese un código válido. Ej: 121-230371-0003A (la letra
+                        final puede ser mayúscula o minúscula).</div>
                 </div>
             </div>
             <div class="col-6 col-md-4 mb-3">
@@ -51,8 +51,7 @@
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="especialidad" name="especialidad"
-                        placeholder="Ingrese la especialidad del docente" required
-                        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+                        placeholder="Ingrese la especialidad del docente" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
                         title="Solo letras y espacios">
                     <label for="especialidad" class="form-label">Especialidad del Docente</label>
                     <div class="invalid-feedback">Por favor ingrese una especialidad válida.</div>
@@ -98,7 +97,20 @@
                             <tbody>
                                 {% for docente in docentes %}
                                 <tr>
-                                    <td>{{ docente.codigo_docente }}</td>
+                                    <td>{{docente.codigo_docente}}</td>
+                                    <td>{{docente.nombre}}</td>
+                                    <td>{{docente.email}}</td>
+                                    <td>{{docente.telefono}}</td>
+                                    <td>{{docente.especialidad}}</td>
+                                    <td>{{docente.get_area_conocimiento_display}}</td>
+                                    <td>
+                                        <a href="editDocente/{{docente.codigo_docente}}" class="btn btn-info btn-sm"><i
+                                                class="bi bi-pencil-square"></i></a>
+                                            <a href="borrarDocente/{{docente.codigo_docente}}" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
+
+                                        <!-- <button class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button> -->
+                                        <!--  <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button> -->
+                                        <!-- <td>{{ docente.codigo_docente }}</td>
                                     <td>{{ docente.nombre }}</td>
                                     <td>{{ docente.email }}</td>
                                     <td>{{ docente.telefono }}</td>
@@ -108,7 +120,7 @@
                                         <button class="btn btn-primary btn-sm"><i
                                                 class="bi bi-pencil-square"></i></button>
                                         <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 {% empty %}
                                 <tr>
