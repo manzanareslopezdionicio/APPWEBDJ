@@ -1,5 +1,10 @@
 from django.shortcuts import render, redirect 
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import EvaluacionArticuloCientifico
+import json
+from datetime import datetime
 
 # Create your views here.
 def login(request):
@@ -43,4 +48,45 @@ def docente(request):
     return render(request, 'vistas/docente.html')
 
 def articuloCientifico(request):
+    if request.method == 'POST':
+        try:
+            # Obtener datos del request
+            data = json.loads(request.body)
+            
+            # Crear nueva evaluación
+            evaluacion = EvaluacionArticuloCientifico(
+                area_conocimiento=data.get('areaConocimiento'),
+                categoria=data.get('categoria'),
+                carrera=data.get('carrera'),
+                titulo=data.get('titulo'),
+                autores=data.get('autores'),
+                criterio1_planteamiento=data.get('criterio1'),
+                criterio2_objetivos=data.get('criterio2'),
+                criterio3_marco_teorico=data.get('criterio3'),
+                criterio4_metodologia=data.get('criterio4'),
+                criterio5_analisis=data.get('criterio5'),
+                criterio6_conclusiones=data.get('criterio6'),
+                criterio7_presentacion=data.get('criterio7'),
+                puntuacion_total=data.get('puntuacionTotal'),
+                porcentaje=data.get('porcentaje'),
+                evaluador=data.get('evaluador'),
+                firma=data.get('firma', ''),
+                fecha_evaluacion=datetime.strptime(data.get('fecha'), '%Y-%m-%d').date()
+            )
+            
+            # Guardar en la base de datos
+            evaluacion.save()
+            
+            return JsonResponse({
+                'success': True,
+                'message': 'Evaluación guardada exitosamente',
+                'id': evaluacion.id
+            })
+            
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'message': f'Error al guardar la evaluación: {str(e)}'
+            }, status=400)
+    
     return render(request, 'vistas/ArticuloCientifico.html')

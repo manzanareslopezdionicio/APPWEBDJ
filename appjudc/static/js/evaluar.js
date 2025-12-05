@@ -38,10 +38,59 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Botón de envío
-    document.getElementById('submitBtn').addEventListener('click', function () {
+    document.getElementById('submitBtn').addEventListener('click', function (e) {
+        e.preventDefault();
+
         if (validateForm()) {
-            // Aquí normalmente se enviarían los datos al servidor
-            alert('Evaluación enviada exitosamente. La puntuación total es: ' + document.getElementById('totalScore').textContent);
+            // Recopilar todos los datos del formulario
+            const evaluacionData = {
+                areaConocimiento: document.getElementById('areaConocimiento').value,
+                categoria: document.getElementById('categoria').value,
+                carrera: document.getElementById('carrera').value,
+                titulo: document.getElementById('titulo').value,
+                autores: document.getElementById('autores').value,
+                criterio1: scores[1],
+                criterio2: scores[2],
+                criterio3: scores[3],
+                criterio4: scores[4],
+                criterio5: scores[5],
+                criterio6: scores[6],
+                criterio7: scores[7],
+                puntuacionTotal: parseFloat(document.getElementById('totalScore').textContent),
+                porcentaje: parseFloat(document.getElementById('totalPercentage').textContent.replace('%', '')),
+                evaluador: document.getElementById('evaluador').value,
+                firma: document.getElementById('firma').value,
+                fecha: document.getElementById('fecha').value
+            };
+
+            // Obtener el token CSRF
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            // Enviar datos al servidor
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(evaluacionData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('✅ ' + data.message + '\n\nID de evaluación: ' + data.id + '\nPuntuación total: ' + evaluacionData.puntuacionTotal);
+                        // Opcional: reiniciar el formulario después de guardar
+                        if (confirm('¿Desea realizar otra evaluación?')) {
+                            resetForm();
+                        }
+                    } else {
+                        alert('❌ Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('❌ Error al enviar la evaluación: ' + error);
+                    console.error('Error:', error);
+                });
         }
     });
 
