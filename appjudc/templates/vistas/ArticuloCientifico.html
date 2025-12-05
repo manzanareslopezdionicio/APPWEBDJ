@@ -72,7 +72,7 @@
 
     <!-- Rúbrica de Evaluación -->
     <div class="form-container">
-        <h2 class="section-title"><i class="bi bi-clipboard2-check-fill"></i>📋 Rúbrica de Evaluación</h2>
+        <h2 class="section-title"><i class="bi bi-clipboard2-check-fill"></i>Rúbrica de Evaluación</h2>
         <p class="mb-4">A continuación se presenta la rúbrica con los criterios y sus respectivos puntajes de
             evaluación. Seleccione el nivel de desempeño para cada elemento a evaluar.</p>
         <form action="" method="post">
@@ -401,10 +401,10 @@
                                 <tr>
                                     <th>Criterio</th>
                                     <th>Puntuación</th>
-                                    <th>Peso</th>
+                                    <th>Porcentaje</th>
                                 </tr>
                             </thead>
-                            <tbody id="scoreSummary">
+                            <tbody id="scoreSummary" class="text-center">
                                 <tr>
                                     <td colspan="3" class="text-center">No hay puntuaciones seleccionadas</td>
                                 </tr>
@@ -418,7 +418,7 @@
 
     <!-- Información del evaluador -->
     <div class="form-container">
-        <h2 class="section-title"><i class="bi bi-person-check-fill"></i>✔️ Información del Evaluador</h2>
+        <h2 class="section-title"><i class="bi bi-person-check-fill"></i>Información del Evaluador</h2>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="evaluador" class="form-label required">Nombre del docente evaluador</label>
@@ -434,8 +434,10 @@
             </div>
         </div>
         <div class="alert bg-primary-subtle" role="alert">
-            <i class="bi bi-info-circle-fill"></i> <strong>Nota:</strong> Todos los campos marcados con (*) son
-            obligatorios. La evaluación se calculará automáticamente al seleccionar los puntajes de cada criterio.
+            <i class="bi bi-info-circle-fill"></i> <strong>Nota:</strong> Todos los campos marcados con
+            (<strong style="color: red; font-size: 16px;">*</strong>) son obligatorios. La evaluación
+            se calculará automáticamente al seleccionar
+            los puntajes de cada criterio.
         </div>
     </div>
 
@@ -450,9 +452,8 @@
     </div>
 
     <div class="text-center mt-4">
-        <p class="text-muted"><i class="bi bi-exclamation-triangle-fill"></i> Este formulario es parte de la XLIII
-            Jornada
-            Universitaria de Desarrollo Científico (JUDC) Edición 2025</p>
+        <p class="text-muted"><i class="bi bi-exclamation-triangle-fill"></i> Este formulario es parte de la XLIV
+            Jornada Universitaria de Desarrollo Científico (JUDC) Edición 2026</p>
     </div>
 </div>
 <script src="{% static 'js/evaluar.js' %}"></script>
