@@ -79,13 +79,12 @@
 }
 
 .university-logo {
-  flex: 1;
-  width: 50px;
-}
-.university-logo img {
-  width: 100%;
+  display: block;
+  margin: 0 auto;
+  width: 150px;
   height: auto;
 }
+
 
 .form-container {
   background-color: white;
@@ -229,8 +228,11 @@
   .rating-scale {
     justify-content: space-around;
   }
+
   .university-logo {
-    text-align: center;
-    margin-bottom: 15px;
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: auto;
   }
 }

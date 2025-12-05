@@ -7,16 +7,16 @@
 <div class="header-section">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-3 col-md-2 university-logo">
+            <!--  <div class="col-3 col-md-2 university-logo">
                 <img src="{% static 'img/logojudc.png'%}" alt="logo UNAN-Managua" class="university-logo">
-            </div>
-            <div class="col-md-8 text-center">
+            </div> -->
+            <div class="col-md-9 text-center">
                 <h1 class="mb-2"><i class="fas fa-graduation-cap"></i> XLIV Jornada Universitaria de Desarrollo
                     Científico (JUDC) 2026</h1>
                 <h3 class="mb-0">"Ciencia, Investigación e Innovación: un compromiso con Nicaragua"</h3>
                 <p class="mb-0 mt-2">Dirección Académica - Departamento de Investigación e Innovación</p>
             </div>
-            <div class="col-6 col-md-2 university-logo">
+            <div class="col-6 col-md-3 university-logo">
                 <img src="{% static 'img/logojudc.png' %}" alt="Logo JUDC" class="university-logo">
                 <!-- <p class="mb-0">Managua, Nicaragua</p>
                     <p class="mb-0">Septiembre, 2025</p> -->
@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="categoria" class="form-label required">Categoría</label>
-                <select class="form-select mi-input" id="categoria" required>
+                <select class="form-select mi-input" id="categoria" name="categoria" required>
                     <option value="">Seleccione...</option>
                     <option value="grado">Grado</option>
                     <option value="posgrado">Posgrado</option>
@@ -55,305 +55,327 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="carrera" class="form-label required">Carrera</label>
-                <input type="text" class="form-control mi-input" id="carrera" required>
+                <input type="text" class="form-control mi-input" id="carrera" name="carrera" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="titulo" class="form-label required">Título de la investigación</label>
-                <input type="text" class="form-control mi-input" id="titulo" required>
+                <input type="text" class="form-control mi-input" id="titulo" name="titulo" required>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 mb-3">
                 <label for="autores" class="form-label required">Autor/es</label>
-                <input type="text" class="form-control mi-input" id="autores" required>
+                <input type="text" class="form-control mi-input" id="autores" name="autores" required>
             </div>
         </div>
     </div>
 
     <!-- Rúbrica de Evaluación -->
     <div class="form-container">
-        <h2 class="section-title"><i class="bi bi-clipboard2-check-fill"></i> Rúbrica de Evaluación</h2>
+        <h2 class="section-title"><i class="bi bi-clipboard2-check-fill"></i>📋 Rúbrica de Evaluación</h2>
         <p class="mb-4">A continuación se presenta la rúbrica con los criterios y sus respectivos puntajes de
             evaluación. Seleccione el nivel de desempeño para cada elemento a evaluar.</p>
-
-        <!-- Criterio 1 -->
-        <div class="criteria-card">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h3>1. Planteamiento del problema <span class="criteria-weight">(8%)</span></h3>
-                    <p class="mb-2"><strong>Indicador de logro:</strong> Claridad, coherencia y relevancia científica o
-                        social del problema.</p>
-                </div>
-                <div class="text-end">
-                    <span class="section-puntaje">PUNTAJE:</span>
-                    <span class="badge bg-secondary" style="font-size: 25px;" id="score1">Pendiente</span>
-                </div>
-            </div>
-            <div class="rating-scale">
-                <div class="rating-option rating-2" data-criteria="1" data-value="2">
-                    <div class="rating-value">2</div>
-                    <div class="rating-label">Insuficiente</div>
-                    <div class="rating-desc">El problema está confuso o sin justificación teórica.</div>
-                </div>
-                <div class="rating-option rating-3" data-criteria="1" data-value="3">
-                    <div class="rating-value">3</div>
-                    <div class="rating-label">Bueno</div>
-                    <div class="rating-desc">Presenta el problema con limitaciones en claridad o justificación.</div>
-                </div>
-                <div class="rating-option rating-4" data-criteria="1" data-value="4">
-                    <div class="rating-value">4</div>
-                    <div class="rating-label">Muy bueno</div>
-                    <div class="rating-desc">El problema está claro y contextualizado, aunque la justificación podría
-                        ser más profunda.</div>
-                </div>
-                <div class="rating-option rating-5" data-criteria="1" data-value="5">
-                    <div class="rating-value">5</div>
-                    <div class="rating-label">Excelente</div>
-                    <div class="rating-desc">Define con precisión el problema, lo contextualiza y justifica con base
-                        teórica sólida y actualizada.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Criterio 2 -->
-        <div class="criteria-card">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h3>2. Objetivos de investigación <span class="criteria-weight">(7%)</span></h3>
-                    <p class="mb-2"><strong>Indicador de logro:</strong> Claridad, coherencia y pertinencia con el
-                        problema planteado.</p>
-                </div>
-                <div class="text-end">
-                    <span class="section-puntaje">PUNTAJE:</span>
-                    <span class="badge bg-secondary" style="font-size: 25px;" id="score2">Pendiente</span>
-                </div>
-            </div>
-            <div class="rating-scale">
-                <div class="rating-option rating-2" data-criteria="2" data-value="2">
-                    <div class="rating-value">2</div>
-                    <div class="rating-label">Insuficiente</div>
-                    <div class="rating-desc">Los objetivos son vagos, incoherentes o no responden al problema.</div>
-                </div>
-                <div class="rating-option rating-3" data-criteria="2" data-value="3">
-                    <div class="rating-value">3</div>
-                    <div class="rating-label">Bueno</div>
-                    <div class="rating-desc">Los objetivos son comprensibles, pero poco específicos.</div>
-                </div>
-                <div class="rating-option rating-4" data-criteria="2" data-value="4">
-                    <div class="rating-value">4</div>
-                    <div class="rating-label">Muy bueno</div>
-                    <div class="rating-desc">Los objetivos son adecuados, aunque algunos carecen de precisión o
-                        coherencia total.</div>
-                </div>
-                <div class="rating-option rating-5" data-criteria="2" data-value="5">
-                    <div class="rating-value">5</div>
-                    <div class="rating-label">Excelente</div>
-                    <div class="rating-desc">Los objetivos son claros, coherentes, medibles y se relacionan directamente
-                        con el problema.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Criterio 3 -->
-        <div class="criteria-card">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h3>3. Marco teórico y antecedentes <span class="criteria-weight">(10%)</span></h3>
-                    <p class="mb-2"><strong>Indicador de logro:</strong> Fundamentación teórica pertinente, actual y
-                        bien estructurada.</p>
-                </div>
-                <div class="text-end">
-                    <span class="section-puntaje">PUNTAJE:</span>
-                    <span class="badge bg-secondary" style="font-size: 25px;" id="score3">Pendiente</span>
-                </div>
-            </div>
-            <div class="rating-scale">
-                <div class="rating-option rating-2" data-criteria="3" data-value="2">
-                    <div class="rating-value">2</div>
-                    <div class="rating-label">Insuficiente</div>
-                    <div class="rating-desc">Superficial, desorganizado o con escasas referencias.</div>
-                </div>
-                <div class="rating-option rating-3" data-criteria="3" data-value="3">
-                    <div class="rating-value">3</div>
-                    <div class="rating-label">Bueno</div>
-                    <div class="rating-desc">Limitaciones en profundidad o actualización de las fuentes.</div>
-                </div>
-                <div class="rating-option rating-4" data-criteria="3" data-value="4">
-                    <div class="rating-value">4</div>
-                    <div class="rating-label">Muy bueno</div>
-                    <div class="rating-desc">Marco teórico suficiente y coherente, aunque faltan referencias recientes.
+        <form action="" method="post">
+            {% csrf_token %}
+            <!-- Criterio 1 -->
+            <div class="criteria-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3>1. Planteamiento del problema <span class="criteria-weight">(8%)</span></h3>
+                        <p class="mb-2"><strong>Indicador de logro:</strong> Claridad, coherencia y relevancia
+                            científica o
+                            social del problema.</p>
+                    </div>
+                    <div class="text-end">
+                        <span class="section-puntaje">PUNTAJE:</span>
+                        <span class="badge bg-secondary" style="font-size: 25px;" id="score1">Pendiente</span>
                     </div>
                 </div>
-                <div class="rating-option rating-5" data-criteria="3" data-value="5">
-                    <div class="rating-value">5</div>
-                    <div class="rating-label">Excelente</div>
-                    <div class="rating-desc">Marco teórico amplio, actualizado, organizado y con fuentes académicas
-                        relevantes.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Criterio 4 -->
-        <div class="criteria-card">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h3>4. Calidad metodológica y aportes del trabajo <span class="criteria-weight">(20%)</span></h3>
-                    <p class="mb-2"><strong>Indicador de logro:</strong> Coherencia y rigurosidad metodológica.</p>
-                </div>
-                <div class="text-end">
-                    <span class="section-puntaje">PUNTAJE:</span>
-                    <span class="badge bg-secondary" style="font-size: 25px;" id="score4">Pendiente</span>
-                </div>
-            </div>
-            <div class="rating-scale">
-                <div class="rating-option rating-2" data-criteria="4" data-value="2">
-                    <div class="rating-value">2</div>
-                    <div class="rating-label">Insuficiente</div>
-                    <div class="rating-desc">Presenta metodología confusa, sin sustento o sin relación con objetivos.
+                <div class="rating-scale">
+                    <div class="rating-option rating-2" data-criteria="1" data-value="2">
+                        <div class="rating-value">2</div>
+                        <div class="rating-label">Insuficiente</div>
+                        <div class="rating-desc">El problema está confuso o sin justificación teórica.</div>
                     </div>
-                </div>
-                <div class="rating-option rating-3" data-criteria="4" data-value="3">
-                    <div class="rating-value">3</div>
-                    <div class="rating-label">Bueno</div>
-                    <div class="rating-desc">Metodología comprensible, pero con vacíos en descripción, tratamiento de
-                        datos o análisis.</div>
-                </div>
-                <div class="rating-option rating-4" data-criteria="4" data-value="4">
-                    <div class="rating-value">4</div>
-                    <div class="rating-label">Muy bueno</div>
-                    <div class="rating-desc">La metodología es coherente y adecuada, aunque requiere mayor detalle o
-                        justificación.</div>
-                </div>
-                <div class="rating-option rating-5" data-criteria="4" data-value="5">
-                    <div class="rating-value">5</div>
-                    <div class="rating-label">Excelente</div>
-                    <div class="rating-desc">Fundamenta de forma clara y ordenada el diseño, enfoque, técnicas y
-                        materiales empleados; responde a líneas de investigación institucionales.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Criterio 5 -->
-        <div class="criteria-card">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h3>5. Análisis y discusión de resultados <span class="criteria-weight">(10%)</span></h3>
-                    <p class="mb-2"><strong>Indicador de logro:</strong> Interpretación crítica y relación con el marco
-                        teórico. Correspondencia con los objetivos propuestos.</p>
-                </div>
-                <div class="text-end">
-                    <span class="section-puntaje">PUNTAJE:</span>
-                    <span class="badge bg-secondary" style="font-size: 25px;" id="score5">Pendiente</span>
-                </div>
-            </div>
-            <div class="rating-scale">
-                <div class="rating-option rating-2" data-criteria="5" data-value="2">
-                    <div class="rating-value">2</div>
-                    <div class="rating-label">Insuficiente</div>
-                    <div class="rating-desc">Presenta resultados sin interpretación ni relación teórica.</div>
-                </div>
-                <div class="rating-option rating-3" data-criteria="5" data-value="3">
-                    <div class="rating-value">3</div>
-                    <div class="rating-label">Bueno</div>
-                    <div class="rating-desc">Presenta resultados con análisis limitado o escasa argumentación.</div>
-                </div>
-                <div class="rating-option rating-4" data-criteria="5" data-value="4">
-                    <div class="rating-value">4</div>
-                    <div class="rating-label">Muy bueno</div>
-                    <div class="rating-desc">Analiza resultados adecuadamente, aunque con limitaciones en interpretación
-                        crítica.</div>
-                </div>
-                <div class="rating-option rating-5" data-criteria="5" data-value="5">
-                    <div class="rating-value">5</div>
-                    <div class="rating-label">Excelente</div>
-                    <div class="rating-desc">Analiza e interpreta resultados con profundidad, emplea evidencias sólidas
-                        y los vincula con la teoría.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Criterio 6 -->
-        <div class="criteria-card">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h3>6. Conclusiones y recomendaciones <span class="criteria-weight">(5%)</span></h3>
-                    <p class="mb-2"><strong>Indicador de logro:</strong> Conclusiones y recomendaciones en coherencia
-                        con objetivos de investigación.</p>
-                </div>
-                <div class="text-end">
-                    <span class="text-primary" style="font-size: 20px;">PUNTAJE:</span>
-                    <span class="badge bg-secondary" style="font-size: 25px;" id="score6">Pendiente</span>
-                </div>
-            </div>
-            <div class="rating-scale">
-                <div class="rating-option rating-2" data-criteria="6" data-value="2">
-                    <div class="rating-value">2</div>
-                    <div class="rating-label">Insuficiente</div>
-                    <div class="rating-desc">Conclusiones vagas o incongruentes.</div>
-                </div>
-                <div class="rating-option rating-3" data-criteria="6" data-value="3">
-                    <div class="rating-value">3</div>
-                    <div class="rating-label">Bueno</div>
-                    <div class="rating-desc">Conclusiones generales, con débil relación con los resultados.</div>
-                </div>
-                <div class="rating-option rating-4" data-criteria="6" data-value="4">
-                    <div class="rating-value">4</div>
-                    <div class="rating-label">Muy bueno</div>
-                    <div class="rating-desc">Conclusiones coherentes, pero con menor nivel de aporte o síntesis.</div>
-                </div>
-                <div class="rating-option rating-5" data-criteria="6" data-value="5">
-                    <div class="rating-value">5</div>
-                    <div class="rating-label">Excelente</div>
-                    <div class="rating-desc">Conclusiones claras, coherentes y sustentadas en los resultados; aportan
-                        conocimiento o propuestas aplicables.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Criterio 7 -->
-        <div class="criteria-card">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h3>7. Presentación de los resultados de investigación <span class="criteria-weight">(30%)</span>
-                    </h3>
-                    <p class="mb-2"><strong>Indicador de logro:</strong> Claridad expositiva, dominio del tema,
-                        comunicación y recursos visuales. Hay que valorar la capacidad de defender una postura teórica.
-                    </p>
-                </div>
-                <div class="text-end">
-                    <span class="section-puntaje">PUNTAJE:</span>
-                    <span class="badge bg-secondary" style="font-size: 25px;" id="score7">Pendiente</span>
-                </div>
-            </div>
-            <div class="rating-scale">
-                <div class="rating-option rating-2" data-criteria="7" data-value="2">
-                    <div class="rating-value">2</div>
-                    <div class="rating-label">Insuficiente</div>
-                    <div class="rating-desc">Presentación desorganizada o confusa; abuso de texto; sin dominio del tema
-                        ni manejo adecuado del tiempo.</div>
-                </div>
-                <div class="rating-option rating-3" data-criteria="7" data-value="3">
-                    <div class="rating-value">3</div>
-                    <div class="rating-label">Bueno</div>
-                    <div class="rating-desc">Presenta con apoyo excesivo en las diapositivas o lectura de texto; manejo
-                        de tiempo irregular; respuestas generales.</div>
-                </div>
-                <div class="rating-option rating-4" data-criteria="7" data-value="4">
-                    <div class="rating-value">4</div>
-                    <div class="rating-label">Muy bueno</div>
-                    <div class="rating-desc">Presenta con claridad y orden; uso adecuado del texto y gráficos; responde
-                        con fundamento, aunque con menor fluidez o seguridad.</div>
-                </div>
-                <div class="rating-option rating-5" data-criteria="7" data-value="5">
-                    <div class="rating-value">5</div>
-                    <div class="rating-label">Excelente</div>
-                    <div class="rating-desc">Presenta con claridad y seguridad; usa texto breve y pertinente; maneja el
-                        tiempo eficientemente; argumenta con criterio científico; demuestra dominio total del contenido.
+                    <div class="rating-option rating-3" data-criteria="1" data-value="3">
+                        <div class="rating-value">3</div>
+                        <div class="rating-label">Bueno</div>
+                        <div class="rating-desc">Presenta el problema con limitaciones en claridad o justificación.
+                        </div>
+                    </div>
+                    <div class="rating-option rating-4" data-criteria="1" data-value="4">
+                        <div class="rating-value">4</div>
+                        <div class="rating-label">Muy bueno</div>
+                        <div class="rating-desc">El problema está claro y contextualizado, aunque la justificación
+                            podría
+                            ser más profunda.</div>
+                    </div>
+                    <div class="rating-option rating-5" data-criteria="1" data-value="5">
+                        <div class="rating-value">5</div>
+                        <div class="rating-label">Excelente</div>
+                        <div class="rating-desc">Define con precisión el problema, lo contextualiza y justifica con base
+                            teórica sólida y actualizada.</div>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- Criterio 2 -->
+            <div class="criteria-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3>2. Objetivos de investigación <span class="criteria-weight">(7%)</span></h3>
+                        <p class="mb-2"><strong>Indicador de logro:</strong> Claridad, coherencia y pertinencia con el
+                            problema planteado.</p>
+                    </div>
+                    <div class="text-end">
+                        <span class="section-puntaje">PUNTAJE:</span>
+                        <span class="badge bg-secondary" style="font-size: 25px;" id="score2">Pendiente</span>
+                    </div>
+                </div>
+                <div class="rating-scale">
+                    <div class="rating-option rating-2" data-criteria="2" data-value="2">
+                        <div class="rating-value">2</div>
+                        <div class="rating-label">Insuficiente</div>
+                        <div class="rating-desc">Los objetivos son vagos, incoherentes o no responden al problema.</div>
+                    </div>
+                    <div class="rating-option rating-3" data-criteria="2" data-value="3">
+                        <div class="rating-value">3</div>
+                        <div class="rating-label">Bueno</div>
+                        <div class="rating-desc">Los objetivos son comprensibles, pero poco específicos.</div>
+                    </div>
+                    <div class="rating-option rating-4" data-criteria="2" data-value="4">
+                        <div class="rating-value">4</div>
+                        <div class="rating-label">Muy bueno</div>
+                        <div class="rating-desc">Los objetivos son adecuados, aunque algunos carecen de precisión o
+                            coherencia total.</div>
+                    </div>
+                    <div class="rating-option rating-5" data-criteria="2" data-value="5">
+                        <div class="rating-value">5</div>
+                        <div class="rating-label">Excelente</div>
+                        <div class="rating-desc">Los objetivos son claros, coherentes, medibles y se relacionan
+                            directamente
+                            con el problema.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Criterio 3 -->
+            <div class="criteria-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3>3. Marco teórico y antecedentes <span class="criteria-weight">(10%)</span></h3>
+                        <p class="mb-2"><strong>Indicador de logro:</strong> Fundamentación teórica pertinente, actual y
+                            bien estructurada.</p>
+                    </div>
+                    <div class="text-end">
+                        <span class="section-puntaje">PUNTAJE:</span>
+                        <span class="badge bg-secondary" style="font-size: 25px;" id="score3">Pendiente</span>
+                    </div>
+                </div>
+                <div class="rating-scale">
+                    <div class="rating-option rating-2" data-criteria="3" data-value="2">
+                        <div class="rating-value">2</div>
+                        <div class="rating-label">Insuficiente</div>
+                        <div class="rating-desc">Superficial, desorganizado o con escasas referencias.</div>
+                    </div>
+                    <div class="rating-option rating-3" data-criteria="3" data-value="3">
+                        <div class="rating-value">3</div>
+                        <div class="rating-label">Bueno</div>
+                        <div class="rating-desc">Limitaciones en profundidad o actualización de las fuentes.</div>
+                    </div>
+                    <div class="rating-option rating-4" data-criteria="3" data-value="4">
+                        <div class="rating-value">4</div>
+                        <div class="rating-label">Muy bueno</div>
+                        <div class="rating-desc">Marco teórico suficiente y coherente, aunque faltan referencias
+                            recientes.
+                        </div>
+                    </div>
+                    <div class="rating-option rating-5" data-criteria="3" data-value="5">
+                        <div class="rating-value">5</div>
+                        <div class="rating-label">Excelente</div>
+                        <div class="rating-desc">Marco teórico amplio, actualizado, organizado y con fuentes académicas
+                            relevantes.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Criterio 4 -->
+            <div class="criteria-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3>4. Calidad metodológica y aportes del trabajo <span class="criteria-weight">(20%)</span>
+                        </h3>
+                        <p class="mb-2"><strong>Indicador de logro:</strong> Coherencia y rigurosidad metodológica.</p>
+                    </div>
+                    <div class="text-end">
+                        <span class="section-puntaje">PUNTAJE:</span>
+                        <span class="badge bg-secondary" style="font-size: 25px;" id="score4">Pendiente</span>
+                    </div>
+                </div>
+                <div class="rating-scale">
+                    <div class="rating-option rating-2" data-criteria="4" data-value="2">
+                        <div class="rating-value">2</div>
+                        <div class="rating-label">Insuficiente</div>
+                        <div class="rating-desc">Presenta metodología confusa, sin sustento o sin relación con
+                            objetivos.
+                        </div>
+                    </div>
+                    <div class="rating-option rating-3" data-criteria="4" data-value="3">
+                        <div class="rating-value">3</div>
+                        <div class="rating-label">Bueno</div>
+                        <div class="rating-desc">Metodología comprensible, pero con vacíos en descripción, tratamiento
+                            de
+                            datos o análisis.</div>
+                    </div>
+                    <div class="rating-option rating-4" data-criteria="4" data-value="4">
+                        <div class="rating-value">4</div>
+                        <div class="rating-label">Muy bueno</div>
+                        <div class="rating-desc">La metodología es coherente y adecuada, aunque requiere mayor detalle o
+                            justificación.</div>
+                    </div>
+                    <div class="rating-option rating-5" data-criteria="4" data-value="5">
+                        <div class="rating-value">5</div>
+                        <div class="rating-label">Excelente</div>
+                        <div class="rating-desc">Fundamenta de forma clara y ordenada el diseño, enfoque, técnicas y
+                            materiales empleados; responde a líneas de investigación institucionales.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Criterio 5 -->
+            <div class="criteria-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3>5. Análisis y discusión de resultados <span class="criteria-weight">(10%)</span></h3>
+                        <p class="mb-2"><strong>Indicador de logro:</strong> Interpretación crítica y relación con el
+                            marco
+                            teórico. Correspondencia con los objetivos propuestos.</p>
+                    </div>
+                    <div class="text-end">
+                        <span class="section-puntaje">PUNTAJE:</span>
+                        <span class="badge bg-secondary" style="font-size: 25px;" id="score5">Pendiente</span>
+                    </div>
+                </div>
+                <div class="rating-scale">
+                    <div class="rating-option rating-2" data-criteria="5" data-value="2">
+                        <div class="rating-value">2</div>
+                        <div class="rating-label">Insuficiente</div>
+                        <div class="rating-desc">Presenta resultados sin interpretación ni relación teórica.</div>
+                    </div>
+                    <div class="rating-option rating-3" data-criteria="5" data-value="3">
+                        <div class="rating-value">3</div>
+                        <div class="rating-label">Bueno</div>
+                        <div class="rating-desc">Presenta resultados con análisis limitado o escasa argumentación.</div>
+                    </div>
+                    <div class="rating-option rating-4" data-criteria="5" data-value="4">
+                        <div class="rating-value">4</div>
+                        <div class="rating-label">Muy bueno</div>
+                        <div class="rating-desc">Analiza resultados adecuadamente, aunque con limitaciones en
+                            interpretación
+                            crítica.</div>
+                    </div>
+                    <div class="rating-option rating-5" data-criteria="5" data-value="5">
+                        <div class="rating-value">5</div>
+                        <div class="rating-label">Excelente</div>
+                        <div class="rating-desc">Analiza e interpreta resultados con profundidad, emplea evidencias
+                            sólidas
+                            y los vincula con la teoría.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Criterio 6 -->
+            <div class="criteria-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3>6. Conclusiones y recomendaciones <span class="criteria-weight">(5%)</span></h3>
+                        <p class="mb-2"><strong>Indicador de logro:</strong> Conclusiones y recomendaciones en
+                            coherencia
+                            con objetivos de investigación.</p>
+                    </div>
+                    <div class="text-end">
+                        <span class="text-primary" style="font-size: 20px;">PUNTAJE:</span>
+                        <span class="badge bg-secondary" style="font-size: 25px;" id="score6">Pendiente</span>
+                    </div>
+                </div>
+                <div class="rating-scale">
+                    <div class="rating-option rating-2" data-criteria="6" data-value="2">
+                        <div class="rating-value">2</div>
+                        <div class="rating-label">Insuficiente</div>
+                        <div class="rating-desc">Conclusiones vagas o incongruentes.</div>
+                    </div>
+                    <div class="rating-option rating-3" data-criteria="6" data-value="3">
+                        <div class="rating-value">3</div>
+                        <div class="rating-label">Bueno</div>
+                        <div class="rating-desc">Conclusiones generales, con débil relación con los resultados.</div>
+                    </div>
+                    <div class="rating-option rating-4" data-criteria="6" data-value="4">
+                        <div class="rating-value">4</div>
+                        <div class="rating-label">Muy bueno</div>
+                        <div class="rating-desc">Conclusiones coherentes, pero con menor nivel de aporte o síntesis.
+                        </div>
+                    </div>
+                    <div class="rating-option rating-5" data-criteria="6" data-value="5">
+                        <div class="rating-value">5</div>
+                        <div class="rating-label">Excelente</div>
+                        <div class="rating-desc">Conclusiones claras, coherentes y sustentadas en los resultados;
+                            aportan
+                            conocimiento o propuestas aplicables.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Criterio 7 -->
+            <div class="criteria-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3>7. Presentación de los resultados de investigación <span
+                                class="criteria-weight">(30%)</span>
+                        </h3>
+                        <p class="mb-2"><strong>Indicador de logro:</strong> Claridad expositiva, dominio del tema,
+                            comunicación y recursos visuales. Hay que valorar la capacidad de defender una postura
+                            teórica.
+                        </p>
+                    </div>
+                    <div class="text-end">
+                        <span class="section-puntaje">PUNTAJE:</span>
+                        <span class="badge bg-secondary" style="font-size: 25px;" id="score7">Pendiente</span>
+                    </div>
+                </div>
+                <div class="rating-scale">
+                    <div class="rating-option rating-2" data-criteria="7" data-value="2">
+                        <div class="rating-value">2</div>
+                        <div class="rating-label">Insuficiente</div>
+                        <div class="rating-desc">Presentación desorganizada o confusa; abuso de texto; sin dominio del
+                            tema
+                            ni manejo adecuado del tiempo.</div>
+                    </div>
+                    <div class="rating-option rating-3" data-criteria="7" data-value="3">
+                        <div class="rating-value">3</div>
+                        <div class="rating-label">Bueno</div>
+                        <div class="rating-desc">Presenta con apoyo excesivo en las diapositivas o lectura de texto;
+                            manejo
+                            de tiempo irregular; respuestas generales.</div>
+                    </div>
+                    <div class="rating-option rating-4" data-criteria="7" data-value="4">
+                        <div class="rating-value">4</div>
+                        <div class="rating-label">Muy bueno</div>
+                        <div class="rating-desc">Presenta con claridad y orden; uso adecuado del texto y gráficos;
+                            responde
+                            con fundamento, aunque con menor fluidez o seguridad.</div>
+                    </div>
+                    <div class="rating-option rating-5" data-criteria="7" data-value="5">
+                        <div class="rating-value">5</div>
+                        <div class="rating-label">Excelente</div>
+                        <div class="rating-desc">Presenta con claridad y seguridad; usa texto breve y pertinente; maneja
+                            el
+                            tiempo eficientemente; argumenta con criterio científico; demuestra dominio total del
+                            contenido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         <!-- Resultados de evaluación -->
         <div class="row mt-5">
             <div class="col-md-6">
@@ -396,7 +418,7 @@
 
     <!-- Información del evaluador -->
     <div class="form-container">
-        <h2 class="section-title"><i class="fas fa-user-edit"></i> Información del Evaluador</h2>
+        <h2 class="section-title"><i class="bi bi-person-check-fill"></i>✔️ Información del Evaluador</h2>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="evaluador" class="form-label required">Nombre del docente evaluador</label>
@@ -411,7 +433,7 @@
                 <input type="date" class="form-control" id="fecha" required>
             </div>
         </div>
-        <div class="alert bg-primary-subtle" role="alert"> 
+        <div class="alert bg-primary-subtle" role="alert">
             <i class="bi bi-info-circle-fill"></i> <strong>Nota:</strong> Todos los campos marcados con (*) son
             obligatorios. La evaluación se calculará automáticamente al seleccionar los puntajes de cada criterio.
         </div>
@@ -428,7 +450,8 @@
     </div>
 
     <div class="text-center mt-4">
-        <p class="text-muted"><i class="bi bi-exclamation-triangle-fill"></i> Este formulario es parte de la XLIII Jornada
+        <p class="text-muted"><i class="bi bi-exclamation-triangle-fill"></i> Este formulario es parte de la XLIII
+            Jornada
             Universitaria de Desarrollo Científico (JUDC) Edición 2025</p>
     </div>
 </div>

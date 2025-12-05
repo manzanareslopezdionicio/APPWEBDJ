@@ -185,12 +185,19 @@ function resetForm() {
                 </tr>
             `;
 
-    // Reiniciar formulario
-    document.querySelector('form').reset();
+    // Limpiar todos los campos de entrada del formulario
+    document.getElementById('areaConocimiento').value = '';
+    document.getElementById('categoria').value = '';
+    document.getElementById('carrera').value = '';
+    document.getElementById('titulo').value = '';
+    document.getElementById('autores').value = '';
+    document.getElementById('evaluador').value = '';
+    document.getElementById('firma').value = '';
 
     // Establecer fecha actual
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('fecha').value = today;
 
     alert('Formulario reiniciado correctamente.');
+
 }
