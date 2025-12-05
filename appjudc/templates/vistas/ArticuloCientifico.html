@@ -7,14 +7,17 @@
 <div class="header-section">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-9">
-                <h1 class="mb-2"><i class="bi bi-mortarboard-fill"></i> XLIII Jornada Universitaria de Desarrollo
-                    Científico (JUDC) 2025</h1>
+            <div class="col-3 col-md-2 university-logo">
+                <img src="{% static 'img/logojudc.png'%}" alt="logo UNAN-Managua" class="university-logo">
+            </div>
+            <div class="col-md-8 text-center">
+                <h1 class="mb-2"><i class="fas fa-graduation-cap"></i> XLIV Jornada Universitaria de Desarrollo
+                    Científico (JUDC) 2026</h1>
                 <h3 class="mb-0">"Ciencia, Investigación e Innovación: un compromiso con Nicaragua"</h3>
                 <p class="mb-0 mt-2">Dirección Académica - Departamento de Investigación e Innovación</p>
             </div>
-            <div class="col-md-3 text-md-end">
-                <img src="{% static 'img/iconjudc.png' %}" alt="Logo JUDC" class="university-logo">
+            <div class="col-6 col-md-2 university-logo">
+                <img src="{% static 'img/logojudc.png' %}" alt="Logo JUDC" class="university-logo">
                 <!-- <p class="mb-0">Managua, Nicaragua</p>
                     <p class="mb-0">Septiembre, 2025</p> -->
             </div>
@@ -29,7 +32,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="areaConocimiento" class="form-label required">Área de Conocimiento o CUR</label>
-                <select class="form-select mi-input" id="categoria" required>
+                <select class="form-select mi-input" id="areaConocimiento" name="areaConocimiento" required>
                     <option value="">Seleccione...</option>
                     <option value="csj">Ciencias Sociales y Jurídicas</option>
                     <option value="cs">Ciencias de la Salud</option>
@@ -416,7 +419,7 @@
 
     <!-- Botón de envío -->
     <div class="text-center mt-4">
-        <button type="button" class="btn btn-submit btn-lg" id="submitBtn">
+        <button type="submit" class="btn btn-submit btn-lg" id="submitBtn">
             <i class="bi bi-send-fill"></i> Enviar Evaluación
         </button>
         <button type="button" class="btn btn-outline-secondary btn-lg ms-2" id="resetBtn">
@@ -429,4 +432,5 @@
             Universitaria de Desarrollo Científico (JUDC) Edición 2025</p>
     </div>
 </div>
+<script src="{% static 'js/evaluar.js' %}"></script>
 {% endblock %}
