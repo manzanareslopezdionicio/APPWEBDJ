@@ -16,9 +16,12 @@
             <div class="col-6 col-md-2 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="codigodocente" name="codigodocente"
-                        placeholder="Ingrese el codigo del docente" autofocus required>
+                        placeholder="121-230371-0003A" autofocus
+                        pattern="^\d{3}-\d{6}-\d{4}[A-Za-z]$"
+                        title="Formato: 121-230371-0003A (último carácter letra, mayúscula o minúscula)"
+                        maxlength="16" required>
                     <label for="codigodocente" class="form-label">Codigo del Docente</label>
-                    <div class="invalid-feedback">Por favor ingrese un código válido.</div>
+                    <div class="invalid-feedback">Por favor ingrese un código válido. Ej: 121-230371-0003A (la letra final puede ser mayúscula o minúscula).</div>
                 </div>
             </div>
             <div class="col-6 col-md-4 mb-3">
@@ -48,7 +51,9 @@
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="especialidad" name="especialidad"
-                        placeholder="Ingrese la especialidad del docente" required>
+                        placeholder="Ingrese la especialidad del docente" required
+                        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+                        title="Solo letras y espacios">
                     <label for="especialidad" class="form-label">Especialidad del Docente</label>
                     <div class="invalid-feedback">Por favor ingrese una especialidad válida.</div>
                 </div>
@@ -124,6 +129,76 @@
         if (!form) return;
         const btn = document.getElementById('btnAgregarDocente');
         const inputs = Array.from(form.querySelectorAll('.mi-input, select'));
+
+        // --- Máscara para el código del docente: XXX-XXXXXX-XXXXA ---
+        const codigoInput = document.getElementById('codigodocente');
+        if (codigoInput) {
+            const formatCodigo = (raw) => {
+                // mantener solo letras y dígitos
+                const only = raw.replace(/[^0-9A-Za-z]/g, '');
+                // extraer dígitos para las partes numéricas en orden
+                const digits = only.replace(/[^0-9]/g, '');
+                // extraer letras para la última parte (si el usuario escribe letras en medio se usan aquí)
+                const letters = only.replace(/[^A-Za-z]/g, '');
+
+                const part1 = digits.substring(0, 3);
+                const part2 = digits.substring(3, 9);
+                const part3 = digits.substring(9, 13);
+                const part4 = letters.substring(0, 1);
+
+                let out = '';
+                if (part1) out += part1;
+                if (part2) out += '-' + part2;
+                if (part3) out += '-' + part3;
+                if (part4) out += part4;
+                return out;
+            };
+
+            // mantener la posición del cursor de forma simple (se resitúa al final)
+            codigoInput.addEventListener('input', function (e) {
+                const before = this.value;
+                const formatted = formatCodigo(before);
+                this.value = formatted;
+                // limitar longitud máxima (incluyendo guiones)
+                if (this.value.length > 16) this.value = this.value.substring(0, 16);
+            });
+
+            // al pegar, formatear también
+            codigoInput.addEventListener('paste', function (e) {
+                setTimeout(() => {
+                    this.value = formatCodigo(this.value);
+                }, 0);
+            });
+        }
+
+        // --- Validación en blur para especialidad: solo letras y espacios ---
+        const especialidadInput = document.getElementById('especialidad');
+        if (especialidadInput) {
+            const especialidadRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+            const validateEspecialidad = () => {
+                const v = (especialidadInput.value || '').trim();
+                if (!v || !especialidadRegex.test(v)) {
+                    especialidadInput.classList.add('is-invalid');
+                    especialidadInput.classList.remove('is-valid');
+                    // opcional: setCustomValidity para que form.checkValidity() falle
+                    especialidadInput.setCustomValidity('Formato inválido');
+                } else {
+                    especialidadInput.classList.remove('is-invalid');
+                    especialidadInput.classList.add('is-valid');
+                    especialidadInput.setCustomValidity('');
+                }
+            };
+
+            especialidadInput.addEventListener('blur', function () {
+                validateEspecialidad();
+                updateButton();
+            });
+            // validar en input para limpiar error mientras escribe
+            especialidadInput.addEventListener('input', function () {
+                if (especialidadInput.classList.contains('is-invalid')) validateEspecialidad();
+                updateButton();
+            });
+        }
 
         const allValid = () => {
             return inputs.every(el => {
