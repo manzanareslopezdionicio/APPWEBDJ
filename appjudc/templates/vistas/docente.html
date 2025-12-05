@@ -161,6 +161,17 @@
                 this.value = formatted;
                 // limitar longitud máxima (incluyendo guiones)
                 if (this.value.length > 16) this.value = this.value.substring(0, 16);
+                // si el valor ya cumple el patrón, marcar como válido
+                const fullPattern = /^\d{3}-\d{6}-\d{4}[A-Za-z]$/;
+                if (fullPattern.test(this.value)) {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                    this.setCustomValidity('');
+                } else {
+                    // no forzar invalid mientras el usuario escribe; sólo limpiar is-valid si no corresponde
+                    this.classList.remove('is-valid');
+                    this.setCustomValidity('');
+                }
             });
 
             // al pegar, formatear también
@@ -168,6 +179,26 @@
                 setTimeout(() => {
                     this.value = formatCodigo(this.value);
                 }, 0);
+            });
+
+            // Validación al perder foco: mostrar error sólo si el valor existe y no cumple el patrón completo
+            codigoInput.addEventListener('blur', function () {
+                const v = (this.value || '').trim();
+                const fullPattern = /^\d{3}-\d{6}-\d{4}[A-Za-z]$/;
+                if (!v) {
+                    this.classList.remove('is-invalid');
+                    this.classList.remove('is-valid');
+                    this.setCustomValidity('');
+                } else if (!fullPattern.test(v)) {
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                    this.setCustomValidity('Formato inválido');
+                } else {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                    this.setCustomValidity('');
+                }
+                updateButton();
             });
         }
 
