@@ -15,4 +15,5 @@ urlpatterns = [
     path('organizador/', views.organizador, name='organizador'),
     path('perfil/', views.perfil, name='perfil'),
     path('docente/', views.docente, name='docente'),
+    path('articuloCientifico/', views.articuloCientifico, name='articuloCientifico'),
 ]

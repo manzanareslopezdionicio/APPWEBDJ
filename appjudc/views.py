@@ -41,3 +41,6 @@ def perfil(request):
 
 def docente(request):
     return render(request, 'vistas/docente.html')
+
+def articuloCientifico(request):
+    return render(request, 'vistas/ArticuloCientifico.html')
