@@ -10,18 +10,17 @@
     </div>
     <h3 style="text-shadow: 2px 2px 4px gray;">Gestion de Docentes:</h3>
 
-    <form action="" method="post" class="mt-4 needs-validation" novalidate>
+    <form action="/registrarDocente/" method="post" class="mt-4 needs-validation" novalidate>
         {% csrf_token %}
         <div class="row">
-            <div class="col-6 col-md-2 mb-3">
+            <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="codigodocente" name="codigodocente"
-                        placeholder="121-230371-0003A" autofocus pattern="^\d{3}-\d{6}-\d{4}[A-Za-z]$"
+                        placeholder="121-230371-0003A" pattern="^\d{3}-\d{6}-\d{4}[A-Za-z]$"
                         title="Formato: 121-230371-0003A (último carácter letra, mayúscula o minúscula)" maxlength="16"
-                        required>
-                    <label for="codigodocente" class="form-label">Codigo del Docente</label>
-                    <div class="invalid-feedback">Por favor ingrese un código válido. Ej: 121-230371-0003A (la letra
-                        final puede ser mayúscula o minúscula).</div>
+                        autofocus required>
+                    <label for="codigodocente" class="form-label">Número de cédula</label>
+                    <div class="invalid-feedback">Por favor ingrese un código válido. Ej: 121-230371-0003A.</div>
                 </div>
             </div>
             <div class="col-6 col-md-4 mb-3">
@@ -32,7 +31,7 @@
                     <div class="invalid-feedback">Por favor ingrese un nombre válido.</div>
                 </div>
             </div>
-            <div class="col-6 col-md-4 mb-3">
+            <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
                     <input type="email" class="form-control mi-input" id="email" name="email"
                         placeholder="Ingrese el correo del docente" required>
@@ -72,7 +71,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-2 mb-4 d-flex align-items-end ">
-                <button type="submit" id="btnAgregarDocente" class="btn btn-secondary w-100">Registrar</button>
+                <button type="submit" class="btn btn-secondary w-100">Registrar</button>
             </div>
         </div>
     </form>
@@ -106,21 +105,8 @@
                                     <td>
                                         <a href="editDocente/{{docente.codigo_docente}}" class="btn btn-info btn-sm"><i
                                                 class="bi bi-pencil-square"></i></a>
-                                            <a href="borrarDocente/{{docente.codigo_docente}}" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
-
-                                        <!-- <button class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button> -->
-                                        <!--  <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button> -->
-                                        <!-- <td>{{ docente.codigo_docente }}</td>
-                                    <td>{{ docente.nombre }}</td>
-                                    <td>{{ docente.email }}</td>
-                                    <td>{{ docente.telefono }}</td>
-                                    <td>{{ docente.especialidad }}</td>
-                                    <td>{{ docente.get_area_conocimiento_display }}</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm"><i
-                                                class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                                    </td> -->
+                                        <a href="borrarDocente/{{docente.codigo_docente}}"
+                                            class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
                                 </tr>
                                 {% empty %}
                                 <tr>
@@ -136,207 +122,177 @@
     </div>
 </div>
 <script>
+    // Validación de formularios Bootstrap 5
     (function () {
-        const form = document.querySelector('form.needs-validation');
-        if (!form) return;
-        const btn = document.getElementById('btnAgregarDocente');
-        const inputs = Array.from(form.querySelectorAll('.mi-input, select'));
-
-        // --- Máscara para el código del docente: XXX-XXXXXX-XXXXA ---
-        const codigoInput = document.getElementById('codigodocente');
-        if (codigoInput) {
-            const formatCodigo = (raw) => {
-                // mantener solo letras y dígitos
-                const only = raw.replace(/[^0-9A-Za-z]/g, '');
-                // extraer dígitos para las partes numéricas en orden
-                const digits = only.replace(/[^0-9]/g, '');
-                // extraer letras para la última parte (si el usuario escribe letras en medio se usan aquí)
-                const letters = only.replace(/[^A-Za-z]/g, '');
-
-                const part1 = digits.substring(0, 3);
-                const part2 = digits.substring(3, 9);
-                const part3 = digits.substring(9, 13);
-                const part4 = letters.substring(0, 1);
-
-                let out = '';
-                if (part1) out += part1;
-                if (part2) out += '-' + part2;
-                if (part3) out += '-' + part3;
-                if (part4) out += part4;
-                return out;
-            };
-
-            // mantener la posición del cursor de forma simple (se resitúa al final)
-            codigoInput.addEventListener('input', function (e) {
-                const before = this.value;
-                const formatted = formatCodigo(before);
-                this.value = formatted;
-                // limitar longitud máxima (incluyendo guiones)
-                if (this.value.length > 16) this.value = this.value.substring(0, 16);
-                // si el valor ya cumple el patrón, marcar como válido
-                const fullPattern = /^\d{3}-\d{6}-\d{4}[A-Za-z]$/;
-                if (fullPattern.test(this.value)) {
-                    this.classList.remove('is-invalid');
-                    this.classList.add('is-valid');
-                    this.setCustomValidity('');
-                } else {
-                    // no forzar invalid mientras el usuario escribe; sólo limpiar is-valid si no corresponde
-                    this.classList.remove('is-valid');
-                    this.setCustomValidity('');
-                }
-            });
-
-            // al pegar, formatear también
-            codigoInput.addEventListener('paste', function (e) {
-                setTimeout(() => {
-                    this.value = formatCodigo(this.value);
-                }, 0);
-            });
-
-            // Validación al perder foco: mostrar error sólo si el valor existe y no cumple el patrón completo
-            codigoInput.addEventListener('blur', function () {
-                const v = (this.value || '').trim();
-                const fullPattern = /^\d{3}-\d{6}-\d{4}[A-Za-z]$/;
-                if (!v) {
-                    this.classList.remove('is-invalid');
-                    this.classList.remove('is-valid');
-                    this.setCustomValidity('');
-                } else if (!fullPattern.test(v)) {
-                    this.classList.add('is-invalid');
-                    this.classList.remove('is-valid');
-                    this.setCustomValidity('Formato inválido');
-                } else {
-                    this.classList.remove('is-invalid');
-                    this.classList.add('is-valid');
-                    this.setCustomValidity('');
-                }
-                updateButton();
-            });
-        }
-
-        // --- Validación en blur para especialidad: solo letras y espacios ---
-        const especialidadInput = document.getElementById('especialidad');
-        if (especialidadInput) {
-            const especialidadRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-            const validateEspecialidad = () => {
-                const v = (especialidadInput.value || '').trim();
-                if (!v || !especialidadRegex.test(v)) {
-                    especialidadInput.classList.add('is-invalid');
-                    especialidadInput.classList.remove('is-valid');
-                    // opcional: setCustomValidity para que form.checkValidity() falle
-                    especialidadInput.setCustomValidity('Formato inválido');
-                } else {
-                    especialidadInput.classList.remove('is-invalid');
-                    especialidadInput.classList.add('is-valid');
-                    especialidadInput.setCustomValidity('');
-                }
-            };
-
-            especialidadInput.addEventListener('blur', function () {
-                validateEspecialidad();
-                updateButton();
-            });
-            // validar en input para limpiar error mientras escribe
-            especialidadInput.addEventListener('input', function () {
-                if (especialidadInput.classList.contains('is-invalid')) validateEspecialidad();
-                updateButton();
-            });
-        }
-
-        const allValid = () => {
-            return inputs.every(el => {
-                if (el.tagName === 'SELECT') return el.value && el.value !== '';
-                return el.value && el.checkValidity();
-            });
-        };
-
-        const updateButton = () => {
-            btn.disabled = !allValid();
-        };
-
-        inputs.forEach(i => {
-            i.addEventListener('input', updateButton);
-            i.addEventListener('change', updateButton);
-            i.addEventListener('blur', updateButton);
-        });
-
-        const agregarDocenteATabla = (docente) => {
-            const tbody = document.querySelector('table tbody');
-            // Eliminar mensaje "No hay docentes" si existe
-            const emptyRow = tbody.querySelector('tr td[colspan="7"]');
-            if (emptyRow) {
-                emptyRow.parentElement.remove();
-            }
-
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${docente.codigo_docente}</td>
-                <td>${docente.nombre}</td>
-                <td>${docente.email}</td>
-                <td>${docente.telefono}</td>
-                <td>${docente.especialidad}</td>
-                <td>${docente.area_conocimiento}</td>
-                <td>
-                    <button class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-                    <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                </td>
-            `;
-            tbody.appendChild(tr);
-        };
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            if (!form.checkValidity()) {
-                form.classList.add('was-validated');
-                updateButton();
-                return;
-            }
-
-            const docenteData = {
-                codigodocente: document.getElementById('codigodocente').value,
-                nombre: document.getElementById('nombre').value,
-                email: document.getElementById('email').value,
-                telefono: document.getElementById('telefono').value,
-                especialidad: document.getElementById('especialidad').value,
-                areaconocimiento: document.getElementById('areaconocimiento').value
-            };
-
-            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-            fetch(window.location.href, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                },
-                body: JSON.stringify(docenteData)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('✅ ' + data.message + '\n\nCódigo: ' + data.docente.codigo_docente);
-                        agregarDocenteATabla(data.docente);
-                        form.reset();
-                        form.classList.remove('was-validated');
-                        updateButton();
-                    } else {
-                        alert('❌ Error: ' + data.message);
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
                     }
-                })
-                .catch(error => {
-                    alert('❌ Error al registrar el docente: ' + error);
-                    console.error('Error:', error);
-                });
-        });
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', updateButton);
-        } else {
-            updateButton();
-        }
-    })();
+        /* VALIDACIÓN Y MÁSCARA PARA EL CÓDIGO DEL DOCENTE-NUMERO DE CEDULA */
+
+        /* VALIDACIÓN Y MÁSCARA PARA EL CÓDIGO DEL DOCENTE-NUMERO DE CEDULA */
+        (function () {
+            const form = document.querySelector('form.needs-validation');
+            if (!form) return;
+            const btn = form.querySelector('button[type="submit"]');
+            const inputs = Array.from(form.querySelectorAll('.mi-input, select'));
+
+            // --- Máscara para el código del docente: XXX-XXXXXX-XXXXA ---
+            const codigoInput = document.getElementById('codigodocente');
+            if (codigoInput) {
+                codigoInput.setAttribute('maxlength', '16');
+
+                const formatCodigo = (raw) => {
+                    const only = raw.replace(/[^0-9A-Za-z]/g, '');
+                    const digits = only.replace(/[^0-9]/g, '').substring(0, 13); // 3+6+4 = 13 dígitos
+                    const letters = only.replace(/[^A-Za-z]/g, '');
+                    const p1 = digits.substring(0, 3);
+                    const p2 = digits.substring(3, 9);
+                    const p3 = digits.substring(9, 13);
+                    let out = '';
+                    if (p1) out += p1;
+                    if (p2) out += (out ? '-' : '') + p2;
+                    if (p3) out += (out ? '-' : '') + p3;
+                    if (letters) out += letters.charAt(0);
+                    return out;
+                };
+
+                const mapCursor = (formatted, alnumBefore) => {
+                    if (alnumBefore <= 0) return 0;
+                    let count = 0;
+                    for (let i = 0; i < formatted.length; i++) {
+                        if (/[0-9A-Za-z]/.test(formatted[i])) count++;
+                        if (count === alnumBefore) return i + 1;
+                    }
+                    return formatted.length;
+                };
+
+                codigoInput.addEventListener('input', function () {
+                    // número de caracteres alfanuméricos antes del cursor actual
+                    const cursorPos = this.selectionStart || 0;
+                    const alnumBefore = (this.value.slice(0, cursorPos).replace(/[^0-9A-Za-z]/g, '')).length;
+
+                    const formatted = formatCodigo(this.value).slice(0, 16);
+                    this.value = formatted;
+
+                    // ajustar nuevo cursor para respetar la posición del usuario
+                    try {
+                        const newPos = mapCursor(formatted, alnumBefore);
+                        this.setSelectionRange(newPos, newPos);
+                    } catch (e) {
+                        // noop
+                    }
+
+                    const fullPattern = /^\d{3}-\d{6}-\d{4}[A-Za-z]$/;
+                    if (fullPattern.test(this.value)) {
+                        this.classList.remove('is-invalid');
+                        this.classList.add('is-valid');
+                        this.setCustomValidity('');
+                    } else {
+                        this.classList.remove('is-valid');
+                        this.setCustomValidity('');
+                    }
+                    updateButton();
+                });
+
+                codigoInput.addEventListener('paste', function () {
+                    setTimeout(() => {
+                        this.value = formatCodigo(this.value).slice(0, 16);
+                        updateButton();
+                    }, 0);
+                });
+
+                codigoInput.addEventListener('blur', function () {
+                    const v = (this.value || '').trim();
+                    const fullPattern = /^\d{3}-\d{6}-\d{4}[A-Za-z]$/;
+                    if (!v) {
+                        this.classList.remove('is-invalid');
+                        this.classList.remove('is-valid');
+                        this.setCustomValidity('');
+                    } else if (!fullPattern.test(v)) {
+                        this.classList.add('is-invalid');
+                        this.classList.remove('is-valid');
+                        this.setCustomValidity('Formato inválido. Debe ser 121-230371-0003A');
+                    } else {
+                        this.classList.remove('is-invalid');
+                        this.classList.add('is-valid');
+                        this.setCustomValidity('');
+                    }
+                    updateButton();
+                });
+            }
+
+            // --- Validación en blur para especialidad: solo letras y espacios ---
+            const especialidadInput = document.getElementById('especialidad');
+            if (especialidadInput) {
+                const especialidadRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+                const validateEspecialidad = () => {
+                    const v = (especialidadInput.value || '').trim();
+                    if (!v || !especialidadRegex.test(v)) {
+                        especialidadInput.classList.add('is-invalid');
+                        especialidadInput.classList.remove('is-valid');
+                        especialidadInput.setCustomValidity('Formato inválido');
+                    } else {
+                        especialidadInput.classList.remove('is-invalid');
+                        especialidadInput.classList.add('is-valid');
+                        especialidadInput.setCustomValidity('');
+                    }
+                };
+
+                especialidadInput.addEventListener('blur', function () {
+                    validateEspecialidad();
+                    updateButton();
+                });
+                especialidadInput.addEventListener('input', function () {
+                    if (especialidadInput.classList.contains('is-invalid')) validateEspecialidad();
+                    updateButton();
+                });
+            }
+
+            const allValid = () => {
+                return inputs.every(el => {
+                    if (el.tagName === 'SELECT') return el.value && el.value !== '';
+                    return el.value && el.checkValidity();
+                });
+            };
+
+            const updateButton = () => {
+                if (!btn) return;
+                btn.disabled = !allValid();
+            };
+
+            inputs.forEach(i => {
+                i.addEventListener('input', updateButton);
+                i.addEventListener('change', updateButton);
+                i.addEventListener('blur', updateButton);
+            });
+
+            form.addEventListener('submit', function (e) {
+                if (!form.checkValidity()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    form.classList.add('was-validated');
+                    updateButton();
+                }
+            });
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', updateButton);
+            } else {
+                updateButton();
+            }
+        })();
+
 </script>
 
 {% endblock %}

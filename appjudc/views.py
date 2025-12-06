@@ -48,6 +48,23 @@ def docente(request):
     docentes = Docente.objects.all()
     return render(request, 'vistas/docente.html', {'docentes': docentes})
 
+def registrarDocente(request):
+    codigo_docente = request.POST.get('codigodocente') 
+    nombre = request.POST.get('nombre')
+    email = request.POST.get('email')
+    telefono = request.POST.get('telefono')
+    especialidad = request.POST.get('especialidad')
+    area_conocimiento = request.POST.get('areaconocimiento')
+    docente = Docente.objects.create(
+        codigo_docente=codigo_docente,
+        nombre=nombre,
+        email=email,
+        telefono=telefono,
+        especialidad=especialidad,
+        area_conocimiento=area_conocimiento
+    )
+    return redirect('docente')
+
     """ if request.method == 'POST':
         try:
             # Obtener datos del request
