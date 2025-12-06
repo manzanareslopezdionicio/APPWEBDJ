@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404 
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from .models import EvaluacionArticuloCientifico, Docente
 import json
 from datetime import datetime
@@ -48,6 +49,7 @@ def docente(request):
     docentes = Docente.objects.all()
     return render(request, 'vistas/docente.html', {'docentes': docentes})
 
+# VISTA PARA REGISTRAR DOCENTE
 def registrarDocente(request):
     codigo_docente = request.POST.get('codigodocente') 
     nombre = request.POST.get('nombre')
@@ -65,47 +67,11 @@ def registrarDocente(request):
     )
     return redirect('docente')
 
-    """ if request.method == 'POST':
-        try:
-            # Obtener datos del request
-            data = json.loads(request.body)
-            
-            # Crear nuevo docente
-            docente_obj = Docente(
-                codigo_docente=data.get('codigodocente'),
-                nombre=data.get('nombre'),
-                email=data.get('email'),
-                telefono=data.get('telefono'),
-                especialidad=data.get('especialidad'),
-                area_conocimiento=data.get('areaconocimiento')
-            )
-            
-            # Guardar en la base de datos
-            docente_obj.save()
-            
-            return JsonResponse({
-                'success': True,
-                'message': 'Docente registrado exitosamente',
-                'id': docente_obj.id,
-                'docente': {
-                    'codigo_docente': docente_obj.codigo_docente,
-                    'nombre': docente_obj.nombre,
-                    'email': docente_obj.email,
-                    'telefono': docente_obj.telefono,
-                    'especialidad': docente_obj.especialidad,
-                    'area_conocimiento': docente_obj.get_area_conocimiento_display()
-                }
-            })
-            
-        except Exception as e:
-            return JsonResponse({
-                'success': False,
-                'message': f'Error al registrar el docente: {str(e)}'
-            }, status=400)
-    
-    # GET request - obtener lista de docentes
-    docentes = Docente.objects.all()
-    return render(request, 'vistas/docente.html', {'docentes': docentes}) """
+@require_POST
+def borrarDocente(request, codigo_docente):
+    docente = get_object_or_404(Docente, codigo_docente=codigo_docente)
+    docente.delete()
+    return redirect('docente')
 
 def articuloCientifico(request):
     if request.method == 'POST':

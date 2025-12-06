@@ -8,8 +8,8 @@ class estudiante(models.Model):
     apellido=models.CharField(max_length=30)
     email=models.EmailField(unique=True, blank=False)
 
-class usuario(models.Model):
-    carnet=models.CharField()  
+""" class usuario(models.Model):
+    carnet=models.CharField() """  
 
 class Docente(models.Model):
     AREA_CHOICES = [
