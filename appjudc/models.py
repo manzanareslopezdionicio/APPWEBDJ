@@ -18,7 +18,7 @@ class Docente(models.Model):
         ('3', 'Departamento de Educación y Humanidades'),
     ]
     
-    codigo_docente = models.CharField(max_length=20, unique=True, verbose_name="Código del Docente")
+    codigo_docente = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name="Código del Docente")
     nombre = models.CharField(max_length=200, verbose_name="Nombre del Docente")
     email = models.EmailField(unique=True, verbose_name="Correo Electrónico")
     telefono = models.CharField(max_length=9, verbose_name="Teléfono")

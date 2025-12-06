@@ -20,6 +20,7 @@
                         title="Formato: 121-230371-0003A (último carácter letra, mayúscula o minúscula)" maxlength="16"
                         autofocus required>
                     <label for="codigodocente" class="form-label">Número de cédula</label>
+                    <div id="mensajeValidacion" style="font-size: 12px; margin-top: 5px;"></div>
                     <div class="invalid-feedback">Por favor ingrese un código válido. Ej: 121-230371-0003A.</div>
                 </div>
             </div>
@@ -105,7 +106,8 @@
                                     <td>
                                         <a href="editDocente/{{docente.codigo_docente}}" class="btn btn-info btn-sm"><i
                                                 class="bi bi-pencil-square"></i></a>
-                                        <a href="borrarDocente/{{docente.codigo_docente}}" onclick=" return confirm('Eliminar docente {{docente.nombre}}?')"
+                                        <a href="borrarDocente/{{docente.codigo_docente}}"
+                                            onclick=" return confirm('Eliminar docente {{docente.nombre}}?')"
                                             class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
                                 </tr>
                                 {% empty %}
@@ -138,161 +140,80 @@
             })
     })()
 
-        /* VALIDACIÓN Y MÁSCARA PARA EL CÓDIGO DEL DOCENTE-NUMERO DE CEDULA */
+    /* VALIDACIÓN Y MÁSCARA PARA EL CÓDIGO DEL DOCENTE-NUMERO DE CEDULA */
 
-        /* VALIDACIÓN Y MÁSCARA PARA EL CÓDIGO DEL DOCENTE-NUMERO DE CEDULA */
-        (function () {
-            const form = document.querySelector('form.needs-validation');
-            if (!form) return;
-            const btn = form.querySelector('button[type="submit"]');
-            const inputs = Array.from(form.querySelectorAll('.mi-input, select'));
 
-            // --- Máscara para el código del docente: XXX-XXXXXX-XXXXA ---
-            const codigoInput = document.getElementById('codigodocente');
-            if (codigoInput) {
-                codigoInput.setAttribute('maxlength', '16');
+</script>
 
-                const formatCodigo = (raw) => {
-                    const only = raw.replace(/[^0-9A-Za-z]/g, '');
-                    const digits = only.replace(/[^0-9]/g, '').substring(0, 13); // 3+6+4 = 13 dígitos
-                    const letters = only.replace(/[^A-Za-z]/g, '');
-                    const p1 = digits.substring(0, 3);
-                    const p2 = digits.substring(3, 9);
-                    const p3 = digits.substring(9, 13);
-                    let out = '';
-                    if (p1) out += p1;
-                    if (p2) out += (out ? '-' : '') + p2;
-                    if (p3) out += (out ? '-' : '') + p3;
-                    if (letters) out += letters.charAt(0);
-                    return out;
-                };
+<script>
+    const input = document.getElementById('codigodocente');
+    const mensaje = document.getElementById('mensajeValidacion');
 
-                const mapCursor = (formatted, alnumBefore) => {
-                    if (alnumBefore <= 0) return 0;
-                    let count = 0;
-                    for (let i = 0; i < formatted.length; i++) {
-                        if (/[0-9A-Za-z]/.test(formatted[i])) count++;
-                        if (count === alnumBefore) return i + 1;
-                    }
-                    return formatted.length;
-                };
+    input.addEventListener('input', function (e) {
+        const valorOriginal = input.value;
 
-                codigoInput.addEventListener('input', function () {
-                    // número de caracteres alfanuméricos antes del cursor actual
-                    const cursorPos = this.selectionStart || 0;
-                    const alnumBefore = (this.value.slice(0, cursorPos).replace(/[^0-9A-Za-z]/g, '')).length;
+        // Remover todos los caracteres no alfanuméricos excepto guiones existentes
+        let valorLimpio = valorOriginal.replace(/[^0-9A-Za-z-]/g, '');
 
-                    const formatted = formatCodigo(this.value).slice(0, 16);
-                    this.value = formatted;
+        // Separar por guiones si existen
+        const partes = valorLimpio.split('-').filter(part => part !== '');
 
-                    // ajustar nuevo cursor para respetar la posición del usuario
-                    try {
-                        const newPos = mapCursor(formatted, alnumBefore);
-                        this.setSelectionRange(newPos, newPos);
-                    } catch (e) {
-                        // noop
-                    }
+        let resultado = '';
 
-                    const fullPattern = /^\d{3}-\d{6}-\d{4}[A-Za-z]$/;
-                    if (fullPattern.test(this.value)) {
-                        this.classList.remove('is-invalid');
-                        this.classList.add('is-valid');
-                        this.setCustomValidity('');
-                    } else {
-                        this.classList.remove('is-valid');
-                        this.setCustomValidity('');
-                    }
-                    updateButton();
-                });
+        // Procesar primera parte (3 números)
+        if (partes.length > 0) {
+            const parte1 = partes[0].replace(/[^0-9]/g, '').substring(0, 3);
+            resultado = parte1;
+        }
 
-                codigoInput.addEventListener('paste', function () {
-                    setTimeout(() => {
-                        this.value = formatCodigo(this.value).slice(0, 16);
-                        updateButton();
-                    }, 0);
-                });
+        // Procesar segunda parte (6 números)
+        if (partes.length > 1) {
+            const parte2 = partes[1].replace(/[^0-9]/g, '').substring(0, 6);
+            resultado += '-' + parte2;
+        } else if (resultado.length === 3 && valorLimpio.length > 3) {
+            // Si no hay guión pero ya tenemos 3 números, extraer los siguientes números
+            const resto = valorLimpio.substring(3).replace(/[^0-9]/g, '').substring(0, 6);
+            if (resto) resultado += '-' + resto;
+        }
 
-                codigoInput.addEventListener('blur', function () {
-                    const v = (this.value || '').trim();
-                    const fullPattern = /^\d{3}-\d{6}-\d{4}[A-Za-z]$/;
-                    if (!v) {
-                        this.classList.remove('is-invalid');
-                        this.classList.remove('is-valid');
-                        this.setCustomValidity('');
-                    } else if (!fullPattern.test(v)) {
-                        this.classList.add('is-invalid');
-                        this.classList.remove('is-valid');
-                        this.setCustomValidity('Formato inválido. Debe ser 121-230371-0003A');
-                    } else {
-                        this.classList.remove('is-invalid');
-                        this.classList.add('is-valid');
-                        this.setCustomValidity('');
-                    }
-                    updateButton();
-                });
+        // Procesar tercera parte (4 números + 1 letra)
+        if (partes.length > 2) {
+            const parte3 = partes[2];
+            const numeros = parte3.replace(/[^0-9]/g, '').substring(0, 4);
+            const letra = parte3.replace(/[^A-Za-z]/g, '').substring(0, 1).toUpperCase();
+            resultado += '-' + numeros + letra;
+        } else if (resultado.includes('-') && resultado.split('-')[1]?.length === 6) {
+            // Si tenemos el segundo bloque completo, extraer el tercero
+            const totalNumeros = valorLimpio.replace(/[^0-9]/g, '');
+            if (totalNumeros.length > 9) {
+                const numerosFinal = totalNumeros.substring(9, 13);
+                const letrasFinal = valorLimpio.replace(/[^A-Za-z]/g, '').substring(0, 1).toUpperCase();
+                resultado += '-' + numerosFinal + letrasFinal;
             }
+        }
 
-            // --- Validación en blur para especialidad: solo letras y espacios ---
-            const especialidadInput = document.getElementById('especialidad');
-            if (especialidadInput) {
-                const especialidadRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-                const validateEspecialidad = () => {
-                    const v = (especialidadInput.value || '').trim();
-                    if (!v || !especialidadRegex.test(v)) {
-                        especialidadInput.classList.add('is-invalid');
-                        especialidadInput.classList.remove('is-valid');
-                        especialidadInput.setCustomValidity('Formato inválido');
-                    } else {
-                        especialidadInput.classList.remove('is-invalid');
-                        especialidadInput.classList.add('is-valid');
-                        especialidadInput.setCustomValidity('');
-                    }
-                };
+        input.value = resultado;
 
-                especialidadInput.addEventListener('blur', function () {
-                    validateEspecialidad();
-                    updateButton();
-                });
-                especialidadInput.addEventListener('input', function () {
-                    if (especialidadInput.classList.contains('is-invalid')) validateEspecialidad();
-                    updateButton();
-                });
-            }
+        // Validación y mensaje
+        const patron = /^\d{3}-\d{6}-\d{4}[A-Z]$/;
+        if (resultado === '' || !patron.test(resultado)) {
+            mensaje.innerHTML = 'Formato esperado: <strong>123-123456-1234S</strong>';
+            mensaje.style.color = '#666';
+            input.style.borderColor = '#ccc';
+        } else {
+            mensaje.innerHTML = '✓ Formato válido';
+            mensaje.style.color = 'green';
+            input.style.borderColor = 'green';
+        }
+    });
 
-            const allValid = () => {
-                return inputs.every(el => {
-                    if (el.tagName === 'SELECT') return el.value && el.value !== '';
-                    return el.value && el.checkValidity();
-                });
-            };
-
-            const updateButton = () => {
-                if (!btn) return;
-                btn.disabled = !allValid();
-            };
-
-            inputs.forEach(i => {
-                i.addEventListener('input', updateButton);
-                i.addEventListener('change', updateButton);
-                i.addEventListener('blur', updateButton);
-            });
-
-            form.addEventListener('submit', function (e) {
-                if (!form.checkValidity()) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    form.classList.add('was-validated');
-                    updateButton();
-                }
-            });
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', updateButton);
-            } else {
-                updateButton();
-            }
-        })();
-
+    // También validar al pegar contenido
+    input.addEventListener('paste', function (e) {
+        setTimeout(() => {
+            const evento = new Event('input');
+            input.dispatchEvent(evento);
+        }, 0);
+    });
 </script>
 
 {% endblock %}
