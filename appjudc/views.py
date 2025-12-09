@@ -67,12 +67,13 @@ def registrarDocente(request):
     )
     return redirect('docente')
 
-@require_POST
+# VISTA DE BORRAR DOCENTE
 def borrarDocente(request, codigo_docente):
     docente = get_object_or_404(Docente, codigo_docente=codigo_docente)
     docente.delete()
     return redirect('docente')
 
+# VISTA DE ARTICULO CIENTIFICO
 def articuloCientifico(request):
     if request.method == 'POST':
         try:

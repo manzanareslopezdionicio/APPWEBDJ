@@ -17,5 +17,5 @@ urlpatterns = [
     path('docente/', views.docente, name='docente'),
     path('articuloCientifico/', views.articuloCientifico, name='articuloCientifico'),
     path('registrarDocente/', views.registrarDocente, name='registrarDocente'),
-    path('borrarDocente/<int:codigo_docente>/', views.borrarDocente, name='borrarDocente'),
+    path('borrarDocente/<str:codigo_docente>/', views.borrarDocente, name='borrarDocente'),
 ]
