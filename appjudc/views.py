@@ -6,6 +6,8 @@ from django.views.decorators.http import require_POST
 from .models import EvaluacionArticuloCientifico, Docente
 import json
 from datetime import datetime
+from django.contrib import messages
+
 
 # Create your views here.
 def login(request):
@@ -69,9 +71,31 @@ def registrarDocente(request):
 
 # VISTA DE BORRAR DOCENTE
 def borrarDocente(request, codigo_docente):
-    docente = get_object_or_404(Docente, codigo_docente=codigo_docente)
-    docente.delete()
-    return redirect('docente')
+    if request.method == 'DELETE' or request.method == 'POST':
+        try:
+            docente = Docente.objects.get(codigo_docente=codigo_docente)
+            nombre = docente.nombre
+            docente.delete()
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'Docente "{nombre}" eliminado exitosamente'
+            })
+        except Docente.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'Docente no encontrado'
+            }, status=404)
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'message': f'Error al eliminar el docente: {str(e)}'
+            }, status=400)
+    
+    return JsonResponse({
+        'success': False,
+        'message': 'Método no permitido'
+    }, status=405)
 
 # VISTA DE ARTICULO CIENTIFICO
 def articuloCientifico(request):

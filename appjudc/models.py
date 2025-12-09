@@ -1,15 +1,76 @@
 from django.db import models
+from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
-class estudiante(models.Model):
-    carnet=models.CharField(primary_key=True,max_length=10)
-    nombre=models.CharField(max_length=30)
-    apellido=models.CharField(max_length=30)
-    email=models.EmailField(unique=True, blank=False)
+class AreaConocimiento(models.Model):
+    codigo=models.CharField(max_length=10, primary_key=True, unique=True, verbose_name="Codigo del Area de Conocimiento")
+    nombre=models.CharField(max_length=100, verbose_name="Nombre del Area de Conocimiento")
+    
+    class Meta:
+        verbose_name = "Area de Conocimiento"
+        verbose_name_plural = "Areas de Conocimiento"
+        ordering = ['nombre']
+    
+    def __str__(self):
+        return self.nombre
 
-""" class usuario(models.Model):
-    carnet=models.CharField() """  
+class Carrera(models.Model):
+    codigo=models.CharField(max_length=10, primary_key=True, unique=True, verbose_name="Codigo de la Carrera")
+    nombre=models.CharField(max_length=100, verbose_name="Nombre de la Carrera")
+    area_conocimiento=models.ForeignKey(
+        AreaConocimiento, 
+        on_delete=models.CASCADE, 
+        related_name="carreras", 
+        verbose_name="Área de Conocimiento"
+    )
+    fecha_registro=models.DateTimeField(
+        auto_now_add=True, 
+        verbose_name="Fecha de Registro"
+    )
+    
+    class Meta:
+        verbose_name = "Carrera"
+        verbose_name_plural = "Carreras"
+        ordering = ['nombre']
+        indexes = [
+            models.Index(fields=['nombre']),
+        ]
+    
+    def __str__(self):
+        return f"{self.codigo} - {self.nombre}"
+
+class estudiante(models.Model):
+    carnet=models.CharField(max_length=10, primary_key=True, verbose_name="Numero de Carnet")
+    nombre=models.CharField(max_length=30, verbose_name="Nombre del Estudiante")
+    apellido=models.CharField(max_length=30, verbose_name="Apellido del Estudiante")
+    email=models.EmailField(unique=True, blank=False, verbose_name="Correo Electrónico")
+    telefono=models.CharField(max_length=9, verbose_name="Teléfono",null=True,blank=True)
+    fecha_nacimiento=models.DateField(verbose_name="Fecha de Nacimiento",null=True,blank=True)
+    direccion=models.CharField(max_length=100, verbose_name="Dirección",null=True,blank=True)
+    fecha_registro=models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Registro")
+    carrera=models.ForeignKey(
+        Carrera, 
+        on_delete=models.CASCADE,
+        related_name="estudiantes", 
+        verbose_name="Carrera"
+    )
+    area_conocimiento=models.ForeignKey(
+        AreaConocimiento, 
+        on_delete=models.CASCADE, 
+        related_name="estudiantes", 
+        verbose_name="Área de Conocimiento"
+    )
+    class Meta:
+        verbose_name = "Estudiante"
+        verbose_name_plural = "Estudiantes"
+        ordering = ['nombre','apellido']
+        indexes = [
+            models.Index(fields=['nombre','apellido']),
+        ]    
+    def __str__(self):
+        return f"{self.carnet} - {self.nombre} {self.apellido}"
 
 class Docente(models.Model):
     AREA_CHOICES = [
@@ -17,7 +78,6 @@ class Docente(models.Model):
         ('2', 'Departamento de Ciencias Economicas y Administrativas'),
         ('3', 'Departamento de Educación y Humanidades'),
     ]
-    
     codigo_docente = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name="Código del Docente")
     nombre = models.CharField(max_length=200, verbose_name="Nombre del Docente")
     email = models.EmailField(unique=True, verbose_name="Correo Electrónico")
@@ -29,8 +89,10 @@ class Docente(models.Model):
     class Meta:
         verbose_name = "Docente"
         verbose_name_plural = "Docentes"
-        ordering = ['nombre']
-    
+        ordering = ['nombre','apellido']
+        indexes = [
+            models.Index(fields=['nombre','apellido']),
+        ]    
     def __str__(self):
         return f"{self.codigo_docente} - {self.nombre}"
 
