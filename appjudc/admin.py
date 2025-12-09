@@ -1,7 +1,26 @@
 from django.contrib import admin
-from .models import estudiante, EvaluacionArticuloCientifico, Docente
+from .models import AreaConocimiento, Carrera, Estudiante, EvaluacionArticuloCientifico, Docente
 
 # Register your models here.
+
+@admin.register(AreaConocimiento)
+class AreaConocimientoAdmin(admin.ModelAdmin):
+    list_display = ['codigo', 'nombre']
+    search_fields = ['codigo', 'nombre']
+
+@admin.register(Carrera)
+class CarreraAdmin(admin.ModelAdmin):
+    list_display = ['codigo', 'nombre', 'area_conocimiento', 'fecha_registro']
+    list_filter = ['area_conocimiento', 'fecha_registro']
+    search_fields = ['codigo', 'nombre']
+    readonly_fields = ['fecha_registro']
+
+@admin.register(Estudiante)
+class EstudianteAdmin(admin.ModelAdmin):
+    list_display = ['carnet', 'nombre', 'apellido', 'email', 'carrera', 'area_conocimiento', 'fecha_registro']
+    list_filter = ['carrera', 'area_conocimiento', 'fecha_registro']
+    search_fields = ['carnet', 'nombre', 'apellido', 'email']
+    readonly_fields = ['fecha_registro']
 
 @admin.register(Docente)
 class DocenteAdmin(admin.ModelAdmin):
@@ -47,5 +66,3 @@ class EvaluacionArticuloCientificoAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
-
-admin.site.register(estudiante)

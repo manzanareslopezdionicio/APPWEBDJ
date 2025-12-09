@@ -41,7 +41,7 @@ class Carrera(models.Model):
     def __str__(self):
         return f"{self.codigo} - {self.nombre}"
 
-class estudiante(models.Model):
+class Estudiante(models.Model):
     carnet=models.CharField(max_length=10, primary_key=True, verbose_name="Numero de Carnet")
     nombre=models.CharField(max_length=30, verbose_name="Nombre del Estudiante")
     apellido=models.CharField(max_length=30, verbose_name="Apellido del Estudiante")
@@ -89,10 +89,8 @@ class Docente(models.Model):
     class Meta:
         verbose_name = "Docente"
         verbose_name_plural = "Docentes"
-        ordering = ['nombre','apellido']
-        indexes = [
-            models.Index(fields=['nombre','apellido']),
-        ]    
+        ordering = ['nombre']
+    
     def __str__(self):
         return f"{self.codigo_docente} - {self.nombre}"
 
