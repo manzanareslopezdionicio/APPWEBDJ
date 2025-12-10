@@ -19,24 +19,14 @@ class AreaConocimiento(models.Model):
 class Carrera(models.Model):
     codigo=models.CharField(max_length=10, primary_key=True, unique=True, verbose_name="Codigo de la Carrera")
     nombre=models.CharField(max_length=100, verbose_name="Nombre de la Carrera")
-    area_conocimiento=models.ForeignKey(
-        AreaConocimiento, 
-        on_delete=models.CASCADE, 
-        related_name="carreras", 
-        verbose_name="Área de Conocimiento"
-    )
-    fecha_registro=models.DateTimeField(
-        auto_now_add=True, 
-        verbose_name="Fecha de Registro"
-    )
+    area_conocimiento=models.ForeignKey(AreaConocimiento, on_delete=models.CASCADE, related_name="carreras", verbose_name="Área de Conocimiento")
+    fecha_registro=models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Registro")
     
     class Meta:
         verbose_name = "Carrera"
         verbose_name_plural = "Carreras"
         ordering = ['nombre']
-        indexes = [
-            models.Index(fields=['nombre']),
-        ]
+        indexes = [models.Index(fields=['nombre'])]
     
     def __str__(self):
         return f"{self.codigo} - {self.nombre}"
@@ -50,20 +40,13 @@ class Estudiante(models.Model):
     fecha_nacimiento=models.DateField(verbose_name="Fecha de Nacimiento",null=True,blank=True)
     direccion=models.CharField(max_length=100, verbose_name="Dirección",null=True,blank=True)
     fecha_registro=models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Registro")
-    carrera=models.ForeignKey(
-        Carrera, 
-        on_delete=models.CASCADE,
-        related_name="estudiantes", 
-        verbose_name="Carrera"
-    )
+    carrera=models.ForeignKey(Carrera, on_delete=models.CASCADE, related_name="estudiantes", verbose_name="Carrera")
     
     class Meta:
         verbose_name = "Estudiante"
         verbose_name_plural = "Estudiantes"
         ordering = ['nombre','apellido']
-        indexes = [
-            models.Index(fields=['nombre','apellido']),
-        ]    
+        indexes = [models.Index(fields=['nombre','apellido'])]    
     
     def __str__(self):
         return f"{self.carnet} - {self.nombre} {self.apellido}"
