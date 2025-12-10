@@ -17,10 +17,15 @@ class CarreraAdmin(admin.ModelAdmin):
 
 @admin.register(Estudiante)
 class EstudianteAdmin(admin.ModelAdmin):
-    list_display = ['carnet', 'nombre', 'apellido', 'email', 'carrera', 'area_conocimiento', 'fecha_registro']
-    list_filter = ['carrera', 'area_conocimiento', 'fecha_registro']
+    list_display = ['carnet', 'nombre', 'apellido', 'email', 'carrera', 'get_area_conocimiento', 'fecha_registro']
+    list_filter = ['carrera', 'fecha_registro']
     search_fields = ['carnet', 'nombre', 'apellido', 'email']
     readonly_fields = ['fecha_registro']
+    
+    def get_area_conocimiento(self, obj):
+        """Muestra el área de conocimiento a través de la carrera"""
+        return obj.area_conocimiento if obj.area_conocimiento else '-'
+    get_area_conocimiento.short_description = 'Área de Conocimiento'
 
 @admin.register(Docente)
 class DocenteAdmin(admin.ModelAdmin):

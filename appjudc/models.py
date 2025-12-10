@@ -56,12 +56,7 @@ class Estudiante(models.Model):
         related_name="estudiantes", 
         verbose_name="Carrera"
     )
-    area_conocimiento=models.ForeignKey(
-        AreaConocimiento, 
-        on_delete=models.CASCADE, 
-        related_name="estudiantes", 
-        verbose_name="Área de Conocimiento"
-    )
+    
     class Meta:
         verbose_name = "Estudiante"
         verbose_name_plural = "Estudiantes"
@@ -69,8 +64,14 @@ class Estudiante(models.Model):
         indexes = [
             models.Index(fields=['nombre','apellido']),
         ]    
+    
     def __str__(self):
         return f"{self.carnet} - {self.nombre} {self.apellido}"
+    
+    @property
+    def area_conocimiento(self):
+        """Obtiene el área de conocimiento a través de la carrera"""
+        return self.carrera.area_conocimiento if self.carrera else None
 
 class Docente(models.Model):
     AREA_CHOICES = [
