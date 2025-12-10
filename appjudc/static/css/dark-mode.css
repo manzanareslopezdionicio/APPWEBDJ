@@ -41,11 +41,33 @@ body {
 
 /* Animación para el icono */
 #theme-icon {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 #theme-toggle:hover #theme-icon {
     transform: rotate(20deg);
+}
+
+/* Color del icono en modo claro (sol) */
+[data-bs-theme="light"] #theme-icon {
+    color: #ff9800;
+    /* Naranja/amarillo para el sol */
+}
+
+[data-bs-theme="light"] #theme-toggle:hover #theme-icon {
+    color: #f57c00;
+    /* Naranja más oscuro al hacer hover */
+}
+
+/* Color del icono en modo oscuro (luna) */
+[data-bs-theme="dark"] #theme-icon {
+    color: #64b5f6;
+    /* Azul claro para la luna */
+}
+
+[data-bs-theme="dark"] #theme-toggle:hover #theme-icon {
+    color: #90caf9;
+    /* Azul más claro al hacer hover */
 }
 
 /* Estilos personalizados para modo oscuro */

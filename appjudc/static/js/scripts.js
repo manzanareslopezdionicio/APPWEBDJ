@@ -32,10 +32,10 @@
 
         if (themeIcon) {
             if (theme === 'dark') {
-                themeIcon.className = 'bi bi-moon-stars-fill';
+                themeIcon.className = 'bi bi-moon-stars-fill fs-5';
                 if (themeText) themeText.textContent = 'Modo Oscuro';
             } else {
-                themeIcon.className = 'bi bi-sun-fill';
+                themeIcon.className = 'bi bi-sun-fill fs-5';
                 if (themeText) themeText.textContent = 'Modo Claro';
             }
         }

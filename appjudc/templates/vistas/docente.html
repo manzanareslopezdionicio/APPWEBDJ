@@ -4,7 +4,7 @@
 
 {% block contenido %}
 
-<div class="col-md-12 content-area ">
+<div class="col-md-12 content-area text-body ">
     <div class="alert bg-primary-subtle text-center">
         <h2 style="text-shadow: 2px 2px 5px gray;">Jornada de Desarrollo Cientifico - JUDC </h2>
     </div>
@@ -16,44 +16,41 @@
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="codigodocente" name="codigodocente"
-                        placeholder="121-230371-0003A" pattern="^\d{3}-\d{6}-\d{4}[A-Za-z]$"
+                        placeholder="" pattern="^\d{3}-\d{6}-\d{4}[A-Za-z]$"
                         title="Formato: 121-230371-0003A (último carácter letra, mayúscula o minúscula)" maxlength="16"
                         autofocus required>
-                    <label for="codigodocente" class="form-label">Número de cédula</label>
+                    <label for="codigodocente" class="form-label text-body">Número de cédula</label>
                     <div id="mensajeValidacion" style="font-size: 12px; margin-top: 5px;"></div>
                     <div class="invalid-feedback">Por favor ingrese un código válido. Ej: 121-230371-0003A.</div>
                 </div>
             </div>
             <div class="col-6 col-md-4 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control mi-input" id="nombre" name="nombre"
-                        placeholder="Ingrese el nombre del docente" required>
-                    <label for="nombre" class="form-label">Nombre del Docente</label>
+                    <input type="text" class="form-control mi-input" id="nombre" name="nombre" placeholder="" required>
+                    <label for="nombre" class="form-label text-body">Nombre del Docente</label>
                     <div class="invalid-feedback">Por favor ingrese un nombre válido.</div>
                 </div>
             </div>
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
-                    <input type="email" class="form-control mi-input" id="email" name="email"
-                        placeholder="Ingrese el correo del docente" required>
-                    <label for="email" class="form-label">Correo del Docente</label>
+                    <input type="email" class="form-control mi-input" id="email" name="email" placeholder="" required>
+                    <label for="email" class="form-label text-body">Correo del Docente</label>
                     <div class="invalid-feedback">Por favor ingrese un correo válido.</div>
                 </div>
             </div>
             <div class="col-6 col-md-2 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control mi-input" id="telefono" name="telefono"
-                        placeholder="9999-9999" title="Formato: 9999-9999" required pattern="^\d{4}-\d{4}$" required>
-                    <label for="telefono" class="form-label">Telefono:</label>
+                    <input type="text" class="form-control mi-input" id="telefono" name="telefono" placeholder=""
+                        title="Formato: 9999-9999" required pattern="^\d{4}-\d{4}$" required>
+                    <label for="telefono" class="form-label text-body">Telefono:</label>
                     <div class="invalid-feedback">Formato inválido. Use solo números</div>
                 </div>
             </div>
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="especialidad" name="especialidad"
-                        placeholder="Ingrese la especialidad del docente" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-                        title="Solo letras y espacios">
-                    <label for="especialidad" class="form-label">Especialidad del Docente</label>
+                        placeholder="" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" title="Solo letras y espacios">
+                    <label for="especialidad" class="form-label text-body">Especialidad del Docente</label>
                     <div class="invalid-feedback">Por favor ingrese una especialidad válida.</div>
                 </div>
             </div>
@@ -68,11 +65,11 @@
                     <div class="invalid-feedback">
                         Por favor seleccione un área válida.
                     </div>
-                    <label for="areaconocimiento" class="form-label">Area del conocimiento</label>
+                    <label for="areaconocimiento" class="form-label text-body">Area del conocimiento</label>
                 </div>
             </div>
             <div class="col-12 col-md-2 mb-4 d-flex align-items-end ">
-                <button type="submit" class="btn btn-secondary w-100">Registrar</button>
+                <button type="submit" class="btn btn-secondary w-100 bg-body text-body">Registrar</button>
             </div>
         </div>
     </form>
@@ -80,10 +77,10 @@
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title">Lista de Docentes</h5>
+                    <h5 class="card-title text-body">Lista de Docentes</h5>
                     <div class="table-responsive">
                         <table class="table table-responsive table-bordered table-hover text-center shadow">
-                            <thead class="table-dark">
+                            <thead class="table-dark bg-body text-body">
                                 <tr>
                                     <th>Codigo</th>
                                     <th>Nombre</th>
