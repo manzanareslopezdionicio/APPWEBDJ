@@ -139,7 +139,15 @@
                                     <td>{{docente.telefono}}</td>
                                     <td>{{docente.especialidad}}</td>
                                     <td>{{docente.tipo_contrato}}</td>
-                                    <td>{{docente.area_conocimiento}}</td>
+                                    <td>
+                                        {% if docente.area_conocimiento == '1' %}
+                                        Ciencias y Tecnología
+                                        {% elif docente.area_conocimiento == '2' %}
+                                        Ciencias Economicas y Admin
+                                        {% elif docente.area_conocimiento == '3' %}
+                                        Educación y Humanidades
+                                        {% endif %}
+                                    </td>
                                     <td>
                                         {% if docente.estado == 'A' %}
                                         <span class="badge bg-success">Activo</span>
@@ -262,7 +270,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
     /* VALIDACIÓN PARA EL CÓDIGO INSS (SOLO NÚMEROS) */
     const inputInss = document.getElementById('codigoinss');
     if (inputInss) {
@@ -271,7 +279,7 @@
             this.value = this.value.replace(/[^0-9]/g, '');
         });
     }
-</script>
+</script> -->
 
 <script>
     // Script para eliminar docentes

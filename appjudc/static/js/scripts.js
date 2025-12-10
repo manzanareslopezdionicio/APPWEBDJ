@@ -955,3 +955,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 })();
 /* ********************************************************************************************************** */
+document.addEventListener('DOMContentLoaded', function () {
+    const inputInss = document.getElementById('codigoinss');
+    if (inputInss) {
+        inputInss.addEventListener('input', function (e) {
+            // Reemplazar cualquier caracter que no sea número por vacío
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    }
+});
