@@ -15,23 +15,39 @@
         <div class="row">
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
+                    <input type="text" class="form-control mi-input" id="codigoinss" name="codigoinss" placeholder=""
+                        pattern="^\d{8}" title="Formato: 99999999 (Solo números)" maxlength="8" autofocus required>
+                    <label for="codigoinss" class="form-label text-body">Número INSS</label>
+                    <div class="invalid-feedback">Por favor ingrese un número válido. Ej: 10701041.</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="codigodocente" name="codigodocente"
                         placeholder="" pattern="^\d{3}-\d{6}-\d{4}[A-Za-z]$"
                         title="Formato: 121-230371-0003A (último carácter letra, mayúscula o minúscula)" maxlength="16"
-                        autofocus required>
+                        required>
                     <label for="codigodocente" class="form-label text-body">Número de cédula</label>
                     <div id="mensajeValidacion" style="font-size: 12px; margin-top: 5px;"></div>
                     <div class="invalid-feedback">Por favor ingrese un código válido. Ej: 121-230371-0003A.</div>
                 </div>
             </div>
-            <div class="col-6 col-md-4 mb-3">
+            <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="nombre" name="nombre" placeholder="" required>
-                    <label for="nombre" class="form-label text-body">Nombre del Docente</label>
+                    <label for="nombre" class="form-label text-body">Nombre</label>
                     <div class="invalid-feedback">Por favor ingrese un nombre válido.</div>
                 </div>
             </div>
             <div class="col-6 col-md-3 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control mi-input" id="apellido" name="apellido" placeholder=""
+                        required>
+                    <label for="apellido" class="form-label text-body">Apellido</label>
+                    <div class="invalid-feedback">Por favor ingrese un apellido válido.</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 mb-3">
                 <div class="form-floating">
                     <input type="email" class="form-control mi-input" id="email" name="email" placeholder="" required>
                     <label for="email" class="form-label text-body">Correo del Docente</label>
@@ -50,22 +66,39 @@
                 <div class="form-floating">
                     <input type="text" class="form-control mi-input" id="especialidad" name="especialidad"
                         placeholder="" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" title="Solo letras y espacios">
-                    <label for="especialidad" class="form-label text-body">Especialidad del Docente</label>
+                    <label for="especialidad" class="form-label text-body">Especialidad</label>
                     <div class="invalid-feedback">Por favor ingrese una especialidad válida.</div>
                 </div>
             </div>
-            <div class="col-6 col-md-4 mb-3">
+            <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">
                     <select class="form-select mi-input" id="areaconocimiento" name="areaconocimiento" required>
                         <option selected disabled value="">Elegir...</option>
-                        <option value="1">Departamento de Ciencias y Tecnología</option>
-                        <option value="2">Departamento de Ciencias Economicas y Administrativas</option>
-                        <option value="3">Departamento de Educación y Humanidades</option>
+                        <option value="1">Ciencias y Tecnología</option>
+                        <option value="2">Ciencias Economicas y Admin</option>
+                        <option value="3">Educación y Humanidades</option>
                     </select>
-                    <div class="invalid-feedback">
-                        Por favor seleccione un área válida.
-                    </div>
-                    <label for="areaconocimiento" class="form-label text-body">Area del conocimiento</label>
+                    <label for="areaconocimiento" class="form-label text-body">Area del Conocimiento-CUR</label>
+                    <div class="invalid-feedback">Seleccione un área.</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="form-floating">
+                    <select class="form-select mi-input" id="tipo_contrato" name="tipo_contrato" required>
+                        <option value="TC">Tiempo Completo</option>
+                        <option value="MP">Medio Tiempo</option>
+                        <option value="HC">Horas Contratadas</option>
+                    </select>
+                    <label for="tipo_contrato" class="form-label text-body">Contrato</label>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="form-floating">
+                    <select class="form-select mi-input" id="estado" name="estado" required>
+                        <option value="A">Activo</option>
+                        <option value="I">Inactivo</option>
+                    </select>
+                    <label for="estado" class="form-label text-body">Estado</label>
                 </div>
             </div>
             <div class="col-12 col-md-2 mb-4 d-flex align-items-end ">
@@ -82,24 +115,36 @@
                         <table class="table table-responsive table-bordered table-hover text-center shadow">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Codigo</th>
+                                    <th>INSS</th>
+                                    <th>Cédula</th>
                                     <th>Nombre</th>
+                                    <th>Apellido</th>
                                     <th>Correo</th>
                                     <th>Telefono</th>
-                                    <th>Especialidad</th>
-                                    <th>Area de Conocimiento</th>
-                                    <th colspan="2">Acciones</th>
+                                    <th>Espec.</th>
+                                    <th>Contrato</th>
+                                    <th>Est.</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for docente in docentes %}
                                 <tr>
+                                    <td>{{docente.codigo_inss|default:"-"}}</td>
                                     <td>{{docente.codigo_docente}}</td>
                                     <td>{{docente.nombre}}</td>
+                                    <td>{{docente.apellido|default:"-"}}</td>
                                     <td>{{docente.email}}</td>
                                     <td>{{docente.telefono}}</td>
                                     <td>{{docente.especialidad}}</td>
-                                    <td>{{docente.get_area_conocimiento_display}}</td>
+                                    <td>{{docente.tipo_contrato}}</td>
+                                    <td>
+                                        {% if docente.estado == 'A' %}
+                                        <span class="badge bg-success">Activo</span>
+                                        {% else %}
+                                        <span class="badge bg-danger">Inactivo</span>
+                                        {% endif %}
+                                    </td>
                                     <td>
                                         <a href="editDocente/{{docente.codigo_docente}}" class="btn btn-info btn-sm"><i
                                                 class="bi bi-pencil-square"></i></a>
@@ -111,7 +156,7 @@
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="7">No hay docentes registrados</td>
+                                    <td colspan="10">No hay docentes registrados</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -213,6 +258,17 @@
             input.dispatchEvent(evento);
         }, 0);
     });
+</script>
+
+<script>
+    /* VALIDACIÓN PARA EL CÓDIGO INSS (SOLO NÚMEROS) */
+    const inputInss = document.getElementById('codigoinss');
+    if (inputInss) {
+        inputInss.addEventListener('input', function (e) {
+            // Reemplazar cualquier caracter que no sea número por vacío
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    }
 </script>
 
 <script>

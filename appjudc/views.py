@@ -54,18 +54,27 @@ def docente(request):
 # VISTA PARA REGISTRAR DOCENTE
 def registrarDocente(request):
     codigo_docente = request.POST.get('codigodocente') 
+    codigo_inss = request.POST.get('codigoinss')
     nombre = request.POST.get('nombre')
+    apellido = request.POST.get('apellido')
     email = request.POST.get('email')
     telefono = request.POST.get('telefono')
     especialidad = request.POST.get('especialidad')
     area_conocimiento = request.POST.get('areaconocimiento')
+    tipo_contrato = request.POST.get('tipo_contrato')
+    estado = request.POST.get('estado')
+    
     docente = Docente.objects.create(
         codigo_docente=codigo_docente,
+        codigo_inss=codigo_inss,
         nombre=nombre,
+        apellido=apellido,
         email=email,
         telefono=telefono,
         especialidad=especialidad,
-        area_conocimiento=area_conocimiento
+        area_conocimiento=area_conocimiento,
+        tipo_contrato=tipo_contrato,
+        estado=estado
     )
     return redirect('docente')
 

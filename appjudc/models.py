@@ -30,7 +30,7 @@ class Carrera(models.Model):
     
     def __str__(self):
         return f"{self.codigo} - {self.nombre}"
-
+# ********************************************************
 class Estudiante(models.Model):
     carnet=models.CharField(max_length=10, primary_key=True, verbose_name="Numero de Carnet")
     nombre=models.CharField(max_length=30, verbose_name="Nombre del Estudiante")
@@ -40,7 +40,7 @@ class Estudiante(models.Model):
     fecha_nacimiento=models.DateField(verbose_name="Fecha de Nacimiento",null=True,blank=True)
     direccion=models.CharField(max_length=100, verbose_name="Dirección",null=True,blank=True)
     fecha_registro=models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Registro")
-    carrera=models.ForeignKey(Carrera, on_delete=models.CASCADE, related_name="estudiantes", verbose_name="Carrera")
+    carrera=models.ForeignKey(Carrera, on_delete=models.CASCADE, related_name="estudiantes", verbose_name="Carrera", null=True)
     
     class Meta:
         verbose_name = "Estudiante"
@@ -55,18 +55,22 @@ class Estudiante(models.Model):
     def area_conocimiento(self):
         """Obtiene el área de conocimiento a través de la carrera"""
         return self.carrera.area_conocimiento if self.carrera else None
-
+# ********************************************************
 class Docente(models.Model):
     AREA_CHOICES = [
         ('1', 'Departamento de Ciencias y Tecnología'),
         ('2', 'Departamento de Ciencias Economicas y Administrativas'),
         ('3', 'Departamento de Educación y Humanidades'),
     ]
-    codigo_docente = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name="Código del Docente")
+    codigo_inss = models.CharField(max_length=8, unique=True, null=True, blank=True, verbose_name="Código INSS")
+    codigo_docente = models.CharField(max_length=20, primary_key=True, verbose_name="Código del Docente")
     nombre = models.CharField(max_length=200, verbose_name="Nombre del Docente")
+    apellido = models.CharField(max_length=200, null=True, blank=True, verbose_name="Apellido del Docente")
     email = models.EmailField(unique=True, verbose_name="Correo Electrónico")
     telefono = models.CharField(max_length=9, verbose_name="Teléfono")
     especialidad = models.CharField(max_length=200, verbose_name="Especialidad")
+    tipo_contrato = models.CharField(max_length=2, choices=[('TC', 'Tiempo completo'), ('MP', 'Medio tiempo'), ('HC', 'Horas Contratadas') ], default='TC', verbose_name="Tipo de Contrato")
+    estado = models.CharField(max_length=1, choices=[('A', 'Activo'), ('I', 'Inactivo')], default='A', verbose_name="Estado")
     area_conocimiento = models.CharField(max_length=1, choices=AREA_CHOICES, verbose_name="Área de Conocimiento")
     fecha_registro = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Registro")
     
@@ -76,8 +80,10 @@ class Docente(models.Model):
         ordering = ['nombre']
     
     def __str__(self):
-        return f"{self.codigo_docente} - {self.nombre}"
-
+        code = self.codigo_inss if self.codigo_inss else self.codigo_docente
+        last_name = self.apellido if self.apellido else ""
+        return f"{code} - {self.nombre} {last_name}".strip()
+# ********************************************************
 class EvaluacionArticuloCientifico(models.Model):
     # Información general
     area_conocimiento = models.CharField(max_length=100, verbose_name="Área de Conocimiento")
@@ -114,3 +120,5 @@ class EvaluacionArticuloCientifico(models.Model):
     
     def __str__(self):
         return f"{self.titulo} - {self.evaluador} ({self.fecha_evaluacion})"
+    
+    # ********************************************************
