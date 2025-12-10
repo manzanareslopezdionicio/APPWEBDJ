@@ -1,6 +1,6 @@
 {% load static%}
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 
 <head>
     <title>{% block titulo %}JUDC {% endblock %}</title>
@@ -15,9 +15,12 @@
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dark-mode.css' %}">
+    <script src="{% static 'js/dark-mode.js' %}"></script>
+
 </head>
 
-<body>
+<body class="bg-body text-body">
     <header>
         <!-- place navbar here -->
         <div class="container-ful">
@@ -38,23 +41,22 @@
                                 <a class="nav-link" href="{% url 'acercade' %}">Acerca de</a>
                             </li>
                         </ul>
-                        <div class=" d-flex">
+
+                        <div class="d-flex align-items-center gap-2">
+                            <!-- Botón de modo oscuro -->
+                            <button id="theme-toggle" class="btn btn-link text-body" type="button" title="Cambiar tema">
+                                <i id="theme-icon" class="bi bi-sun-fill fs-5"></i>
+                            </button>
                             <a class="btn btn-outline-success" href="{% url 'login'%}">Login</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </div>
-
     </header>
-    <main>
+    {% block contenido %}
 
-        {% block contenido %}
-
-        {% endblock %}
-
-    </main>
-
+    {% endblock %}
     <footer>
         <!-- place footer here -->
         <div class="container-fluid text-white" style=" background: linear-gradient(to bottom, #141e30, #243b55);">

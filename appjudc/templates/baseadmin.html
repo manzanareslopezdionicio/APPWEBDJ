@@ -9,6 +9,7 @@
     <link rel="icon" href="{% static 'assets/img/kaiadmin/favicon.ico' %}" type="image/x-icon" />
     <!-- Fonts and icons -->
     <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+    <script src="{% static 'js/dark-mode.js' %}"></script>
     <script>
         WebFont.load({
             google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -35,9 +36,10 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dark-mode.css' %}">
 </head>
 
-<body>
+<body class="bg-body text-body">
     <div class="wrapper">
         <!-- Sidebar -->
         {% include 'header.html' %}
@@ -71,6 +73,12 @@
                     style="background: linear-gradient(180deg, #363636,#ffffff);">
                     <div class="container-fluid">
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <button id="theme-toggle" class="btn btn-link text-body" type="button"
+                                    title="Cambiar tema">
+                                    <i id="theme-icon" class="bi bi-sun-fill fs-5"></i>
+                                </button>
+                            </div>
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                                     aria-expanded="false">
