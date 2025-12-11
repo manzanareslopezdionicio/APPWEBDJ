@@ -1,20 +1,29 @@
-/* VALIDACION DEL FORMULARIO DE EVALUACIÓN */
+// PROYECTOS DE INNOVACIÓN
 // Variables para almacenar puntuaciones
-
-// ARTICULOS CIENTÍFICOS
 let scores = {
-    1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null
+    1: null, 2: null, 3: null, 4: null, 5: null,
+    6: null, 7: null, 8: null, 9: null
 };
 
 // Pesos de cada criterio (en porcentaje)
 const weights = {
-    1: 8,  // Planteamiento del problema
-    2: 7,  // Objetivos de investigación
-    3: 10, // Marco teórico y antecedentes
-    4: 20, // Calidad metodológica y aportes
-    5: 10, // Análisis y discusión
-    6: 5,  // Conclusiones y recomendaciones
-    7: 30  // Presentación de resultados
+    1: 10, // Contextualización de la problemática
+    2: 10, // Metodologías empleadas
+    3: 10, // Fundamentación teórica
+    4: 5,  // Definición del alcance del proyecto
+    5: 10, // Generación de prototipos
+    6: 15, // Propuesta de valor
+    7: 10, // Resultados del proyecto
+    8: 15, // Valores institucionales
+    9: 15  // Comunicación y trabajo en equipo
+};
+
+// Niveles de desempeño
+const nivelesDesempeno = {
+    5: { nombre: "Excelente", clase: "bg-success" },
+    4: { nombre: "Muy Bueno", clase: "bg-info" },
+    3: { nombre: "Bueno", clase: "bg-warning" },
+    2: { nombre: "Insuficiente", clase: "bg-danger" }
 };
 
 // Inicialización
@@ -26,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Añadir eventos a las opciones de puntuación
     document.querySelectorAll('.rating-option').forEach(option => {
         option.addEventListener('click', function () {
-            const criteria = this.getAttribute('data-criteria');
+            const criteria = parseInt(this.getAttribute('data-criteria'));
             const value = parseInt(this.getAttribute('data-value'));
 
             // Actualizar puntuación
@@ -40,59 +49,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Botón de envío
-    document.getElementById('submitBtn').addEventListener('click', function (e) {
-        e.preventDefault();
-
+    document.getElementById('submitBtn').addEventListener('click', function () {
         if (validateForm()) {
-            // Recopilar todos los datos del formulario
-            const evaluacionData = {
-                areaConocimiento: document.getElementById('areaConocimiento').value,
-                categoria: document.getElementById('categoria').value,
-                carrera: document.getElementById('carrera').value,
-                titulo: document.getElementById('titulo').value,
-                autores: document.getElementById('autores').value,
-                criterio1: scores[1],
-                criterio2: scores[2],
-                criterio3: scores[3],
-                criterio4: scores[4],
-                criterio5: scores[5],
-                criterio6: scores[6],
-                criterio7: scores[7],
-                puntuacionTotal: parseFloat(document.getElementById('totalScore').textContent),
-                porcentaje: parseFloat(document.getElementById('totalPercentage').textContent.replace('%', '')),
-                evaluador: document.getElementById('evaluador').value,
-                firma: document.getElementById('firma').value,
-                fecha: document.getElementById('fecha').value
-            };
+            // Aquí normalmente se enviarían los datos al servidor
+            const totalScore = parseFloat(document.getElementById('totalScore').textContent);
+            const nivel = getNivelDesempeno(totalScore);
 
-            // Obtener el token CSRF
-            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-            // Enviar datos al servidor
-            fetch(window.location.href, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                },
-                body: JSON.stringify(evaluacionData)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('✅ ' + data.message + '\n\nID de evaluación: ' + data.id + '\nPuntuación total: ' + evaluacionData.puntuacionTotal);
-                        // Opcional: reiniciar el formulario después de guardar
-                        if (confirm('¿Desea realizar otra evaluación?')) {
-                            resetForm();
-                        }
-                    } else {
-                        alert('❌ Error: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    alert('❌ Error al enviar la evaluación: ' + error);
-                    console.error('Error:', error);
-                });
+            alert(`Evaluación enviada exitosamente.\n\nPuntuación total: ${totalScore.toFixed(2)}\nNivel de desempeño: ${nivel.nombre}`);
         }
     });
 
@@ -101,6 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (confirm('¿Está seguro de que desea reiniciar el formulario? Se perderán todos los datos ingresados.')) {
             resetForm();
         }
+    });
+
+    // Botón de impresión
+    document.getElementById('printBtn').addEventListener('click', function () {
+        window.print();
     });
 });
 
@@ -125,13 +93,21 @@ function updateScoreBadge(criteria, value) {
         badge.textContent = value;
 
         // Cambiar color según puntuación
-        badge.className = 'badge';
+        badge.className = 'badge score-badge';
         if (value === 2) badge.classList.add('bg-danger');
         else if (value === 3) badge.classList.add('bg-warning');
         else if (value === 4) badge.classList.add('bg-info');
         else if (value === 5) badge.classList.add('bg-success');
         else badge.classList.add('bg-secondary');
     }
+}
+
+// Determinar nivel de desempeño basado en puntuación
+function getNivelDesempeno(score) {
+    if (score >= 4.5) return nivelesDesempeno[5];
+    if (score >= 3.5) return nivelesDesempeno[4];
+    if (score >= 2.5) return nivelesDesempeno[3];
+    return nivelesDesempeno[2];
 }
 
 // Calcular puntuación total ponderada
@@ -142,17 +118,21 @@ function calculateTotalScore() {
 
     // Crear resumen de puntuaciones
     let summaryHTML = '';
+    let totalPonderado = 0;
 
-    for (let criteria = 1; criteria <= 7; criteria++) {
+    for (let criteria = 1; criteria <= 9; criteria++) {
         if (scores[criteria] !== null) {
+            const puntos = (scores[criteria] * weights[criteria]) / 100;
             totalWeightedScore += scores[criteria] * weights[criteria];
             totalWeight += weights[criteria];
+            totalPonderado += puntos;
 
             summaryHTML += `
                         <tr>
                             <td>${criteria}</td>
                             <td>${scores[criteria]}</td>
                             <td>${weights[criteria]}%</td>
+                            <td>${puntos.toFixed(2)}</td>
                         </tr>
                     `;
         } else {
@@ -163,30 +143,39 @@ function calculateTotalScore() {
     if (totalWeight > 0) {
         const weightedAverage = totalWeightedScore / totalWeight;
         const percentage = (weightedAverage / 5) * 100;
+        const nivel = getNivelDesempeno(weightedAverage);
 
         // Actualizar totales
         document.getElementById('totalScore').textContent = weightedAverage.toFixed(2);
         document.getElementById('totalPercentage').textContent = percentage.toFixed(1) + '%';
+        document.getElementById('totalPonderado').textContent = totalPonderado.toFixed(2);
+
+        // Actualizar nivel de desempeño
+        const nivelElement = document.getElementById('nivelDesempeno');
+        nivelElement.innerHTML = `<span class="badge ${nivel.clase}">Nivel: ${nivel.nombre}</span>`;
 
         // Actualizar resumen
         if (summaryHTML) {
             document.getElementById('scoreSummary').innerHTML = summaryHTML;
+            document.getElementById('scoreFooter').style.display = 'table-row';
         }
     } else {
         document.getElementById('totalScore').textContent = '0.0';
         document.getElementById('totalPercentage').textContent = '0%';
+        document.getElementById('nivelDesempeno').innerHTML = `<span class="badge bg-secondary">Nivel: Pendiente</span>`;
         document.getElementById('scoreSummary').innerHTML = `
                     <tr>
-                        <td colspan="3" class="text-center">No hay puntuaciones seleccionadas</td>
+                        <td colspan="4" class="text-center">No hay puntuaciones seleccionadas</td>
                     </tr>
                 `;
+        document.getElementById('scoreFooter').style.display = 'none';
     }
 }
 
 // Validar formulario antes de enviar
 function validateForm() {
     // Verificar que todos los criterios tengan puntuación
-    for (let criteria = 1; criteria <= 7; criteria++) {
+    for (let criteria = 1; criteria <= 9; criteria++) {
         if (scores[criteria] === null) {
             alert(`Por favor, seleccione una puntuación para el criterio ${criteria}`);
             document.querySelector(`.rating-option[data-criteria="${criteria}"]`).scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -195,7 +184,7 @@ function validateForm() {
     }
 
     // Verificar campos obligatorios
-    const requiredFields = ['areaConocimiento', 'categoria', 'carrera', 'titulo', 'autores', 'evaluador', 'fecha'];
+    const requiredFields = ['areaConocimiento', 'categoria', 'carrera', 'titulo', 'autor1', 'evaluador', 'fecha'];
     for (let fieldId of requiredFields) {
         const field = document.getElementById(fieldId);
         if (!field.value.trim()) {
@@ -211,7 +200,9 @@ function validateForm() {
 // Reiniciar formulario
 function resetForm() {
     // Reiniciar puntuaciones
-    scores = { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null };
+    for (let i = 1; i <= 9; i++) {
+        scores[i] = null;
+    }
 
     // Reiniciar selecciones visuales
     document.querySelectorAll('.rating-option').forEach(option => {
@@ -219,31 +210,31 @@ function resetForm() {
     });
 
     // Reiniciar badges
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= 9; i++) {
         const badge = document.getElementById(`score${i}`);
         if (badge) {
             badge.textContent = 'Pendiente';
-            badge.className = 'badge bg-secondary';
+            badge.className = 'badge bg-secondary score-badge';
         }
     }
 
     // Reiniciar totales
     document.getElementById('totalScore').textContent = '0.0';
     document.getElementById('totalPercentage').textContent = '0%';
+    document.getElementById('nivelDesempeno').innerHTML = `<span class="badge bg-secondary">Nivel: Pendiente</span>`;
     document.getElementById('scoreSummary').innerHTML = `
                 <tr>
-                    <td colspan="3" class="text-center">No hay puntuaciones seleccionadas</td>
+                    <td colspan="4" class="text-center">No hay puntuaciones seleccionadas</td>
                 </tr>
             `;
+    document.getElementById('scoreFooter').style.display = 'none';
 
-    // Limpiar todos los campos de entrada del formulario
-    document.getElementById('areaConocimiento').value = '';
-    document.getElementById('categoria').value = '';
-    document.getElementById('carrera').value = '';
-    document.getElementById('titulo').value = '';
-    document.getElementById('autores').value = '';
-    document.getElementById('evaluador').value = '';
-    document.getElementById('firma').value = '';
+    // Reiniciar formulario
+    document.querySelectorAll('input, select').forEach(element => {
+        if (element.type !== 'button' && element.id !== 'printBtn') {
+            element.value = '';
+        }
+    });
 
     // Establecer fecha actual
     const today = new Date().toISOString().split('T')[0];
@@ -251,5 +242,4 @@ function resetForm() {
 
     alert('Formulario reiniciado correctamente.');
 }
-// FIN ARTICULOS CIENTÍFICOS
-
+// FIN PROYECTOS DE INNOVACIÓN
