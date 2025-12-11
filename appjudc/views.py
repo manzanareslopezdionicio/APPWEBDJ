@@ -47,6 +47,9 @@ def organizador(request):
 def perfil(request):
     return render(request, 'vistas/perfil.html')
 
+def proyectoInnovacion(request):
+    return render(request, 'vistas/ProyectoInnovacion.html') 
+
 def docente(request):
     docentes = Docente.objects.all()
     return render(request, 'vistas/docente.html', {'docentes': docentes})

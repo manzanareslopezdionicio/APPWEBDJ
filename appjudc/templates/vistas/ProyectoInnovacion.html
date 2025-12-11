@@ -1,0 +1,563 @@
+{% extends 'baseadmin.html' %}
+{% load static %}
+{% block titulo %} Proyecto Innovación {% endblock %}
+{% block contenido %}
+<!-- Encabezado -->
+<div class="header-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-9">
+                <h1 class="mb-2"><i class="fas fa-graduation-cap"></i> XLIII Jornada Universitaria de Desarrollo
+                    Científico (JUDC) 2025</h1>
+                <h4 class="mb-0">"Ciencia, Investigación e Innovación: un compromiso con Nicaragua"</h4>
+                <p class="mb-0 mt-2">Dirección Académica - Departamento de Investigación e Innovación</p>
+            </div>
+            <div class="col-md-3 text-md-end">
+                <p class="mb-0">Managua, Nicaragua</p>
+                <p class="mb-0">Septiembre, 2025</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Información general -->
+    <div class="form-container">
+        <h3 class="section-title"><i class="fas fa-info-circle"></i> Información General del Proyecto</h3>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="areaConocimiento" class="form-label required">Área de Conocimiento o CUR</label>
+                <input type="text" class="form-control" id="areaConocimiento" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="categoria" class="form-label required">Categoría</label>
+                <select class="form-select" id="categoria" required>
+                    <option value="">Seleccione...</option>
+                    <option value="grado">Grado</option>
+                    <option value="posgrado">Posgrado</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="carrera" class="form-label required">Carrera</label>
+                <input type="text" class="form-control" id="carrera" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="titulo" class="form-label required">Título del Proyecto de Innovación</label>
+                <input type="text" class="form-control" id="titulo" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="autor1" class="form-label required">Autor/es del Proyecto</label>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <input type="text" class="form-control" id="autor1" placeholder="Autor 1" required>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="text" class="form-control" id="autor2" placeholder="Autor 2 (opcional)">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="text" class="form-control" id="autor3" placeholder="Autor 3 (opcional)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rúbrica de Evaluación -->
+    <div class="form-container">
+        <h3 class="section-title"><i class="fas fa-clipboard-check"></i> Rúbrica de Evaluación de Proyecto de
+            Innovación</h3>
+        <p class="mb-4">A continuación se presenta la rúbrica con los criterios y sus respectivos puntajes de
+            evaluación. Seleccione el nivel de desempeño para cada elemento a evaluar.</p>
+
+        <!-- Criterio 1 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5>1. Contextualización de la problemática <span class="criteria-weight">(10%)</span></h5>
+                    <div class="indicator-logro">
+                        <strong>Indicador de logro:</strong> Vincula la problemática o necesidad con las prioridades
+                        del país, estando bien contextualizada; además, se destacan los elementos de su importancia.
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="section-puntaje">PUNTAJE:</span>
+                    <span class="badge bg-secondary score-badge" id="score1">Pendiente</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="1" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">No vincula la problemática o necesidad con las prioridades del país;
+                        tampoco está contextualizada, ni se destacan los elementos de su importancia.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="1" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Vincula con poca claridad la problemática o necesidad con las
+                        prioridades del país; no está muy contextualizada, se destacan algunos elementos de su
+                        importancia.</div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="1" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Vincula con bastante claridad la problemática o necesidad con las
+                        prioridades del país, estando contextualizada; se destacan varios elementos de su
+                        importancia.</div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="1" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Vincula con total claridad la problemática o necesidad con las
+                        prioridades de país, estando contextualizada; destacando todos los elementos de su
+                        importancia.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Criterio 2 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h3>2. Metodologías empleadas <span class="criteria-weight">(10%)</span></h3>
+                    <div class="indicator-logro">
+                        <p class="mb-2"><strong>Indicador de logro:</strong> Describe la metodología y herramientas
+                            utilizadas para
+                            el desarrollo del proyecto de innovación.</p>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-secondary score-badge" id="score2">Pendiente</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="2" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">No describe la metodología y herramientas utilizadas para el desarrollo
+                        del proyecto de innovación.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="2" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Describe de forma parcial la metodología y herramientas utilizadas para
+                        el desarrollo del proyecto de innovación.</div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="2" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Describe con bastante claridad la metodología y herramientas utilizadas
+                        para el desarrollo del proyecto de innovación.</div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="2" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Describe ampliamente la metodología y herramientas utilizadas para el
+                        desarrollo del proyecto de innovación.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Criterio 3 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5>3. Fundamentación teórica <span class="criteria-weight">(10%)</span></h5>
+                    <div class="indicator-logro">
+                        <strong>Indicador de logro:</strong> Muestra dominio en el manejo del proceso y herramientas
+                        en la investigación para el desarrollo del proyecto de innovación.
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-secondary score-badge" id="score3">-</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="3" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">No muestra el manejo del proceso y herramientas de investigación; no se
+                        evidencia la confiabilidad de las fuentes de información.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="3" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Muestra de manera parcial el manejo del proceso y herramientas en la
+                        investigación; no se evidencia la confiabilidad en varias fuentes de información.</div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="3" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Muestra de manera adecuada el manejo del proceso y herramientas en la
+                        investigación, aunque no se evidencia la confiabilidad en algunas fuentes de información.
+                    </div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="3" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Muestra de manera sólida el manejo del proceso y herramientas en la
+                        investigación; se evidencia la confiabilidad de la información utilizada.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Criterio 4 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5>4. Definición del alcance del proyecto <span class="criteria-weight">(5%)</span></h5>
+                    <div class="indicator-logro">
+                        <strong>Indicador de logro:</strong> Formula objetivos medibles y acordes a la capacidad
+                        instalada, considerando factores internos y externos.
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-secondary score-badge" id="score4">-</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="4" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">Formula objetivos que no son medibles, no se muestran acordes a la
+                        capacidad instalada, tampoco se consideran los factores internos y externos.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="4" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Formula objetivos poco medibles, no están muy acordes a la capacidad
+                        instalada, considera pocos factores internos y externos.</div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="4" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Formula objetivos medibles y acordes a la capacidad instalada;
+                        considera varios factores internos y externos.</div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="4" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Formula objetivos totalmente medibles y acordes a la capacidad
+                        instalada, considerando factores internos y externos.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Criterio 5 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5>5. Generación de prototipos <span class="criteria-weight">(10%)</span></h5>
+                    <div class="indicator-logro">
+                        <strong>Indicador de logro:</strong> Genera prototipos considerando elementos técnicos y
+                        legales, así como los requerimientos del cliente o usuario.
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-secondary score-badge" id="score5">-</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="5" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">El prototipo carece de la evidencia del proceso de validación técnica,
+                        cumplimiento de aspectos legales, así como de la incorporación de los requerimientos del
+                        cliente o usuario.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="5" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Genera prototipos evidenciando parcialmente el proceso de validación
+                        técnica, cumplimiento de aspectos legales, así como de la incorporación de los
+                        requerimientos del cliente o usuario.</div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="5" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Genera prototipos evidenciando el proceso de validación técnica,
+                        cumplimiento de aspectos legales; se incorporan la mayor parte de los requerimientos del
+                        cliente o usuario.</div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="5" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Genera prototipos evidenciando totalmente el proceso de validación
+                        técnica, cumplimiento de aspectos legales e incorporando los requerimientos del cliente o
+                        usuario.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Criterio 6 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5>6. Propuesta de valor <span class="criteria-weight">(15%)</span></h5>
+                    <div class="indicator-logro">
+                        <strong>Indicador de logro:</strong> Detalla la propuesta de valor y estrategias de
+                        propiedad intelectual según el proyecto de innovación desarrollado.
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-secondary score-badge" id="score6">-</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="6" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">No detalla con claridad la propuesta de valor y estrategias de
+                        propiedad intelectual.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="6" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Detalla con poca claridad la propuesta de valor y estrategias de
+                        propiedad intelectual según el proyecto de innovación desarrollado.</div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="6" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Detalla con bastante claridad la propuesta de valor y estrategias de
+                        propiedad intelectual según el proyecto de innovación desarrollado.</div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="6" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Detalla con total claridad la propuesta de valor y estrategias de
+                        propiedad intelectual según el proyecto de innovación desarrollado.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Criterio 7 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5>7. Resultados del proyecto <span class="criteria-weight">(10%)</span></h5>
+                    <div class="indicator-logro">
+                        <strong>Indicador de logro:</strong> Plantea soluciones innovadoras bajo un enfoque de uso
+                        racional de los recursos y aporte a la sociedad.
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-secondary score-badge" id="score7">-</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="7" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">Las soluciones planteadas no detallan el uso racional de los recursos,
+                        ni el aporte que tendrá en la sociedad.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="7" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Plantea soluciones innovadoras, detallándose con poca claridad el uso
+                        racional de los recursos, así como el aporte que tendrá en la sociedad.</div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="7" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Plantea soluciones innovadoras, detallándose con bastante claridad el
+                        uso racional de los recursos, así como el aporte que tendrá en la sociedad.</div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="7" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Plantea soluciones innovadoras, detallándose con total claridad el uso
+                        racional de los recursos, así como el aporte que tendrá en la sociedad.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Criterio 8 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5>8. Valores institucionales <span class="criteria-weight">(15%)</span></h5>
+                    <div class="indicator-logro">
+                        <strong>Indicador de logro:</strong> Asume con compromiso social, honestidad, transparencia
+                        y ética académica el proceso para el desarrollo del proyecto de innovación.
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-secondary score-badge" id="score8">-</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="8" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">No asume el compromiso social, honestidad, transparencia y ética
+                        académica el proceso para el desarrollo del proyecto de innovación.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="8" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Asume de forma superficial el compromiso social, honestidad,
+                        transparencia y ética académica en el proceso para el desarrollo del proyecto de innovación.
+                    </div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="8" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Asume de manera parcial el compromiso social, honestidad, transparencia
+                        y ética académica en el proceso para el desarrollo del proyecto de innovación.</div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="8" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Asume totalmente con compromiso social, honestidad, transparencia y
+                        ética académica en el proceso para el desarrollo del proyecto de innovación.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Criterio 9 -->
+        <div class="criteria-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5>9. Comunicación y trabajo en equipo <span class="criteria-weight">(15%)</span></h5>
+                    <div class="indicator-logro">
+                        <strong>Indicador de logro:</strong> Comunica de manera clara, dominio y organizada el
+                        proyecto de innovación.
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-secondary score-badge" id="score9">-</span>
+                </div>
+            </div>
+            <div class="rating-scale">
+                <div class="rating-option rating-2" data-criteria="9" data-value="2">
+                    <div class="rating-value">2</div>
+                    <div class="rating-label">Insuficiente</div>
+                    <div class="rating-desc">Comunica sin claridad y organización el proyecto de innovación; no se
+                        muestra un dominio; la colaboración no se evidencia en los integrantes del equipo en el
+                        desarrollo de este.</div>
+                </div>
+                <div class="rating-option rating-3" data-criteria="9" data-value="3">
+                    <div class="rating-value">3</div>
+                    <div class="rating-label">Bueno</div>
+                    <div class="rating-desc">Comunica con poca claridad y organización el proyecto de innovación; se
+                        muestra un dominio; la colaboración no se evidencia, pocos aspectos en los integrantes del
+                        equipo en el desarrollo de este.</div>
+                </div>
+                <div class="rating-option rating-4" data-criteria="9" data-value="4">
+                    <div class="rating-value">4</div>
+                    <div class="rating-label">Muy Bueno</div>
+                    <div class="rating-desc">Comunica con claridad y de forma organizada el proyecto de innovación;
+                        se muestra bastante dominio; la colaboración se evidencia en varios aspectos de los
+                        integrantes del equipo en el desarrollo de este.</div>
+                </div>
+                <div class="rating-option rating-5" data-criteria="9" data-value="5">
+                    <div class="rating-value">5</div>
+                    <div class="rating-label">Excelente</div>
+                    <div class="rating-desc">Comunica con claridad y de forma organizada el proyecto de innovación,
+                        mostrando el dominio total y colaboración de los integrantes del equipo en el desarrollo de
+                        este.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultados de evaluación -->
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-calculator"></i> Puntuación Total</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="total-score" id="totalScore">0.0</div>
+                        <div class="percentage" id="totalPercentage">0%</div>
+                        <p class="mt-2 mb-0">Puntuación máxima posible: 5.0 (100%)</p>
+                        <div class="mt-3" id="nivelDesempeno">
+                            <span class="badge bg-secondary">Nivel: Pendiente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-success">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Resumen por Criterios</h5>
+                    </div>
+                    <div class="card-body">
+                        <div style="max-height: 250px; overflow-y: auto;">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Criterio</th>
+                                        <th>Puntuación</th>
+                                        <th>Peso</th>
+                                        <th>Puntos</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scoreSummary">
+                                    <tr>
+                                        <td colspan="4" class="text-center">No hay puntuaciones seleccionadas</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot id="scoreFooter" style="display: none;">
+                                    <tr class="table-primary">
+                                        <td colspan="3" class="text-end"><strong>Total ponderado:</strong></td>
+                                        <td><strong id="totalPonderado">0.0</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información del evaluador -->
+    <div class="form-container">
+        <h3 class="section-title"><i class="fas fa-user-edit"></i> Información del Evaluador</h3>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="evaluador" class="form-label required">Nombre del docente evaluador</label>
+                <input type="text" class="form-control" id="evaluador" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="firma" class="form-label">Firma</label>
+                <input type="text" class="form-control" id="firma">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="fecha" class="form-label required">Fecha</label>
+                <input type="date" class="form-control" id="fecha" required>
+            </div>
+        </div>
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> <strong>Nota:</strong> Todos los campos marcados con (*) son
+            obligatorios. La evaluación se calculará automáticamente al seleccionar los puntajes de cada criterio.
+        </div>
+    </div>
+
+    <!-- Botón de envío -->
+    <div class="text-center mt-4">
+        <button type="button" class="btn btn-submit btn-lg" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Enviar Evaluación
+        </button>
+        <button type="button" class="btn btn-outline-secondary btn-lg ms-2" id="resetBtn">
+            <i class="fas fa-redo"></i> Reiniciar Formulario
+        </button>
+        <button type="button" class="btn btn-outline-info btn-lg ms-2" id="printBtn">
+            <i class="fas fa-print"></i> Imprimir Evaluación
+        </button>
+    </div>
+
+    <div class="text-center mt-4">
+        <p class="text-muted"><i class="fas fa-exclamation-triangle"></i> Este formulario es parte de la XLIII
+            Jornada Universitaria de Desarrollo Científico (JUDC) Edición 2025</p>
+    </div>
+</div>
+
+{% endblock %}
