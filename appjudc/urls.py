@@ -19,4 +19,5 @@ urlpatterns = [
     path('registrarDocente/', views.registrarDocente, name='registrarDocente'),
     path('borrarDocente/<str:codigo_docente>/', views.borrarDocente, name='borrarDocente'),
     path('proyectoInnovacion/', views.proyectoInnovacion, name='proyectoInnovacion'),
+    path('carrera/', views.carrera, name='carrera'),
 ]

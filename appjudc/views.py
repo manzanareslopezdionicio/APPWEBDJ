@@ -50,6 +50,9 @@ def perfil(request):
 def proyectoInnovacion(request):
     return render(request, 'vistas/ProyectoInnovacion.html') 
 
+def carrera(request):
+    return render(request, 'vistas/carrera.html')
+
 def docente(request):
     docentes = Docente.objects.all()
     return render(request, 'vistas/docente.html', {'docentes': docentes})
