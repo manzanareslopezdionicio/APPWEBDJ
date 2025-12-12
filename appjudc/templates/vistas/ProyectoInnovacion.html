@@ -1,20 +1,20 @@
 {% extends 'baseadmin.html' %}
 {% load static %}
-{% block titulo %} Proyecto Innovación {% endblock %}
+{% block titulo %} Evaluación Proyecto Innovación {% endblock %}
 {% block contenido %}
 <!-- Encabezado -->
 <div class="header-section">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-9">
+            <div class="col-md-9 text-center">
                 <h1 class="mb-2"><i class="fas fa-graduation-cap"></i> XLIV Jornada Universitaria de Desarrollo
-                    Científico (JUDC) 2025</h1>
-                <h4 class="mb-0">"Ciencia, Investigación e Innovación: un compromiso con Nicaragua"</h4>
+                    Científico (JUDC) 2026</h1>
+                <h3 class="mb-0">"Ciencia, Investigación e Innovación: un compromiso con Nicaragua"</h4>
                 <p class="mb-0 mt-2">Dirección Académica - Departamento de Investigación e Innovación</p>
             </div>
-            <div class="col-md-3 text-md-end">
-                <p class="mb-0">Managua, Nicaragua</p>
-                <p class="mb-0">Septiembre, 2025</p>
+            <div class="col-6 col-md-3 university-logo">
+                <img src="{% static 'img/logojudc.png' %}" alt="Logo JUDC" class="university-logo"
+                    style="max-height: 100px;">
             </div>
         </div>
     </div>
@@ -78,10 +78,10 @@
             <div class="d-flex justify-content-between align-items-start">
                 <div>
                     <h4>1. Contextualización de la problemática <span class="criteria-weight">(10%)</span></h4>
-                    <div class="indicator-logro">
-                        <strong>Indicador de logro:</strong> Vincula la problemática o necesidad con las prioridades
-                        del país, estando bien contextualizada; además, se destacan los elementos de su importancia.
-                    </div>
+                    <p class="mb-2 indicator-logro"><strong>Indicador de logro:</strong> Vincula la problemática o
+                        necesidad con las prioridades del país, estando bien contextualizada; además, se destacan
+                        los elementos de su importancia.
+                    </p>
                 </div>
                 <div class="text-end">
                     <span class="section-puntaje">PUNTAJE:</span>
@@ -126,11 +126,11 @@
                     <h4>2. Metodologías empleadas <span class="criteria-weight">(10%)</span></h4>
                     <div class="indicator-logro">
                         <p class="mb-2"><strong>Indicador de logro:</strong> Describe la metodología y herramientas
-                            utilizadas para
-                            el desarrollo del proyecto de innovación.</p>
+                            utilizadas para el desarrollo del proyecto de innovación.</p>
                     </div>
                 </div>
                 <div class="text-end">
+                    <span class="section-puntaje">PUNTAJE:</span>
                     <span class="badge bg-secondary score-badge" id="score2">Pendiente</span>
                 </div>
             </div>
@@ -173,7 +173,8 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <span class="badge bg-secondary score-badge" id="score3">-</span>
+                    <span class="section-puntaje">PUNTAJE:</span>
+                    <span class="badge bg-secondary score-badge" id="score3">Pendiente</span>
                 </div>
             </div>
             <div class="rating-scale">
@@ -216,7 +217,8 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <span class="badge bg-secondary score-badge" id="score4">-</span>
+                    <span class="section-puntaje">PUNTAJE:</span>
+                    <span class="badge bg-secondary score-badge" id="score4">Pendiente</span>
                 </div>
             </div>
             <div class="rating-scale">
@@ -258,7 +260,8 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <span class="badge bg-secondary score-badge" id="score5">-</span>
+                    <span class="section-puntaje">PUNTAJE:</span>
+                    <span class="badge bg-secondary score-badge" id="score5">Pendiente</span>
                 </div>
             </div>
             <div class="rating-scale">
@@ -304,7 +307,8 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <span class="badge bg-secondary score-badge" id="score6">-</span>
+                    <span class="section-puntaje">PUNTAJE:</span>
+                    <span class="badge bg-secondary score-badge" id="score6">Pendiente</span>
                 </div>
             </div>
             <div class="rating-scale">
@@ -346,7 +350,8 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <span class="badge bg-secondary score-badge" id="score7">-</span>
+                    <span class="section-puntaje">PUNTAJE:</span>
+                    <span class="badge bg-secondary score-badge" id="score7">Pendiente</span>
                 </div>
             </div>
             <div class="rating-scale">
@@ -388,7 +393,8 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <span class="badge bg-secondary score-badge" id="score8">-</span>
+                    <span class="section-puntaje">PUNTAJE:</span>
+                    <span class="badge bg-secondary score-badge" id="score8">Pendiente</span>
                 </div>
             </div>
             <div class="rating-scale">
@@ -431,7 +437,8 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <span class="badge bg-secondary score-badge" id="score9">-</span>
+                    <span class="section-puntaje">PUNTAJE:</span>
+                    <span class="badge bg-secondary score-badge" id="score9">Pendiente</span>
                 </div>
             </div>
             <div class="rating-scale">
@@ -559,7 +566,6 @@
             Jornada Universitaria de Desarrollo Científico (JUDC) Edición 2025</p>
     </div>
 </div>
-
 
 <script>
     // Variables para almacenar puntuaciones
@@ -756,7 +762,6 @@
                 return false;
             }
         }
-
         return true;
     }
 

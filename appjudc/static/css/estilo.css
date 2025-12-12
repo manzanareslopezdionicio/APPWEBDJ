@@ -64,10 +64,6 @@
   color: #495057;
 }
 
-/* Ajuste para que el texto no se solape con el icono */
-/* .form-floating .form-control {
-  padding-right: 45px;
-} */
 /* ******************************************************************************* */
 /* EVALUACIONES - ARTICULOS CIENTÍFICOS */
 .header-section {
@@ -84,7 +80,6 @@
   width: 150px;
   height: auto;
 }
-
 
 .form-container {
   background-color: white;
@@ -223,7 +218,6 @@
   border-radius: 10px;
   margin-left: 5px;
 }
-
 
 .required::after {
   content: " *";
