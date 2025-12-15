@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
     <link rel="stylesheet" href="{% static 'css/dark-mode.css' %}">
-   <!--  <link rel="stylesheet" href="{% static 'css/estiloPI.css' %}"> -->
+    <!-- <link rel="stylesheet" href="{% static 'css/estiloPI.css' %}"> -->
 </head>
 
 <body class="bg-body text-body">
@@ -51,7 +51,7 @@
             <div class="main-header">
                 <div class="main-header-logo">
                     <!-- Logo Header -->
-                    <div class="logo-header" data-background-color="dark">
+                    <div class="logo-header">
                         <a href="index.html" class="logo">
                             <img src="{% static 'assets/img/kaiadmin/logo_light.svg' %}" alt="navbar brand"
                                 class="navbar-brand" height="20" />
@@ -71,8 +71,7 @@
                     <!-- End Logo Header -->
                 </div>
                 <!-- Navbar Header -->
-                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom shadow"
-                    style="background: linear-gradient(180deg, #363636,#ffffff);">
+                <nav class="navbar navbar-header bg-primary-subtle navbar-expand-lg">
                     <div class="container-fluid">
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             <div class="d-flex align-items-center gap-2">
@@ -88,9 +87,9 @@
                                         <img src="{% static 'assets/img/profile.jpg' %}" alt="..."
                                             class="avatar-img rounded-circle" />
                                     </div>
-                                    <span class="profile-username">
-                                        <span class="op-7">Hola,</span>
-                                        <span class="fw-bold">Usuario</span>
+                                    <span class="profile-username text-body">
+                                        <span class="op-7 text-white">Hola,</span>
+                                        <span class="fw-bold text-white">Usuario</span>
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">

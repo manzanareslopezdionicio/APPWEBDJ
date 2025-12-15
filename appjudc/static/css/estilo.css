@@ -64,6 +64,31 @@
   color: #495057;
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(2px);
+  background-color: rgba(127, 150, 254, 0.7) !important;
+  z-index: 1000;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-header {
+  background-color: rgba(4, 48, 241, 0.7) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
 /* ******************************************************************************* */
 /* EVALUACIONES - ARTICULOS CIENTÍFICOS */
 .header-section {
