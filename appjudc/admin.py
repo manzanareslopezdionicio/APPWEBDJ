@@ -42,7 +42,7 @@ class DocenteAdmin(admin.ModelAdmin):
 class EvaluacionArticuloCientificoAdmin(admin.ModelAdmin):
     list_display = ['id', 'titulo', 'evaluador', 'puntuacion_total', 'porcentaje', 'fecha_evaluacion', 'fecha_creacion']
     list_filter = ['area_conocimiento', 'categoria', 'fecha_evaluacion']
-    search_fields = ['titulo', 'autores', 'evaluador', 'carrera']
+    search_fields = ['titulo', 'autores','autores1','autores2', 'evaluador', 'carrera']
     readonly_fields = ['fecha_creacion']
     
     fieldsets = (

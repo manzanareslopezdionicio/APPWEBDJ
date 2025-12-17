@@ -90,8 +90,10 @@ class EvaluacionArticuloCientifico(models.Model):
     categoria = models.CharField(max_length=50, verbose_name="Categoría")
     carrera = models.CharField(max_length=200, verbose_name="Carrera")
     titulo = models.CharField(max_length=500, verbose_name="Título de la investigación")
-    autores = models.TextField(verbose_name="Autores")
-    
+    autores = models.TextField(max_length=100,verbose_name="Autor 1")
+    autores1 = models.CharField(max_length=100, verbose_name="Autor 2")
+    autores2 = models.CharField(max_length=100, verbose_name="Autor 3")
+  
     # Puntuaciones de criterios (2-5 puntos cada uno)
     criterio1_planteamiento = models.IntegerField(verbose_name="Planteamiento del problema")
     criterio2_objetivos = models.IntegerField(verbose_name="Objetivos de investigación")

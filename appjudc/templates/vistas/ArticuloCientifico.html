@@ -1,10 +1,11 @@
 {% extends 'baseadmin.html' %}
 {% load static %}
 {% block titulo %} Evaluación Artículo Científico - JUDC 2025 {% endblock %}
+
 {% block contenido %}
 
 <!-- Encabezado -->
-<div class="header-section">
+<div class="header-section" id="inicio-formulario">
     <div class="container">
         <div class="row align-items-center">
             <!--  <div class="col-3 col-md-2 university-logo">
@@ -32,16 +33,18 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="areaConocimiento" class="form-label required">Área de Conocimiento o CUR</label>
-                <select class="form-select mi-input bg-body" id="areaConocimiento" name="areaConocimiento" required>
+                <select class="form-select mi-input" id="areaConocimiento" name="areaConocimiento" required>
                     <option value="">Seleccione...</option>
                     <option value="csj">Ciencias Sociales y Jurídicas</option>
-                    <option value="cs">Ciencias de la Salud</option>
+                    <option value="ccs">Ciencias de la Salud</option>
                     <option value="eah">Educación, Artes y Humanidades</option>
-                    <option value="cet">Ciencias Economicas y Administrativas</option>
+                    <option value="cea">Ciencias Economicas y Administrativas</option>
                     <option value="cbt">Ciencias Basicas y Tecnología</option>
+                    <option value="cch">CUR - Chontales</option>
+                    <option value="ces">CUR - Estelí</option>
+                    <option value="cca">CUR - Carazo</option>
+                    <option value="cma">CUR - Matagalpa</option>
                 </select>
-                <!--  <input type="text" class="form-control" id="areaConocimiento" required> -->
-
             </div>
             <div class="col-md-6 mb-3">
                 <label for="categoria" class="form-label required">Categoría</label>
@@ -53,19 +56,35 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4 mb-3">
                 <label for="carrera" class="form-label required">Carrera</label>
-                <input type="text" class="form-control mi-input" id="carrera" name="carrera" required>
+                <select class="form-select mi-input bg-body" id="carrera" name="carrera" required>
+                    <option value="">Seleccione...</option>
+                    <option value="ISI">Ingeniería Sistemas de Información</option>
+                    <option value="IA">Ingeniería Agroindustrial</option>
+                    <option value="AE">Administración de Empresas</option>
+                    <option value="CF">Contabilidad</option>
+                    <option value="OD">Odontología</option>
+                    <option value="MM">Medicina</option>
+                </select>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-8 mb-3">
                 <label for="titulo" class="form-label required">Título de la investigación</label>
                 <input type="text" class="form-control mi-input" id="titulo" name="titulo" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 mb-3">
-                <label for="autores" class="form-label required">Autor/es</label>
+            <div class="col-md-4 mb-3">
+                <label for="autores" class="form-label required">Autor(a)</label>
                 <input type="text" class="form-control mi-input" id="autores" name="autores" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="autores" class="form-label required">Autor(a)</label>
+                <input type="text" class="form-control mi-input" id="autores1" name="autores1" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="autores" class="form-label required">Autor(a)</label>
+                <input type="text" class="form-control mi-input" id="autores2" name="autores2" required>
             </div>
         </div>
     </div>
@@ -155,8 +174,7 @@
                         <div class="rating-value">5</div>
                         <div class="rating-label">Excelente</div>
                         <div class="rating-desc">Los objetivos son claros, coherentes, medibles y se relacionan
-                            directamente
-                            con el problema.</div>
+                            directamente con el problema.</div>
                     </div>
                 </div>
             </div>
@@ -167,8 +185,7 @@
                     <div>
                         <h3>3. Marco teórico y antecedentes <span class="criteria-weight">(10%)</span></h3>
                         <p class="mb-2 indicator-logro"><strong>Indicador de logro:</strong> Fundamentación teórica
-                            pertinente, actual y
-                            bien estructurada.</p>
+                            pertinente, actual y bien estructurada.</p>
                     </div>
                     <div class="text-end">
                         <span class="section-puntaje">PUNTAJE:</span>
@@ -228,8 +245,7 @@
                         <div class="rating-value">3</div>
                         <div class="rating-label">Bueno</div>
                         <div class="rating-desc">Metodología comprensible, pero con vacíos en descripción, tratamiento
-                            de
-                            datos o análisis.</div>
+                            de datos o análisis.</div>
                     </div>
                     <div class="rating-option rating-4" data-criteria="4" data-value="4">
                         <div class="rating-value">4</div>
@@ -252,9 +268,7 @@
                     <div>
                         <h3>5. Análisis y discusión de resultados <span class="criteria-weight">(10%)</span></h3>
                         <p class="mb-2 indicator-logro"><strong>Indicador de logro:</strong> Interpretación crítica y
-                            relación con el
-                            marco
-                            teórico. Correspondencia con los objetivos propuestos.</p>
+                            relación con el marco teórico. Correspondencia con los objetivos propuestos.</p>
                     </div>
                     <div class="text-end">
                         <span class="section-puntaje">PUNTAJE:</span>
@@ -295,9 +309,7 @@
                     <div>
                         <h3>6. Conclusiones y recomendaciones <span class="criteria-weight">(5%)</span></h3>
                         <p class="mb-2 indicator-logro"><strong>Indicador de logro:</strong> Conclusiones y
-                            recomendaciones en
-                            coherencia
-                            con objetivos de investigación.</p>
+                            recomendaciones en coherencia con objetivos de investigación.</p>
                     </div>
                     <div class="text-end">
                         <span class="text-primary" style="font-size: 20px;">PUNTAJE:</span>
@@ -325,8 +337,7 @@
                         <div class="rating-value">5</div>
                         <div class="rating-label">Excelente</div>
                         <div class="rating-desc">Conclusiones claras, coherentes y sustentadas en los resultados;
-                            aportan
-                            conocimiento o propuestas aplicables.</div>
+                            aportan conocimiento o propuestas aplicables.</div>
                     </div>
                 </div>
             </div>
@@ -339,10 +350,8 @@
                                 class="criteria-weight">(30%)</span>
                         </h3>
                         <p class="mb-2 indicator-logro"><strong>Indicador de logro:</strong> Claridad expositiva,
-                            dominio del tema,
-                            comunicación y recursos visuales. Hay que valorar la capacidad de defender una postura
-                            teórica.
-                        </p>
+                            dominio del tema, comunicación y recursos visuales. Hay que valorar la capacidad de defender
+                            una postura teórica.</p>
                     </div>
                     <div class="text-end">
                         <span class="section-puntaje">PUNTAJE:</span>
@@ -354,31 +363,26 @@
                         <div class="rating-value">2</div>
                         <div class="rating-label">Insuficiente</div>
                         <div class="rating-desc">Presentación desorganizada o confusa; abuso de texto; sin dominio del
-                            tema
-                            ni manejo adecuado del tiempo.</div>
+                            tema ni manejo adecuado del tiempo.</div>
                     </div>
                     <div class="rating-option rating-3" data-criteria="7" data-value="3">
                         <div class="rating-value">3</div>
                         <div class="rating-label">Bueno</div>
                         <div class="rating-desc">Presenta con apoyo excesivo en las diapositivas o lectura de texto;
-                            manejo
-                            de tiempo irregular; respuestas generales.</div>
+                            manejo de tiempo irregular; respuestas generales.</div>
                     </div>
                     <div class="rating-option rating-4" data-criteria="7" data-value="4">
                         <div class="rating-value">4</div>
                         <div class="rating-label">Muy bueno</div>
                         <div class="rating-desc">Presenta con claridad y orden; uso adecuado del texto y gráficos;
-                            responde
-                            con fundamento, aunque con menor fluidez o seguridad.</div>
+                            responde con fundamento, aunque con menor fluidez o seguridad.</div>
                     </div>
                     <div class="rating-option rating-5" data-criteria="7" data-value="5">
                         <div class="rating-value">5</div>
                         <div class="rating-label">Excelente</div>
                         <div class="rating-desc">Presenta con claridad y seguridad; usa texto breve y pertinente; maneja
-                            el
-                            tiempo eficientemente; argumenta con criterio científico; demuestra dominio total del
-                            contenido.
-                        </div>
+                            el tiempo eficientemente; argumenta con criterio científico; demuestra dominio total del
+                            contenido.</div>
                     </div>
                 </div>
             </div>
@@ -441,11 +445,9 @@
             </div>
         </div>
         <div class="alert bg-primary-subtle text-body" role="alert">
-            <i class="bi bi-info-circle-fill"></i> <strong>Nota:</strong> Todos los campos marcados
-            con
+            <i class="bi bi-info-circle-fill"></i> <strong>Nota:</strong> Todos los campos marcados con
             (<strong style="color: red; font-size: 16px;">*</strong>) son obligatorios. La evaluación
-            se calculará automáticamente al seleccionar
-            los puntajes de cada criterio.
+            se calculará automáticamente al seleccionar los puntajes de cada criterio.
         </div>
     </div>
 
@@ -457,8 +459,11 @@
         <button type="button" class="btn btn-outline-secondary btn-lg ms-2" id="resetBtn">
             <i class="bi bi-arrow-clockwise"></i> Reiniciar Formulario
         </button>
+
     </div>
 
 </div>
+
+
 <script src="{% static 'js/evaluar.js' %}"></script>
 {% endblock %}
