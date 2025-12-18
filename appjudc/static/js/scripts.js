@@ -965,25 +965,3 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Botón para volver al principio
-document.addEventListener('DOMContentLoaded', function () {
-    const backToTopButton = document.getElementById('back-to-top');
-
-    if (backToTopButton) {
-        window.addEventListener('scroll', function () {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('d-none');
-            } else {
-                backToTopButton.classList.add('d-none');
-            }
-        });
-
-        backToTopButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-});
