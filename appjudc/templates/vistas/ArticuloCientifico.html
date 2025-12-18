@@ -405,20 +405,22 @@
                         <h2 class="mb-0"><i class="bi bi-bar-chart-line-fill"></i> Resumen por Criterios</h2>
                     </div>
                     <div class="card-body">
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Criterio</th>
-                                    <th>Puntuación</th>
-                                    <th>Porcentaje</th>
-                                </tr>
-                            </thead>
-                            <tbody id="scoreSummary" class="text-center">
-                                <tr>
-                                    <td colspan="3" class="text-center">No hay puntuaciones seleccionadas</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style="max-height: 200px; overflow-y: auto;">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Criterio</th>
+                                        <th>Puntuación</th>
+                                        <th>Porcentaje</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scoreSummary" class="text-center">
+                                    <tr>
+                                        <td colspan="3" class="text-center">No hay puntuaciones seleccionadas</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -460,33 +462,33 @@
     </div>
 </div>
 <!-- Botón para volver al principio -->
-            <a href="#" class="back-to-top btn btn-primary d-none" id="back-to-top">
-                <i class="bi bi-chevron-up"></i>
-            </a>
+<a href="#" class="back-to-top btn btn-primary d-none" id="back-to-top">
+    <i class="bi bi-chevron-up"></i>
+</a>
 <script>
-    
-// Botón para volver al principio
-document.addEventListener('DOMContentLoaded', function () {
-    const backToTopButton = document.getElementById('back-to-top');
 
-    if (backToTopButton) {
-        window.addEventListener('scroll', function () {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('d-none');
-            } else {
-                backToTopButton.classList.add('d-none');
-            }
-        });
+    // Botón para volver al principio
+    document.addEventListener('DOMContentLoaded', function () {
+        const backToTopButton = document.getElementById('back-to-top');
 
-        backToTopButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        if (backToTopButton) {
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('d-none');
+                } else {
+                    backToTopButton.classList.add('d-none');
+                }
             });
-        });
-    }
-});
+
+            backToTopButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    });
 </script>
 
 <script src="{% static 'js/evaluar.js' %}"></script>

@@ -61,15 +61,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Botón de reinicio
     document.getElementById('resetBtn').addEventListener('click', function () {
-        if (confirm('¿Está seguro de que desea reiniciar el formulario? Se perderán todos los datos ingresados.')) {
+        if (confirm('¿Está seguro de que desea reiniciar el formulario? Se perderán todos los datos ingresados.?')) {
             resetForm();
         }
     });
 
     // Botón de impresión
-    document.getElementById('printBtn').addEventListener('click', function () {
-        window.print();
-    });
+    //document.getElementById('printBtn').addEventListener('click', function () {
+    //    window.print();
+    //});
 });
 
 // Actualizar selección visual
@@ -118,21 +118,21 @@ function calculateTotalScore() {
 
     // Crear resumen de puntuaciones
     let summaryHTML = '';
-    let totalPonderado = 0;
+    //let totalPonderado = 0;
 
     for (let criteria = 1; criteria <= 9; criteria++) {
         if (scores[criteria] !== null) {
             const puntos = (scores[criteria] * weights[criteria]) / 100;
             totalWeightedScore += scores[criteria] * weights[criteria];
             totalWeight += weights[criteria];
-            totalPonderado += puntos;
+            //totalPonderado += puntos;
 
             summaryHTML += `
                         <tr>
                             <td>${criteria}</td>
                             <td>${scores[criteria]}</td>
                             <td>${weights[criteria]}%</td>
-                            <td>${puntos.toFixed(2)}</td>
+                            <!-- <td>${puntos.toFixed(2)}</td>  -->
                         </tr>
                     `;
         } else {
@@ -143,26 +143,26 @@ function calculateTotalScore() {
     if (totalWeight > 0) {
         const weightedAverage = totalWeightedScore / totalWeight;
         const percentage = (weightedAverage / 5) * 100;
-        const nivel = getNivelDesempeno(weightedAverage);
+        //const nivel = getNivelDesempeno(weightedAverage);
 
         // Actualizar totales
         document.getElementById('totalScore').textContent = weightedAverage.toFixed(2);
         document.getElementById('totalPercentage').textContent = percentage.toFixed(1) + '%';
-        document.getElementById('totalPonderado').textContent = totalPonderado.toFixed(2);
+        //document.getElementById('totalPonderado').textContent = totalPonderado.toFixed(2);
 
         // Actualizar nivel de desempeño
         const nivelElement = document.getElementById('nivelDesempeno');
-        nivelElement.innerHTML = `<span class="badge ${nivel.clase}">Nivel: ${nivel.nombre}</span>`;
+        //nivelElement.innerHTML = `<span class="badge ${nivel.clase}">Nivel: ${nivel.nombre}</span>`;
 
         // Actualizar resumen
         if (summaryHTML) {
             document.getElementById('scoreSummary').innerHTML = summaryHTML;
-            document.getElementById('scoreFooter').style.display = 'table-row';
+            //document.getElementById('scoreFooter').style.display = 'table-row';
         }
     } else {
         document.getElementById('totalScore').textContent = '0.0';
         document.getElementById('totalPercentage').textContent = '0%';
-        document.getElementById('nivelDesempeno').innerHTML = `<span class="badge bg-secondary">Nivel: Pendiente</span>`;
+        //document.getElementById('nivelDesempeno').innerHTML = `<span class="badge bg-secondary">Nivel: Pendiente</span>`;
         document.getElementById('scoreSummary').innerHTML = `
                     <tr>
                         <td colspan="4" class="text-center">No hay puntuaciones seleccionadas</td>
@@ -193,7 +193,6 @@ function validateForm() {
             return false;
         }
     }
-
     return true;
 }
 
