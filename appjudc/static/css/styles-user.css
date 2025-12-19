@@ -1,0 +1,304 @@
+ :root {
+     --sidebar-width: 250px;
+     --transition-speed: 0.3s;
+ }
+
+ * {
+     box-sizing: border-box;
+ }
+
+ body {
+     transition: background-color var(--transition-speed), color var(--transition-speed);
+     padding-top: 56px;
+     /* Para compensar el navbar fijo */
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+     overflow-x: hidden;
+     /* Evitar scroll horizontal en todo el body */
+ }
+
+ /* Sidebar personalizado - SIEMPRE VISIBLE EN ESCRITORIO */
+ .sidebar {
+     width: var(--sidebar-width);
+     background-color: var(--bs-light);
+     position: fixed;
+     top: 56px;
+     left: 0;
+     z-index: 100;
+     overflow-y: auto;
+     transition: all var(--transition-speed);
+     border-right: 1px solid var(--bs-border-color);
+     height: calc(100vh - 56px);
+ }
+
+ /* Contenido principal con ajuste para sidebar */
+ .main-content {
+     margin-left: var(--sidebar-width);
+     transition: margin-left var(--transition-speed);
+     flex: 1;
+     width: calc(100% - var(--sidebar-width));
+     overflow-x: hidden;
+     /* Evitar scroll horizontal */
+     display: flex;
+     flex-direction: column;
+ }
+
+ /* Contenido interno que se expande */
+ .content-wrapper {
+     flex: 1;
+     padding: 1rem;
+     overflow-y: auto;
+ }
+
+ .nav-item {
+     transition: background-color var(--transition-speed);
+ }
+
+ /* Hover gris para enlaces dentro de nav-item */
+ .nav-item .nav-link:hover,
+ .nav-item .nav-link:focus {
+     background-color: rgba(0, 0, 0, 0.05);
+     border-radius: 6px;
+     transition: background-color var(--transition-speed);
+ }
+
+ /* Ajustes para modo oscuro */
+ [data-bs-theme="dark"] .nav-item .nav-link:hover,
+ [data-bs-theme="dark"] .nav-item .nav-link:focus {
+     background-color: rgb(58, 8, 221);
+ }
+
+ [data-bs-theme="dark"] .sidebar {
+     background-color: var(--bs-dark);
+     border-right: 1px solid var(--bs-border-color);
+ }
+
+ [data-bs-theme="dark"] .card {
+     background-color: var(--bs-dark);
+     border-color: var(--bs-border-color);
+ }
+
+ /* Responsive: ocultar sidebar en pantallas pequeñas */
+ @media (max-width: 992px) {
+     .sidebar {
+         transform: translateX(-100%);
+     }
+
+     .sidebar.mobile-show {
+         transform: translateX(0);
+     }
+
+     .main-content {
+         margin-left: 0;
+         width: 100%;
+     }
+
+     .overlay {
+         display: none;
+         position: fixed;
+         top: 56px;
+         left: 0;
+         width: 100%;
+         height: calc(100vh - 56px);
+         background-color: rgba(0, 0, 0, 0.5);
+         z-index: 99;
+     }
+
+     .overlay.show {
+         display: block;
+     }
+ }
+
+ /* Estilos para los iconos de redes sociales */
+ .social-icon {
+     font-size: 1.2rem;
+     transition: transform 0.3s, color 0.3s;
+     display: inline-block;
+ }
+
+ .social-icon:hover {
+     transform: translateY(-3px);
+ }
+
+ /* Colores específicos para cada red social */
+ .facebook {
+     color: #1877f2;
+ }
+
+ .facebook:hover {
+     color: #166fe5;
+ }
+
+ .twitter {
+     color: #1da1f2;
+ }
+
+ .twitter:hover {
+     color: #1a91da;
+ }
+
+ .instagram {
+     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+     -webkit-background-clip: text;
+     background-clip: text;
+     -webkit-text-fill-color: transparent;
+ }
+
+ .instagram:hover {
+     opacity: 0.9;
+ }
+
+ .youtube {
+     color: #ff0000;
+ }
+
+ .youtube:hover {
+     color: #cc0000;
+ }
+
+ .whatsapp {
+     color: #25d366;
+ }
+
+ .whatsapp:hover {
+     color: #1da851;
+ }
+
+ /* Ajustes para modo oscuro */
+ [data-bs-theme="dark"] .facebook {
+     color: #6c9cea;
+ }
+
+ [data-bs-theme="dark"] .twitter {
+     color: #7cc1f0;
+ }
+
+ [data-bs-theme="dark"] .youtube {
+     color: #ff6666;
+ }
+
+ [data-bs-theme="dark"] .whatsapp {
+     color: #6bdf94;
+ }
+
+ /* Estilo para botón de modo oscuro */
+ #theme-toggle i {
+     transition: transform 0.5s;
+ }
+
+ #theme-toggle:hover i {
+     transform: rotate(30deg);
+ }
+
+ /* FOOTER DENTRO DEL CONTENIDO PRINCIPAL */
+ .main-footer {
+     border-top: 1px solid var(--bs-border-color);
+     width: 100%;
+     background-color: var(--bs-body-bg);
+     margin-top: auto;
+     /* Empujar al fondo */
+ }
+
+ .footer-social {
+     background-color: rgba(0, 0, 0, 0.02);
+     padding: 2rem 0;
+ }
+
+ [data-bs-theme="dark"] .footer-social {
+     background-color: rgba(255, 255, 255, 0.03);
+ }
+
+ .footer-links a {
+     text-decoration: none;
+     transition: color 0.3s;
+ }
+
+ .footer-links a:hover {
+     color: var(--bs-primary) !important;
+ }
+
+ .newsletter-input {
+     max-width: 400px;
+ }
+
+ /* Ajustes para elementos específicos */
+ .table-responsive {
+     overflow-x: auto;
+     -webkit-overflow-scrolling: touch;
+ }
+
+ /* Mejoras para responsive */
+ @media (max-width: 768px) {
+     .footer-social .row>div {
+         text-align: center !important;
+         margin-bottom: 1rem;
+     }
+
+     .footer-social .d-flex {
+         justify-content: center !important;
+     }
+
+     .newsletter-input {
+         max-width: 100%;
+     }
+ }
+
+ /* Botón para volver al principio */
+ .back-to-top {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     z-index: 1000;
+     width: 50px;
+     height: 50px;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 1.5rem;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+     transition: all 0.3s;
+ }
+
+ .back-to-top:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+ }
+
+ /* Tarjetas con efecto hover */
+ .card-hover:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+     transition: all 0.3s ease;
+ }
+
+ /* Asegurar que todo el contenido sea responsive */
+ .container-fluid {
+     max-width: 100%;
+     padding-right: 15px;
+     padding-left: 15px;
+ }
+
+ /* Ajustes para texto truncado en tablas */
+ .text-truncate-cell {
+     max-width: 150px;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+ }
+
+ /* Navbar semitransparente */
+ .navbar-transparent {
+     background: rgba(13, 110, 253, 0.70) !important;
+     /* Azul primario semi-transparente */
+     backdrop-filter: blur(10px);
+     -webkit-backdrop-filter: blur(10px);
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ }
+
+ [data-bs-theme="dark"] .navbar-transparent {
+     background: rgba(13, 17, 23, 0.70) !important;
+     /* Oscuro semi-transparente */
+     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+ }

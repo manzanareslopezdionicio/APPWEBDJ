@@ -5,282 +5,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block titulo %}{% endblock %}</title>
-    <!-- Bootstrap CSS -->
-    <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>{% block titulo %} {% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
-
-    <style>
-        /* Estilos adicionales para la plantilla */
-        .sidebar {
-            min-height: 100vh;
-            background-color: #354d63;
-            transition: all 0.3s;
-        }
-
-        .accordion-button:not(.collapsed) {
-            background-color: #0d6efd;
-            color: white;
-        }
-
-        .navbar-toggler {
-            border: none;
-            font-size: 1.5rem;
-        }
-
-        .offcanvas {
-            max-width: 200px;
-        }
-
-        .menu-header {
-            background-color: #343a40;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        /* Opción simple (sin caret) y estilos de subopciones */
-        .menu-simple-link {
-            background: transparent;
-            color: #ffffff;
-            border: none;
-            padding-left: 2rem;
-            display: block;
-        }
-
-        .menu-simple-link:hover {
-            background: transparent;
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        /* Subopciones: color y transición en hover */
-        .sidebar .suboption {
-            padding-left: 1.5rem;
-            color: rgba(0, 0, 0, 0.9);
-            transition: background-color 0.15s ease, color 0.15s ease;
-        }
-
-        .sidebar .suboption:hover {
-            background-color: #cdd0d3;
-            color: #000000;
-        }
-
-        /* Offcanvas (móvil) subopciones hover */
-        .offcanvas .suboption:hover {
-            background-color: #cdd0d3;
-            color: #000000;
-        }
-
-        .list-group-item {
-            border: none;
-            border-radius: 0;
-            padding-left: 1rem;
-        }
-
-        .list-group-item:hover {
-            background-color: #116ecb;
-        }
-
-        .content-area {
-            transition: all 0.3s;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar-desktop {
-                display: none;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .mobile-toggle {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/styles-user.css' %}">
+    <!--  <link rel="stylesheet" href="{% static 'css/estilo.css' %}"> -->
 </head>
 
-<body class="bg-body text-body">
-    <!-- Navbar con botón hamburguesa para móviles -->
-    <nav class="navbar navbar-dark bg-dark mobile-toggle ">
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-transparent fixed-top">
         <div class="container-fluid">
-            <span class="navbar-brand d-flex justify-content-center flex-grow-1">JUDC</span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+            <button class="btn btn-outline-light me-2 d-lg-none" id="sidebar-toggle">
                 <i class="bi bi-list"></i>
             </button>
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-bootstrap-fill me-2"></i>
+                Inscripciones JUDC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="bi bi-house-door me-1"></i> Inicio</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-grid me-1"></i> Servicios
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Inscripciones</a></li>
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Paso a paso...</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-envelope me-1"></i> Contacto</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-light me-2" id="theme-toggle">
+                    <i class="bi bi-moon"></i>
+                </button>
+                <div class="">
+                    <a class="btn btn-secondary" href="#" title="Cerrar Sesión"><i
+                            class="bi bi-box-arrow-right h5"></i></a>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Menú Vertical para Desktop -->
-            <div class="col-md-3 sidebar sidebar-desktop">
-                <div class="menu-header">
-                    <h5>👩🏻‍💻📓✍🏻💡Menú Principal</h5>
-                </div>
-                <div class="accordion mt-3" id="menuAccordion">
-                    <!-- Opción 1 -->
-                    <div class="accordion-item">
-                        <div class="p-3">
-                            <a href="/" class="btn btn-primary btn-lg w-100 active" aria-current="true">
-                                🏠 Inicio
-                            </a>
-                        </div>
+    <!-- Overlay para móviles (al hacer clic cierra el sidebar) -->
+    <div class="overlay" id="overlay"></div>
 
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne">
-                                🗂️ Registrar
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
-                            <div class="accordion-body p-0 accordion-primary">
-
-                                <div class="list-group list-group-flush">
-                                    <a href="{% url 'inscripcion'%}" class="list-group-item list-group-item-action">
-                                        ✍🏻 Inscripciones
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Opción 2 -->
-                    <!-- <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo">
-                                <i class="bi bi-bar-chart me-2"></i> Reportes
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
-                            <div class="accordion-body p-0">
-                                <div class="list-group list-group-flush">
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-graph-up me-2"></i> Informe de Docentes
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-pie-chart me-2"></i> Informe de Estudiantes
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i class="bi bi-bar-chart-line me-2"></i> Informe de jurados
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- Opción 3 -->
-                    <div class="accordion-item p-2">
-                        <div class="list-group list-group-flush">
-                            <a href="{% url 'perfil' %}" class="list-group-item list-group-item-action suboption ">
-                                🙍🏻‍♂️ Perfil
-                            </a>
-                        </div>
-                    </div>
-                    <div class="accordion-item p-2">
-                        <div class="list-group list-group-flush">
-                            <a href="" class="list-group-item list-group-item-action suboption ">
-                                Salir ➜]
-                            </a>
-                        </div>
-                    </div>
-                    <!-- <div class="accordion-item p-2">
-                        <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-action suboption ">
-                                <i class="bi bi-bar-chart me-2"></i> Evaluaciones
-                            </a>
-                        </div>
-                    </div> -->
+    <!-- Sidebar - SIN BOTÓN DE OCULTAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="p-3">
+            <!-- Perfil de usuario -->
+            <div class="d-flex align-items-center mb-4">
+                <img src="https://ui-avatars.com/api/?name=Usuario+Demo&background=0d6efd&color=fff&size=64"
+                    class="rounded-circle me-3" alt="Avatar">
+                <div>
+                    <h6 class="mb-0">Usuario Demo</h6>
+                    <small class="text-muted">Administrador</small>
                 </div>
             </div>
 
-            <!-- Contenido Principal -->
-            {% block contenido %}
-
-            {% endblock %}
-
+            <!-- Menú del sidebar -->
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link active" href="#">
+                        <i class="bi bi-house-door me-2"></i>Inicio
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-pencil-square me-2"></i> Inscripciones
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-person me-2"></i> Perfil
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-patch-question me-2"></i>
+                        Paso a paso
+                    </a>
+                </li>
+                <hr class="my-1">
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="#">Salir
+                        <i class="bi bi-box-arrow-right me-2"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </aside>
 
-    <!-- Offcanvas Menu para Móviles -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Menú Principal</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="accordion" id="mobileMenuAccordion">
-
-                <!-- Opción 1 -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#mobileCollapseOne">
-                            🗂️ Registrar
+    <!-- Contenido principal con FOOTER INTEGRADO -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <!-- Título y botones de acción -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                    <h1 class="h3 mb-2 mb-md-0">Dashboard Principal</h1>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-plus-circle me-1"></i> Nuevo Elemento
                         </button>
-                    </h2>
-                    <div id="mobileCollapseOne" class="accordion-collapse collapse"
-                        data-bs-parent="#mobileMenuAccordion">
-                        <div class="accordion-body p-0">
-                            <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    ✍🏻 Inscripciones
-                                </a>
-
-                            </div>
-                        </div>
+                        <button class="btn btn-outline-secondary">
+                            <i class="bi bi-download me-1"></i> Exportar
+                        </button>
                     </div>
                 </div>
+                <!-- Contenido dinámico de la página -->
+                {% block contenido %}
 
-                <!-- Opción 2 -->
-                <!-- <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#mobileCollapseTwo">
-                            <i class="bi bi-bar-chart me-2"></i> Reportes
-                        </button>
-                    </h2>
-                    <div id="mobileCollapseTwo" class="accordion-collapse collapse"
-                        data-bs-parent="#mobileMenuAccordion">
-                        <div class="accordion-body p-0">
-                            <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-graph-up me-2"></i> Informe de Docentes
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-pie-chart me-2"></i> Informe de Estudiantes
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">
-                                    <i class="bi bi-bar-chart me-2"></i> Informe de Asignaturas
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                {% endblock %}
 
-                <!-- Opción 3 -->
-
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
-                        🙍🏻‍♂️ Perfil
-                    </a>
-                </div>
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action suboption" data-bs-dismiss="offcanvas">
-                        Salir ➜]
-                    </a>
-                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
+        <!-- FOOTER DENTRO DEL CONTENIDO PRINCIPAL - VISIBLE CORRECTAMENTE -->
+        <footer class="main-footer">
+            <!-- Sección superior del footer con redes sociales -->
+            <div class="footer-social">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 mb-4 mb-lg-0">
+                            <h5 class="fw-bold mb-3">Conéctate con nosotros</h5>
+                            <p class="text-muted mb-0">Síguenos en nuestras redes sociales para mantenerte actualizado
+                                con las últimas noticias y actualizaciones.</p>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-end">
+                                <!-- Redes sociales con iconos grandes -->
+                                <a href="#" class="text-decoration-none mx-3 my-2" aria-label="Facebook">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <i class="bi bi-facebook social-icon facebook fs-2"></i>
+                                        <span class="mt-1 small d-none d-md-block">Facebook</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="text-decoration-none mx-3 my-2" aria-label="Twitter">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <i class="bi bi-twitter social-icon twitter fs-2"></i>
+                                        <span class="mt-1 small d-none d-md-block">Twitter</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="text-decoration-none mx-3 my-2" aria-label="Instagram">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <i class="bi bi-instagram social-icon instagram fs-2"></i>
+                                        <span class="mt-1 small d-none d-md-block">Instagram</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="text-decoration-none mx-3 my-2" aria-label="YouTube">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <i class="bi bi-youtube social-icon youtube fs-2"></i>
+                                        <span class="mt-1 small d-none d-md-block">YouTube</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="text-decoration-none mx-3 my-2" aria-label="WhatsApp">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <i class="bi bi-whatsapp social-icon whatsapp fs-2"></i>
+                                        <span class="mt-1 small d-none d-md-block">WhatsApp</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección inferior del footer -->
+            <div class="py-3 bg-dark text-white">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <span>© 2026 CUR-Chontales. Todos los derechos reservados.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="footer-links text-center text-md-end">
+                                <a href="#" class="text-decoration-none text-white me-3">Política de Privacidad</a>
+                                <a href="#" class="text-decoration-none text-white me-3">Términos de Servicio</a>
+                                <a href="#" class="text-decoration-none text-white me-3">Contacto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <!-- Botón para volver al principio -->
+    <a href="#" class="back-to-top btn btn-primary d-none" id="back-to-top">
+        <i class="bi bi-chevron-up"></i>
+    </a>
+
+    <!-- Bootstrap 5 JS Bundle con Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/scripts-user.js' %}"></script>
+    <!--   <script src="{% static 'js/scripts.js' %}"></script> -->
 </body>
 
 </html>
