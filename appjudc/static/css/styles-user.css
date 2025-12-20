@@ -297,7 +297,7 @@
      white-space: nowrap;
  }
 
- /* Navbar semitransparente */
+ /* NAVBAR SEMITRANSPARENTE */
  .navbar-transparent {
      background: rgba(13, 110, 253, 0.70) !important;
      /* Azul primario semi-transparente */
@@ -311,3 +311,4 @@
      /* Oscuro semi-transparente */
      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
  }
+ 
