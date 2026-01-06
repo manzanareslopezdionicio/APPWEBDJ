@@ -1,40 +1,4 @@
 
-
-/* 
-// Funcionalidad para el modo oscuro/claro
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = themeToggle.querySelector('i');
-
-themeToggle.addEventListener('click', function () {
-    const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-    // Cambiar tema
-    document.documentElement.setAttribute('data-bs-theme', newTheme);
-
-    // Cambiar icono
-    if (newTheme === 'dark') {
-        themeIcon.classList.remove('bi-moon');
-        themeIcon.classList.add('bi-sun');
-    } else {
-        themeIcon.classList.remove('bi-sun');
-        themeIcon.classList.add('bi-moon');
-    }
-
-    // Guardar preferencia en localStorage
-    localStorage.setItem('theme', newTheme);
-});
-
-// Cargar tema guardado
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-bs-theme', savedTheme);
-
-if (savedTheme === 'dark') {
-    themeIcon.classList.remove('bi-moon');
-    themeIcon.classList.add('bi-sun');
-}
- */
-
 // Funcionalidad del sidebar para móviles
 const sidebarToggle = document.getElementById('sidebar-toggle');
 const sidebar = document.getElementById('sidebar');
