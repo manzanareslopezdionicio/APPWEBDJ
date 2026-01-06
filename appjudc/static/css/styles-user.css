@@ -9,7 +9,7 @@
 
  body {
      transition: background-color var(--transition-speed), color var(--transition-speed);
-     padding-top: 56px;
+     padding-top: 16px;
      /* Para compensar el navbar fijo */
      display: flex;
      flex-direction: column;
@@ -19,13 +19,18 @@
  }
 
  /* Estilos por defecto del input */
- .mi-input {
+ /* .mi-input {
      padding: 6px;
      border: 1px solid #ccc;
      border-radius: 8px;
      transition: border-color 0.5s ease;
-     /* Añade una transición suave al cambio de color del borde */
- }
+ } */
+ /* Añade una transición suave al cambio de color del borde */
+ /* Estilos al pasar el mouse sobre el input */
+ /*  .mi-input:hover {
+     border-color: rgb(240, 213, 60);
+     box-shadow: 0 0 10px rgb(59, 103, 249);
+ } */
 
  /* Sidebar personalizado - SIEMPRE VISIBLE EN ESCRITORIO */
  .sidebar {
@@ -311,4 +316,3 @@
      /* Oscuro semi-transparente */
      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
  }
- 
