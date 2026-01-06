@@ -1,73 +1,4 @@
-// ==========================================
-// MODO OSCURO DE BOOTSTRAP 5
-// ==========================================
-(function () {
-    'use strict';
 
-    // Obtener el tema guardado en localStorage o usar 'light' por defecto
-    const getStoredTheme = () => localStorage.getItem('theme');
-    const setStoredTheme = theme => localStorage.setItem('theme', theme);
-
-    // Obtener el tema preferido del sistema
-    const getPreferredTheme = () => {
-        const storedTheme = getStoredTheme();
-        if (storedTheme) {
-            return storedTheme;
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-
-    // Aplicar el tema al documento
-    const setTheme = theme => {
-        document.documentElement.setAttribute('data-bs-theme', theme);
-
-        // Actualizar el icono del botón si existe
-        updateThemeIcon(theme);
-    };
-
-    // Actualizar el icono del botón de tema
-    const updateThemeIcon = theme => {
-        const themeIcon = document.querySelector('#theme-icon');
-        const themeText = document.querySelector('#theme-text');
-
-        if (themeIcon) {
-            if (theme === 'dark') {
-                themeIcon.className = 'bi bi-moon-stars-fill fs-5';
-                if (themeText) themeText.textContent = 'Modo Oscuro';
-            } else {
-                themeIcon.className = 'bi bi-sun-fill fs-5';
-                if (themeText) themeText.textContent = 'Modo Claro';
-            }
-        }
-    };
-
-    // Aplicar el tema al cargar la página
-    setTheme(getPreferredTheme());
-
-    // Escuchar cambios en la preferencia del sistema
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        const storedTheme = getStoredTheme();
-        if (!storedTheme) {
-            setTheme(getPreferredTheme());
-        }
-    });
-
-    // Función para alternar el tema
-    window.toggleTheme = function () {
-        const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setStoredTheme(newTheme);
-        setTheme(newTheme);
-    };
-
-    // Configurar el botón de alternancia cuando el DOM esté listo
-    document.addEventListener('DOMContentLoaded', function () {
-        const themeToggle = document.querySelector('#theme-toggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', window.toggleTheme);
-        }
-    });
-})();
 
 /* 
 // Funcionalidad para el modo oscuro/claro
@@ -103,6 +34,7 @@ if (savedTheme === 'dark') {
     themeIcon.classList.add('bi-sun');
 }
  */
+
 // Funcionalidad del sidebar para móviles
 const sidebarToggle = document.getElementById('sidebar-toggle');
 const sidebar = document.getElementById('sidebar');
@@ -187,44 +119,3 @@ window.addEventListener('resize', function () {
 
 // Inicializar
 console.log("Diseño cargado correctamente. Footer visible dentro del contenido principal.");
-
-
-// MOSTRAR SIMPLE PARA FORMATO 99-99999-9 EN #CARNET (SIN LIBRERÍAS EXTERNAS)
-$(document).ready(function () {
-    var $c = $('#carnet');
-    if ($c.length) {
-        // Asegurar atributos HTML básicos
-        $c.attr('maxlength', 10)
-            .attr('inputmode', 'numeric')
-            .attr('placeholder', '12-34567-8');
-
-        $c.on('input', function () {
-            var v = $(this).val().replace(/\D/g, '').slice(0, 8); // solo dígitos, máximo 8
-            var p1 = v.slice(0, 2);
-            var p2 = v.slice(2, 7);
-            var p3 = v.slice(7, 8);
-            var out = '';
-            if (p1) out += p1;
-            if (p2) out += '-' + p2;
-            if (p3) out += '-' + p3;
-            $(this).val(out);
-            // quitar estado inválido al corregir
-            if (/^\d{2}-\d{5}-\d$/.test(out)) {
-                $(this).removeClass('is-invalid');
-            }
-        });
-
-        // Validación al enviar el formulario: impedir submit si formato inválido
-        $c.closest('form').on('submit', function (e) {
-            var val = $c.val();
-            var re = /^\d{2}-\d{5}-\d$/;
-            if (!re.test(val)) {
-                e.preventDefault();
-                $c.addClass('is-invalid');
-                $c.focus();
-            } else {
-                $c.removeClass('is-invalid');
-            }
-        });
-    }
-});

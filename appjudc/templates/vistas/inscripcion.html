@@ -12,35 +12,38 @@
         <fieldset class="border bg-body-secondary rounded-3 p-3 shadow ">
             <div class="col-md-12 mb-3 p-2 d-flex justify-content-end ">
                 <a href="#">
-                    <button class="btn btn-outline-success btn-lg" type="button">🔎 Buscar</button>
+                    <button class="btn btn-outline-success btn-lg" type="button"
+                        title="Buscar estudiante por carnet o nombre BD">🔎
+                        Buscar</button>
                 </a>
             </div>
             <legend class="float-none w-auto px-3 text-primary-emphasis">Datos del estudiante:</legend>
             <div class="row ">
                 <div class="col-6 col-md-4 mb-3 ">
                     <div class="form-floating">
-                        <input type="text" class="form-control mi-input" id="carnet" name="carnet"
-                            placeholder="12-34567-8" inputmode="numeric" pattern="\d{2}-\d{5}-\d"
-                            title="Formato: 99-99999-9" maxlength="10" required autofocus>
+                        <input type="text" class="form-control" id="carnet" name="carnet" placeholder="12-34567-8"
+                            inputmode="numeric" pattern="\d{2}-\d{5}-\d" title="Formato: 99-99999-9" maxlength="10"
+                            required autofocus>
                         <label for="carnet" class="form-label">Número de Carnet</label>
                         <div class="invalid-feedback">Formato inválido. Use 12-34567-8</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder desabled>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder required>
                         <label for="nombre" class="form-label">Nombres</label>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder desabled>
-                        <label for="nombre" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder required>
+                        <label for="apellido" class="form-label">Apellidos</label>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 mb-3">
                     <div class=" form-floating">
-                        <input type="email" class="form-control mi-input" name="email" id="email" placeholder readonly>
+                        <input type="email" class="form-control mi-input" name="email" id="email" placeholder readonly
+                            required>
                         <label for="email" class="form-label">Correo electrónico:</label>
                     </div>
                 </div>
@@ -62,7 +65,7 @@
                         <div class="invalid-feedback">Formato inválido. Use 9999-9999</div>
                     </div>
                 </div>
-                <div class="col-6 col-md-4 mb-3">
+                <div class="col-4 col-md-4 mb-3">
                     <label for="carrera">Seleccionar la Carrera:</label>
                     <select name="carrera" id="carrera" class="form-select mi-input" aria-label="Small select example"
                         required>
@@ -73,7 +76,7 @@
                     </select>
                     <div class="invalid-feedback">Seleccione una carrera.</div>
                 </div>
-                <div class="col-6 col-md-4 mb-3">
+                <div class="col-4 col-md-4 mb-3">
                     <label for="tipoInvestigacion">Seleccionar el Tipo de Investigación:</label>
                     <select name="tipoInvestigacion" id="tipoInvestigacion" class="form-select mi-input"
                         aria-label="Small select example" required>
@@ -83,6 +86,12 @@
                         <option value="3">Proyecto de Innovación</option>
                     </select>
                     <div class="invalid-feedback">Seleccione un tipo de investigación.</div>
+                </div>
+                <div class="col-md-4 p-3 d-flex justify-content-center">
+                    <a href="#">
+                        <button class="btn btn-outline-primary" type="button" title="Agregar estudiante como autor">✍
+                            Agregar Autor</button>
+                    </a>
                 </div>
             </div>
         </fieldset>
@@ -148,10 +157,10 @@
             <div class="row">
                 <div class="col-6 col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control mi-input" id="nombre" name="nombre"
+                        <input type="text" class="form-control mi-input" id="nombre" name="nombreautor"
                             placeholder="Ingrese solo letras" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
                             title="Solo se permiten letras y espacios" required>
-                        <label for="nombre" class="form-label">Nombre completo del Tutor</label>
+                        <label for="nombreautor" class="form-label">Nombre completo del Autor</label>
                         <div class="invalid-feedback">Solo se permiten letras y espacios</div>
                     </div>
                 </div>

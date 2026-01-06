@@ -18,20 +18,6 @@
      /* Evitar scroll horizontal en todo el body */
  }
 
- /* Estilos por defecto del input */
- /* .mi-input {
-     padding: 6px;
-     border: 1px solid #ccc;
-     border-radius: 8px;
-     transition: border-color 0.5s ease;
- } */
- /* Añade una transición suave al cambio de color del borde */
- /* Estilos al pasar el mouse sobre el input */
- /*  .mi-input:hover {
-     border-color: rgb(240, 213, 60);
-     box-shadow: 0 0 10px rgb(59, 103, 249);
- } */
-
  /* Sidebar personalizado - SIEMPRE VISIBLE EN ESCRITORIO */
  .sidebar {
      width: var(--sidebar-width);
