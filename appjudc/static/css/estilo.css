@@ -69,7 +69,7 @@
          color: #495057;
        }
 
-       .navbar {
+       /*        .navbar {
          position: fixed;
          top: 0;
          left: 0;
@@ -82,6 +82,22 @@
          background-color: rgba(127, 150, 254, 0.7) !important;
          z-index: 1000;
          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+       } */
+
+
+       /* Navbar semitransparente */
+       .navbar-transparent {
+         background: rgba(13, 110, 253, 0.70) !important;
+         /* Azul primario semi-transparente */
+         backdrop-filter: blur(10px);
+         -webkit-backdrop-filter: blur(10px);
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+       }
+
+       [data-bs-theme="dark"] .navbar-transparent {
+         background: rgba(13, 17, 23, 0.70) !important;
+         /* Oscuro semi-transparente */
          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
        }
 

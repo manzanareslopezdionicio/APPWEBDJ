@@ -18,6 +18,15 @@
      /* Evitar scroll horizontal en todo el body */
  }
 
+ /* Estilos por defecto del input */
+ .mi-input {
+     padding: 6px;
+     border: 1px solid #ccc;
+     border-radius: 8px;
+     transition: border-color 0.5s ease;
+     /* Añade una transición suave al cambio de color del borde */
+ }
+
  /* Sidebar personalizado - SIEMPRE VISIBLE EN ESCRITORIO */
  .sidebar {
      width: var(--sidebar-width);
@@ -288,7 +297,7 @@
      white-space: nowrap;
  }
 
- /* Navbar semitransparente */
+ /* NAVBAR SEMITRANSPARENTE */
  .navbar-transparent {
      background: rgba(13, 110, 253, 0.70) !important;
      /* Azul primario semi-transparente */
@@ -302,3 +311,4 @@
      /* Oscuro semi-transparente */
      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
  }
+ 
