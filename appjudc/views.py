@@ -7,9 +7,11 @@ from .models import EvaluacionArticuloCientifico, Docente
 import json
 from datetime import datetime
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required
 def login(request):
     if request.method == 'POST':
         carnet = request.POST.get('carnet')
@@ -17,12 +19,18 @@ def login(request):
         user = authenticate(request, username=carnet, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect('estudiante')
-    return render(request, 'login.html')
+            return redirect('index')
+    return render(request, 'registration/login.html')
+
+@login_required
+def salir(request):
+    auth_logout(request)
+    return redirect('login')
 
 def registro(request):
-    return render(request, 'registro.html')
+    return render(request, 'registration/registro.html')
 
+@login_required
 def index(request):
     return render(request, 'index.html')
 
