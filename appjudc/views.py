@@ -28,6 +28,34 @@ def salir(request):
     return redirect('login')
 
 def registro(request):
+    if request.method == 'POST':
+        carnet = request.POST.get('carnet')
+        nombre = request.POST.get('nombre')
+        apellidos = request.POST.get('apellidos')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        passwordf = request.POST.get('passwordf')
+
+        if password != passwordf:
+             return render(request, 'registration/registro.html', {'error': 'Las contraseñas no coinciden'})
+
+        try:
+            # Create user with carnet as username
+            from django.contrib.auth.models import User
+            if User.objects.filter(username=carnet).exists():
+                 return render(request, 'registration/registro.html', {'error': 'El carnet ya está registrado'})
+            
+            user = User.objects.create_user(username=carnet, email=email, password=password)
+            user.first_name = nombre
+            user.last_name = apellidos
+            user.save()
+
+            # Log the user in
+            auth_login(request, user)
+            return redirect('index')
+        except Exception as e:
+             return render(request, 'registration/registro.html', {'error': str(e)})
+
     return render(request, 'registration/registro.html')
 
 @login_required
