@@ -1,32 +1,55 @@
-from django.shortcuts import render, redirect, get_object_or_404 
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from .models import EvaluacionArticuloCientifico, Docente
+from .models import EvaluacionArticuloCientifico, Docente, Estudiante
 import json
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
-
-# Create your views here.
-@login_required
+# VISTA DE LOGIN
 def login(request):
+    """
+    Vista de login que valida si existe el número de carnet en la base de datos
+    """
     if request.method == 'POST':
         carnet = request.POST.get('carnet')
         password = request.POST.get('password')
-        user = authenticate(request, username=carnet, password=password)
-        if user is not None:
-            auth_login(request, user)
-            return redirect('index')
+        
+        # Validar si el carnet existe en la tabla Estudiante
+        try:
+            user = User.objects.get(username=carnet)
+            # El carnet existe, ahora autenticar con Django
+            user = authenticate(request, username=carnet, password=password)
+            if user is not None:
+                auth_login(request, user)
+                #messages.success(request, 'Bienvenido')
+                messages.success(request, f'Bienvenido {user.first_name} {user.last_name}')
+                return redirect('index')
+            else:
+                messages.error(request, 'Contraseña incorrecta')
+                return render(request, 'registration/login.html')
+        except User.DoesNotExist:
+            messages.error(request, 'El número de carnet no existe en el sistema')
+            return render(request, 'registration/login.html')
+    
     return render(request, 'registration/login.html')
 
+# VISTA DE INDEX PAGINA PRINCIPAL
+@login_required
+def index(request):
+    return render(request, 'index.html')
+
+# VISTA DE SALIR
 @login_required
 def salir(request):
     auth_logout(request)
     return redirect('login')
 
+# VISTA DE REGISTRO
 def registro(request):
     if request.method == 'POST':
         carnet = request.POST.get('carnet')
@@ -57,10 +80,6 @@ def registro(request):
              return render(request, 'registration/registro.html', {'error': str(e)})
 
     return render(request, 'registration/registro.html')
-
-@login_required
-def index(request):
-    return render(request, 'index.html')
 
 def estudiante(request):
     return render(request, 'vistas/estudiante.html')

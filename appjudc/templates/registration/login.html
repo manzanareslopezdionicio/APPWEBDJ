@@ -10,7 +10,7 @@
                 <div style="text-align: center;"><img src="{% static 'img/login.png' %}" width="40%" alt="logo"></div>
                 <h5 class="card-title text-center mb-4">Iniciar sesión</h5>
 
-                <form action="{% url 'login' %}" method="post">
+                <form action="" method="post">
                     {% csrf_token %}
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control mi-input" id="carnet" name="carnet"
@@ -38,4 +38,30 @@
         </div>
     </div>
 </div>
+
+<!-- SweetAlert2 para mostrar mensajes -->
+{% if messages %}
+{% for message in messages %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        Toast.fire({
+            icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
+            title: '{{ message|escapejs }}'
+        });
+    });
+</script>
+{% endfor %}
+{% endif %}
 {% endblock %}
