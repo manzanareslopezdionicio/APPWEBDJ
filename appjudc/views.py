@@ -26,8 +26,7 @@ def login(request):
             user = authenticate(request, username=carnet, password=password)
             if user is not None:
                 auth_login(request, user)
-                #messages.success(request, 'Bienvenido')
-                #messages.success(request, f'Bienvenido {user.first_name} {user.last_name}')
+                messages.success(request, f'Bienvenido {user.first_name} {user.last_name}')
                 return redirect('index')
             else:
                 messages.error(request, 'Contraseña incorrecta')
@@ -60,24 +59,29 @@ def registro(request):
         passwordf = request.POST.get('passwordf')
 
         if password != passwordf:
-             return render(request, 'registration/registro.html', {'error': 'Las contraseñas no coinciden'})
+            messages.error(request, 'Las contraseñas no coinciden')
+            return render(request, 'registration/registro.html')
 
         try:
             # Create user with carnet as username
             from django.contrib.auth.models import User
             if User.objects.filter(username=carnet).exists():
-                 return render(request, 'registration/registro.html', {'error': 'El carnet ya está registrado'})
+                messages.error(request, 'El carnet ya está registrado')
+                return render(request, 'registration/registro.html')
             
             user = User.objects.create_user(username=carnet, email=email, password=password)
             user.first_name = nombre
             user.last_name = apellidos
             user.save()
 
-            # Log the user in
+            # Inicio de sesión
             auth_login(request, user)
+            messages.success(request, 'Usuario registrado exitosamente')
             return redirect('index')
+
         except Exception as e:
-             return render(request, 'registration/registro.html', {'error': str(e)})
+            messages.error(request, 'Error al registrar el usuario')
+            return render(request, 'registration/registro.html')
 
     return render(request, 'registration/registro.html')
 

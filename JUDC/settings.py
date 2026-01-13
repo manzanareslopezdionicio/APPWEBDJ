@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 # Application definition
 
@@ -122,3 +123,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication settings
+LOGIN_URL = 'login'  # Redirige a tu vista de login personalizada
+LOGIN_REDIRECT_URL = 'index'  # Redirige a index después del login
+LOGOUT_REDIRECT_URL = 'login'  # Redirige a login después del logout

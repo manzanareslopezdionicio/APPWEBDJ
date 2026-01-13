@@ -43,7 +43,33 @@
             </div>
         </div>
         </div>
-        {% block contenido %} {% endblock %}
+        {% if messages %}
+        {% for message in messages %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer);
+                        toast.addEventListener('mouseleave', Swal.resumeTimer);
+                    }
+                });
+
+                Toast.fire({
+                    icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
+                    title: '{{ message|escapejs }}'
+                });
+            });
+        </script>
+        {% endfor %}
+        {% endif %}
+        {% block contenido %}
+
+        {% endblock %}
 
     </main>
     <footer>

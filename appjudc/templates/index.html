@@ -4,7 +4,6 @@
 
 {% block contenido %}
 <div class="col-md-12">
-
     <div class="alert bg-primary-subtle text-center text-body">
         <h2 style="text-shadow: 2px 2px 5px gray;">Jornada de Desarrollo Cientifico - JUDC </h2>
     </div>
@@ -174,5 +173,32 @@
         </table>
     </div>
 </div>
+
+<!-- Mensajes de alerta -->
+{% if messages %}
+{% for message in messages %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        Toast.fire({
+            icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
+            title: '{{ message|escapejs }}'
+        });
+    });
+</script>
+{% endfor %}
+{% endif %}
+<!-- Fin Mensajes de alerta -->
 
 {% endblock %}
