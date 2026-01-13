@@ -27,7 +27,7 @@ def login(request):
             if user is not None:
                 auth_login(request, user)
                 #messages.success(request, 'Bienvenido')
-                messages.success(request, f'Bienvenido {user.first_name} {user.last_name}')
+                #messages.success(request, f'Bienvenido {user.first_name} {user.last_name}')
                 return redirect('index')
             else:
                 messages.error(request, 'Contraseña incorrecta')
