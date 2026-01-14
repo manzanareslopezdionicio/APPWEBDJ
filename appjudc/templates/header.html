@@ -68,10 +68,12 @@
                         </ul>
                     </div>
                 </li>
+                {% if not user.is_superuser %}
                 <li class="nav-item"><a href="{% url 'inscripcion' %}"><i class="bi bi-clipboard-check-fill"></i>
                         <p>Incripciones</p>
                     </a>
                 </li>
+                {% endif %}
                 <li class="nav-item"><a href="#"><i class="bi bi-person-fill"></i>
                         <p>Perfil</p>
                     </a>

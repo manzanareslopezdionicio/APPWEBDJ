@@ -138,11 +138,13 @@
                         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#menuAccordion">
                             <div class="accordion-body p-0 accordion-primary">
 
+                                {% if not user.is_superuser %}
                                 <div class="list-group list-group-flush">
                                     <a href="{% url 'inscripcion'%}" class="list-group-item list-group-item-action">
                                         ✍🏻 Inscripciones
                                     </a>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

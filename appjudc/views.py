@@ -46,7 +46,7 @@ def index(request):
 @login_required
 def salir(request):
     auth_logout(request)
-    messages.success(request, 'Has cerrado sesión exitosamente')
+    messages.info(request, 'Has cerrado sesión exitosamente')
     return redirect('login')
 
 # VISTA DE REGISTRO
@@ -89,7 +89,12 @@ def registro(request):
 def estudiante(request):
     return render(request, 'vistas/estudiante.html')
 
+@login_required
 def inscripcion(request):
+    # Solo usuarios que NO son superusuarios pueden ver la página de inscripciones
+    if request.user.is_superuser:
+        messages.error(request, 'No tienes permiso para ver las inscripciones.')
+        return redirect('index')
     return render(request, 'vistas/inscripcion.html')
 
 def indexUsuario(request):
@@ -118,6 +123,7 @@ def docente(request):
     return render(request, 'vistas/docente.html', {'docentes': docentes})
 
 # VISTA PARA REGISTRAR DOCENTE
+@login_required
 def registrarDocente(request):
     codigo_docente = request.POST.get('codigodocente') 
     codigo_inss = request.POST.get('codigoinss')
