@@ -3,6 +3,7 @@
 {% block titulo %}Inicio{% endblock %}
 
 {% block contenido %}
+{% if user.is_superuser %}
 <div class="col-md-12">
     <div class="alert bg-primary-subtle text-center text-body">
         <h2 style="text-shadow: 2px 2px 5px gray;">Jornada de Desarrollo Cientifico - JUDC </h2>
@@ -173,7 +174,7 @@
         </table>
     </div>
 </div>
-
+{% endif %}
 <!-- Mensajes de alerta -->
 {% if messages %}
 {% for message in messages %}
