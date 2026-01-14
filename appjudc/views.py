@@ -46,6 +46,7 @@ def index(request):
 @login_required
 def salir(request):
     auth_logout(request)
+    messages.success(request, 'Has cerrado sesión exitosamente')
     return redirect('login')
 
 # VISTA DE REGISTRO

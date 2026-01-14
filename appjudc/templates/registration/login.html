@@ -39,43 +39,4 @@
     </div>
 </div>
 
-<!-- SweetAlert2 para mostrar mensajes 
-{% if request.GET.next %}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Acceso restringido',
-            text: 'Debes iniciar sesión para acceder a esa página.',
-            timer: 3000,
-            showConfirmButton: false
-        });
-    });
-</script>
-{% endif %}
--->
-<!-- {% if messages %}
-{% for message in messages %}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer);
-                toast.addEventListener('mouseleave', Swal.resumeTimer);
-            }
-        });
-
-        Toast.fire({
-            icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
-            title: '{{ message|escapejs }}'
-        });
-    });
-</script>
-{% endfor %}
-{% endif %} -->
 {% endblock %}
