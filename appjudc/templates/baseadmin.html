@@ -117,7 +117,9 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Account Setting</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="{% url 'salir' %}">Salir...</a>
+                                            <a class="dropdown-item confirm-logout" href="{% url 'salir' %}"
+                                                data-title="Cerrar sesión" data-text="¿Deseas cerrar sesión?"
+                                                data-confirm="Sí, salir" data-cancel="No, cancelar">Salir...</a>
                                         </li>
                                     </div>
                                 </ul>
@@ -131,8 +133,8 @@
             <div class="container">
                 <div class="page-inner">
                     <div class="page-category">
-                        {% block contenido %} 
-                        
+                        {% block contenido %}
+
                         {% endblock %}
                     </div>
                 </div>

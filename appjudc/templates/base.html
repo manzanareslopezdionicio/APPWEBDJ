@@ -91,10 +91,40 @@
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
+
+    <script>
+        // Confirmación de logout para enlaces con clase `confirm-logout`
+        document.addEventListener('click', function (e) {
+            const a = e.target.closest('a.confirm-logout');
+            if (!a) return;
+            e.preventDefault();
+
+            const title = a.dataset.title || 'Cerrar sesión';
+            const text = a.dataset.text || '¿Quieres salir del sistema?';
+            const confirmText = a.dataset.confirm || 'Sí';
+            const cancelText = a.dataset.cancel || 'No';
+
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: confirmText,
+                cancelButtonText: cancelText
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = a.href;
+                } else {
+                    Swal.fire({ icon: 'info', title: 'Cancelado', text: a.dataset.msgCancel || 'Se canceló la salida.' });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

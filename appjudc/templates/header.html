@@ -76,7 +76,9 @@
                         <p>Perfil</p>
                     </a>
                 </li>
-                <li class="nav-item"><a href="{% url 'salir' %}"><i class="bi bi-box-arrow-right"></i>
+                <li class="nav-item"><a class="confirm-logout" href="{% url 'salir' %}" data-title="Cerrar sesión"
+                        data-text="¿Deseas cerrar sesión?" data-confirm="Sí, salir" data-cancel="No, cancelar"><i
+                            class="bi bi-box-arrow-right"></i>
                         <p>Salir</p>
                     </a>
                 </li>
