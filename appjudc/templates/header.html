@@ -70,7 +70,7 @@
                     </div>
                 </li>
                 {% endif %}
-                {% if user.is_superuser %}
+                {% if not user.is_superuser %}
                 <li class="nav-item"><a href="{% url 'inscripcion' %}"><i class="bi bi-clipboard-check-fill"></i>
                         <p>Incripciones</p>
                     </a>
