@@ -92,8 +92,8 @@
                                     </div>
                                     <span class="profile-username text-body">
                                         <span class="op-7 text-white">Hola,</span>
-                                        <span class="fw-bold text-white">{{ user.first_name }} {{ user.last_name
-                                            }}</span>
+                                        <span class="fw-bold text-white">{{ user.first_name }} {{ user.last_name }}
+                                        </span>
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -212,8 +212,11 @@
                 Swal.fire({
                     icon: icon,
                     title: m.getAttribute('data-text'),
-                    confirmButtonText: 'Iniciar'
-
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
                 });
             });
         });

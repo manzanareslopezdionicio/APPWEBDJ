@@ -4,6 +4,29 @@
 
 {% block contenido %}
 
+{% if messages %}
+{% for message in messages %}
+<script>
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                text: "{{ message|escapejs }}",
+                icon: "success"
+            });
+        }
+    });
+</script>
+{% endfor %}
+{% endif %}
+
 <div class="container">
     <div class="row col-md-6 p-4 offset-md-3">
         <div class="card text-start shadow rounded-4 bg-primary-subtle">
@@ -16,7 +39,7 @@
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control mi-input" id="carnet" name="carnet"
                             placeholder="12-34567-8" inputmode="numeric" pattern="\d{2}-\d{5}-\d"
-                            title="Formato: 99-99999-9" maxlength="10" required autofocus>
+                            title="Formato: 99-99999-9 (Solo números)" maxlength="10" required autofocus>
                         <label for="carnet" class="form-label">Número de Carnet</label>
                         <div class="invalid-feedback">Formato inválido. Use 12-34567-8</div>
                     </div>
