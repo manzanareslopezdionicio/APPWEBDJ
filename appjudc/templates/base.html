@@ -35,28 +35,33 @@
         </div>
         <!-- mensaje de alerta -->
         {% if messages %}
-        {% for message in messages %}
+        <div id="django-messages" style="display: none;">
+            {% for message in messages %}
+            <span class="django-message" data-tags="{{ message.tags }}" data-text="{{ message }}"></span>
+            {% endfor %}
+        </div>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer);
-                        toast.addEventListener('mouseleave', Swal.resumeTimer);
-                    }
-                });
+                const messages = document.querySelectorAll('.django-message');
+                messages.forEach(m => {
+                    const tags = m.getAttribute('data-tags') || '';
+                    let icon = 'info';
+                    if (tags.includes('success')) icon = 'success';
+                    else if (tags.includes('error')) icon = 'error';
+                    else if (tags.includes('warning')) icon = 'warning';
 
-                Toast.fire({
-                    icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
-                    title: '{{ message|escapejs }}'
+                    Swal.fire({
+                        icon: icon,
+                        title: m.getAttribute('data-text'),
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
                 });
             });
         </script>
-        {% endfor %}
         {% endif %}
         <!-- Finaliza mensaje de alerta -->
         {% block contenido %}

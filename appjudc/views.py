@@ -30,7 +30,7 @@ def login(request):
                 if user.is_superuser:
                     return redirect('index')
                 else:
-                    messages.info(request, 'No tienes permiso para ver las inscripciones.')
+                    messages.success(request, 'Bienvenido a la inscripcion de JUDC - 2026')
                     return redirect('inscripcion')
             else:
                 messages.error(request, 'Contraseña incorrecta')

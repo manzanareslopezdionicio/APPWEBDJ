@@ -10,6 +10,8 @@
     <!-- Fonts and icons -->
     <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
     <script src="{% static 'js/dark-mode.js' %}"></script>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <script>
         WebFont.load({
@@ -90,7 +92,8 @@
                                     </div>
                                     <span class="profile-username text-body">
                                         <span class="op-7 text-white">Hola,</span>
-                                        <span class="fw-bold text-white">{{ user.first_name }} {{ user.last_name }}</span>
+                                        <span class="fw-bold text-white">{{ user.first_name }} {{ user.last_name
+                                            }}</span>
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -188,6 +191,35 @@
 
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+    <div id="django-messages" style="display: none;">
+        {% for message in messages %}
+        <span class="django-message" data-tags="{{ message.tags }}" data-text="{{ message }}"></span>
+        {% endfor %}
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const messages = document.querySelectorAll('.django-message');
+            messages.forEach(m => {
+                const tags = m.getAttribute('data-tags');
+                let icon = 'info';
+                if (tags.includes('success')) icon = 'success';
+                else if (tags.includes('error')) icon = 'error';
+                else if (tags.includes('warning')) icon = 'warning';
+                else if (tags.includes('info')) icon = 'info';
+
+                Swal.fire({
+                    icon: icon,
+                    title: m.getAttribute('data-text'),
+                    confirmButtonText: 'Iniciar'
+
+                });
+            });
+        });
+    </script>
+    {% endif %}
+
     <!-- Kaiadmin JS -->
     <script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>

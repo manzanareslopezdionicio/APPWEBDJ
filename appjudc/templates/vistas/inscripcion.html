@@ -3,6 +3,7 @@
 {% block titulo %}Incripción{% endblock %}
 
 {% block contenido %}
+
 <div class="col-md-12 content-area p-3">
     <div class="alert bg-body-secondary text-center">
         <h3>Inscripción de JUDC</h3>
@@ -215,8 +216,26 @@
                 if (!form.checkValidity()) {
                     event.preventDefault()
                     event.stopPropagation()
+                    form.classList.add('was-validated')
+                } else {
+                    // Si el formulario es válido, mostrar confirmación de SweetAlert2
+                    event.preventDefault(); // Prevenir envío inmediato
+
+                    Swal.fire({
+                        title: '¿Confirmar inscripción?',
+                        text: "Verifica que todos los datos sean correctos",
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#198754',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, guardar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); // Enviar formulario si se confirma
+                        }
+                    });
                 }
-                form.classList.add('was-validated')
             }, false)
         })
     })()
@@ -274,6 +293,5 @@
         }
     });
 </script>
-
 
 {% endblock %}

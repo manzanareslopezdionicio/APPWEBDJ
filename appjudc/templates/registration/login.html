@@ -1,30 +1,8 @@
 {% extends 'base.html' %}
 {% block titulo %}Login JUDC{% endblock %}
 {% load static %}
-{% block contenido %}
 
-{% if messages %}
-{% for message in messages %}
-<script>
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                text: "{{ message|escapejs }}",
-                icon: "success"
-            });
-        }
-    });
-</script>
-{% endfor %}
-{% endif %}
+{% block contenido %}
 
 <div class="container">
     <div class="row col-md-6 p-4 offset-md-3">
