@@ -27,7 +27,11 @@ def login(request):
             if user is not None:
                 auth_login(request, user)
                 messages.success(request, f'Bienvenido {user.first_name} {user.last_name}')
-                return redirect('index')
+                if user.is_superuser:
+                    return redirect('index')
+                else:
+                    messages.info(request, 'No tienes permiso para ver las inscripciones.')
+                    return redirect('inscripcion')
             else:
                 messages.error(request, 'Contraseña incorrecta')
                 return render(request, 'registration/login.html')
@@ -92,9 +96,9 @@ def estudiante(request):
 @login_required
 def inscripcion(request):
     # Solo usuarios que NO son superusuarios pueden ver la página de inscripciones
-    if request.user.is_superuser:
-        messages.error(request, 'No tienes permiso para ver las inscripciones.')
-        return redirect('index')
+    #if request.user.is_superuser:
+    #    messages.error(request, 'No tienes permiso para ver las inscripciones.')
+    #    return redirect('index')
     return render(request, 'vistas/inscripcion.html')
 
 def indexUsuario(request):

@@ -25,12 +25,14 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-primary">
+                {% if user.is_superuser %}
                 <li class="nav-item active">
                     <a href="{% url 'index' %}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
+                {% endif %}
                 <li class="nav-section">
                     <span class="sidebar-mini-icon ">
                         <i class="fa fa-ellipsis-h"></i>
@@ -68,6 +70,10 @@
                             <li><a href="#"><span class="sub-item">Informe de SINACAM</span></a></li>
                         </ul>
                     </div>
+                </li>
+                <li class="nav-item"><a href="{% url 'inscripcion' %}"><i class="bi bi-clipboard-check-fill"></i>
+                        <p>Incripciones</p>
+                    </a>
                 </li>
                 {% endif %}
                 {% if not user.is_superuser %}
