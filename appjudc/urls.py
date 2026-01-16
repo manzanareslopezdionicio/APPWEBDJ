@@ -21,5 +21,6 @@ urlpatterns = [
     path('borrarDocente/<str:codigo_docente>/', views.borrarDocente, name='borrarDocente'),
     path('proyectoInnovacion/', views.proyectoInnovacion, name='proyectoInnovacion'),
     path('carrera/', views.carrera, name='carrera'),
+    path('asignatura/', views.asignatura, name='asignatura'),
     path('salir/', views.salir, name='salir'),
 ]

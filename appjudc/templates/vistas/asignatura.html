@@ -1,0 +1,234 @@
+{% extends 'baseadmin.html' %}
+{% load static %}
+{% block titulo %}Asignaturas{% endblock %}
+
+{% block contenido %}
+<div class="col-md-12 content-area text-body">
+    <div class="alert bg-primary-subtle text-center">
+        <h2 style="text-shadow: 2px 2px 5px gray;">Registro de Asignaturas </h2>
+    </div>
+
+    <form action="" method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6 col-md-4 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control mi-input" name="codigoasignatura" id="codigoasignatura"
+                        pattern="^[A-Z]{4}\d{3}$" title="Formato: ABCD123" maxlength="7" required placeholder="">
+                    <label for="codigoasignatura" class="form-label">Código</label>
+                    <div class="invalid-feedback">Por favor ingrese un código válido.</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control mi-input" name="nombreasignatura" id="nombreasignatura"
+                        title="Solo letras y espacios" maxlength="50" required placeholder="">
+                    <label for="nombreasignatura" class="form-label">Nombre</label>
+                    <div class="invalid-feedback">Por favor ingrese un nombre válido.</div>
+                </div>
+                <div id="mensajeError" style="color: red; font-size: 12px; margin-top: 5px;"></div>
+            </div>
+            <div class="col-6 col-md-4 mb-3">
+                <div class="form-floating">
+                    <select name="areaconocimiento" id="areaconocimiento" class="form-select mi-input" required>
+                        <option value="">Seleccione una area</option>
+                        <option value="1">Ciencias y Tecnología</option>
+                        <option value="2">Ciencias Economicas y Admin</option>
+                        <option value="3">Educación y Humanidades</option>
+                    </select>
+                    <label for="areaconocimiento">Area del Conocimiento-CUR</label>
+                    <div class="invalid-feedback">Seleccione un área.</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 mb-3">
+                <div class="form-floating">
+                    <select name="carrera" id="carrera" class="form-select mi-input" required>
+                        <option value="">Seleccione una carrera</option>
+                        <option value="1">Ingeniería en Sistemas</option>
+                        <option value="2">Ingeniería en Agroindustria</option>
+                        <option value="3">Licenciatura en Administración</option>
+                    </select>
+                    <label for="carrera">Carrera</label>
+                    <div class="invalid-feedback">Seleccione una carrera.</div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center p-3">
+            <button type="submit" id="btnEnviar" class="btn btn-outline-primary">Guardar</button>
+        </div>
+    </form>
+    <h2>Lista de Asignaturas</h2>
+    <table class="table table-dark table-striped table-hover table-bordered rounded-3 table-responsive">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Carrera</th>
+                <th>Area del Conocimiento</th>
+
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asignatura in asignaturas %}
+            <tr>
+                <td>{{ asignatura.codigoasignatura }}</td>
+                <td>{{ asignatura.nombreasignatura }}</td>
+                <td>{{ asignatura.carrera }}</td>
+                <td>{{ asignatura.areaconocimiento }}</td>
+
+                <td>
+                    <a href="{% url 'editar_asignatura' asignatura.id %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'eliminar_asignatura' asignatura.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    // Validación de formularios Bootstrap 5
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+<script>
+    // VALIDACIÓN DEL CAMPO CODIGO
+    document.getElementById('codigoasignatura').addEventListener('input', function (e) {
+        let valor = e.target.value.toUpperCase();
+        let nuevoValor = '';
+
+        // Filtrar solo letras y números, mantener orden
+        for (let i = 0; i < valor.length; i++) {
+            if (i < 4) {
+                // Primeras 4 posiciones: solo letras
+                if (/[A-Z]/.test(valor[i])) {
+                    nuevoValor += valor[i];
+                }
+            } else {
+                // Últimas 3 posiciones: solo números
+                if (/[0-9]/.test(valor[i])) {
+                    nuevoValor += valor[i];
+                }
+            }
+        }
+
+        e.target.value = nuevoValor;
+    });
+
+    // Validación al enviar formulario
+    function validarCodigo() {
+        const input = document.getElementById('codigoasignatura');
+        const regex = /^[A-Z]{4}\d{3}$/;
+        const esValido = regex.test(input.value);
+
+        if (!esValido) {
+            alert('Formato inválido. Debe ser 4 letras + 3 números (ej: CAGN120)');
+            input.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script>
+    // VALIDACIÓN DEL CAMPO NOMBRE
+    document.getElementById('nombreasignatura').addEventListener('input', function (e) {
+        const input = e.target;
+        const mensajeError = document.getElementById('mensajeError');
+        let valor = input.value;
+
+        // Validar en tiempo real
+        const resultado = validarNombreAsignaturaEnTiempoReal(valor);
+
+        // Mostrar/ocultar mensaje de error
+        if (!resultado.valido && valor.length > 0) {
+            mensajeError.textContent = resultado.mensaje;
+            input.style.borderColor = 'red';
+        } else {
+            mensajeError.textContent = '';
+            input.style.borderColor = resultado.valido ? 'green' : '#ccc';
+        }
+    });
+
+    function validarNombreAsignaturaEnTiempoReal(valor) {
+        if (valor.length === 0) {
+            return { valido: true, mensaje: '' };
+        }
+
+        // Validar longitud mínima mientras se escribe
+        if (valor.length < 3) {
+            return {
+                valido: false,
+                mensaje: 'Mínimo 3 caracteres'
+            };
+        }
+
+        // Validar caracteres permitidos
+        const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-.,:;()]*$/;
+        if (!regex.test(valor)) {
+            return {
+                valido: false,
+                mensaje: 'Caracter no permitido'
+            };
+        }
+
+        // Validar que no empiece con espacio
+        if (valor.startsWith(' ')) {
+            return {
+                valido: false,
+                mensaje: 'No puede empezar con espacio'
+            };
+        }
+
+        return { valido: true, mensaje: '' };
+    }
+
+    // Validación completa al enviar
+    function validarAntesDeEnviar() {
+        const input = document.getElementById('nombreAsignatura');
+        const resultado = validarNombreAsignatura(input.value);
+
+        if (!resultado.valido) {
+            alert(resultado.mensaje);
+            input.focus();
+            return false;
+        }
+
+        // Formatear nombre (capitalizar palabras)
+        const nombreFormateado = capitalizarAsignatura(resultado.nombreFormateado);
+        console.log('Nombre formateado:', nombreFormateado);
+
+        return true;
+    }
+
+    // Función para capitalizar el nombre de la asignatura
+    function capitalizarAsignatura(nombre) {
+        return nombre
+            .toLowerCase()
+            .split(' ')
+            .map(palabra => {
+                // No capitalizar palabras cortas como conectores
+                const palabrasCortas = ['y', 'e', 'o', 'u', 'de', 'del', 'la', 'las', 'el', 'los', 'en', 'con'];
+                if (palabrasCortas.includes(palabra)) {
+                    return palabra;
+                }
+                return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+            })
+            .join(' ');
+    }
+</script>
+
+{% endblock %}

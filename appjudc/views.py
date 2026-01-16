@@ -126,6 +126,9 @@ def docente(request):
     docentes = Docente.objects.all()
     return render(request, 'vistas/docente.html', {'docentes': docentes})
 
+def asignatura(request):
+    return render(request, 'vistas/asignatura.html')
+
 # VISTA PARA REGISTRAR DOCENTE
 @login_required
 def registrarDocente(request):

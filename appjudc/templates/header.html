@@ -1,4 +1,5 @@
 {% load static %}
+
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo Header -->
@@ -24,7 +25,7 @@
     <!-- Menu Sidebar -->
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
-            <ul class="nav nav-primary">
+            <ul class="nav nav-secondary">
                 {% if user.is_superuser %}
                 <li class="nav-item active">
                     <a href="{% url 'index' %}">
@@ -51,6 +52,7 @@
                             <li><a href="{% url 'docente' %}"><span class="sub-item">Docentes</span></a></li>
                             <li><a href="{% url 'estudiante' %}"><span class="sub-item">Estudiantes</span></a></li>
                             <li><a href="{% url 'carrera' %}"><span class="sub-item">Carreras</span></a></li>
+                            <li><a href="{% url 'asignatura' %}"><span class="sub-item">Asignaturas</span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -82,7 +84,7 @@
                     </a>
                 </li>
                 {% endif %}
-                <li class="nav-item"><a href="#"><i class="bi bi-person-fill"></i>
+                <li class="nav-item"><a href="{% url 'perfil' %}"><i class="bi bi-person-fill"></i>
                         <p>Perfil</p>
                     </a>
                 </li>

@@ -8,7 +8,7 @@
     <div class="alert bg-primary-subtle text-center">
         <h2 style="text-shadow: 2px 2px 5px gray;">Jornada de Desarrollo Cientifico - JUDC </h2>
     </div>
-    <h3 style="text-shadow: 2px 2px 4px gray;">Gestion de Docentes:</h3>
+    <h3 style="text-shadow: 2px 2px 4px gray;">Gestión de Docentes:</h3>
 
     <form action="/registrarDocente/" method="post" class="mt-4 needs-validation" novalidate>
         {% csrf_token %}
@@ -21,14 +21,6 @@
                     <label for="carnet" class="form-label">Número de INSS</label>
                     <div class="invalid-feedback">Formato inválido. Use 12-34567-8</div>
                 </div>
-
-                <!-- <div class="form-floating">
-                    <input type="text" class="form-control mi-input" id="codigoinss" name="codigoinss" placeholder=""
-                        pattern="^\d{2}-\d{5}-\d$" title="Formato: 99999999 (Solo números)" maxlength="10" autofocus
-                        required>
-                    <label for="codigoinss" class="form-label text-body">Número INSS</label>
-                    <div class="invalid-feedback">Por favor ingrese un número válido. Ej: 10701041</div>
-                </div> -->
             </div>
             <div class="col-6 col-md-3 mb-3">
                 <div class="form-floating">

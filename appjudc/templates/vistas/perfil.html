@@ -1,9 +1,9 @@
-{% extends 'baseusuario.html' %}
+{% extends 'baseadmin.html' %}
 {%load static%}
 {% block titulo %}Perfil - Usuario{% endblock %}
 
 {% block contenido %}
-<div class="col-md-9 content-area p-3">
+<div class="col-md-12 content-area p-3">
     <div class="text-center">
         <h1>Perfil de usuario</h1>
     </div>
@@ -63,7 +63,7 @@
                                 <div class="invalid-feedback">Formato inválido. Use solo números</div>
                             </div>
                         </div>
-                        
+
                         <!-- Password Registro -->
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating mb-3 position-relative">
@@ -78,7 +78,8 @@
                                         style="color:blue; font-size: 1.3rem;"></i>
                                 </span>
                                 <div class="password-strength"></div>
-                                 <div class="invalid-feedback">Formato inválido. Use solo letras mayúsculas, números y caracteres especiales</div>
+                                <div class="invalid-feedback">Formato inválido. Use solo letras mayúsculas, números y
+                                    caracteres especiales</div>
                             </div>
                         </div>
 
@@ -119,7 +120,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center p-3">
-                            <button type="submit" id="btnEnviar" class="btn btn-outline-primary" disabled>Actualizar</button>
+                            <button type="submit" id="btnEnviar" class="btn btn-outline-primary"
+                                disabled>Actualizar</button>
                         </div>
                     </div>
                 </form>
@@ -195,59 +197,59 @@
 
 
 
-$(document).ready(function () {
-    var $inputLetras = $('#apellido');
-    if ($inputLetras.length) {
+    $(document).ready(function () {
+        var $inputLetras = $('#apellido');
+        if ($inputLetras.length) {
 
-        // Máscara: solo permitir letras en tiempo real
-        $inputLetras.on('input', function () {
-            var valor = $(this).val();
+            // Máscara: solo permitir letras en tiempo real
+            $inputLetras.on('input', function () {
+                var valor = $(this).val();
 
-            // Remover cualquier carácter que no sea letra, espacio o letra acentuada
-            var soloLetras = valor.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g, '');
+                // Remover cualquier carácter que no sea letra, espacio o letra acentuada
+                var soloLetras = valor.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g, '');
 
-            $(this).val(soloLetras);
+                $(this).val(soloLetras);
 
-            // Validación visual en tiempo real
-            var esValido = this.checkValidity() && soloLetras.length > 0;
-            if (esValido) {
-                $(this).removeClass('is-invalid').addClass('is-valid');
-            } else {
-                $(this).removeClass('is-valid');
-            }
-        });
+                // Validación visual en tiempo real
+                var esValido = this.checkValidity() && soloLetras.length > 0;
+                if (esValido) {
+                    $(this).removeClass('is-invalid').addClass('is-valid');
+                } else {
+                    $(this).removeClass('is-valid');
+                }
+            });
 
-        // Validación al perder el foco
-        $inputLetras.on('blur', function () {
-            var esValido = this.checkValidity() && $(this).val().length > 0;
-            $(this).toggleClass('is-invalid', !esValido);
-            $(this).toggleClass('is-valid', esValido);
-        });
+            // Validación al perder el foco
+            $inputLetras.on('blur', function () {
+                var esValido = this.checkValidity() && $(this).val().length > 0;
+                $(this).toggleClass('is-invalid', !esValido);
+                $(this).toggleClass('is-valid', esValido);
+            });
 
-        // Limpiar estilos al enfocar
-        $inputLetras.on('focus', function () {
-            $(this).removeClass('is-invalid is-valid');
-        });
+            // Limpiar estilos al enfocar
+            $inputLetras.on('focus', function () {
+                $(this).removeClass('is-invalid is-valid');
+            });
 
-        // Prevenir pegado de texto no válido
-        $inputLetras.on('paste', function (e) {
-            var textoPegado = (e.originalEvent || e).clipboardData.getData('text/plain');
-            if (!/^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$/.test(textoPegado)) {
-                e.preventDefault();
-            }
-        });
+            // Prevenir pegado de texto no válido
+            $inputLetras.on('paste', function (e) {
+                var textoPegado = (e.originalEvent || e).clipboardData.getData('text/plain');
+                if (!/^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$/.test(textoPegado)) {
+                    e.preventDefault();
+                }
+            });
 
-        // Validación en el submit
-        $inputLetras.closest('form').on('submit', function (e) {
-            var esValido = $inputLetras[0].checkValidity() && $inputLetras.val().length > 0;
-            if (!esValido) {
-                e.preventDefault();
-                $inputLetras.addClass('is-invalid');
-                $inputLetras.focus();
-            }
-        });
-    }
-});
+            // Validación en el submit
+            $inputLetras.closest('form').on('submit', function (e) {
+                var esValido = $inputLetras[0].checkValidity() && $inputLetras.val().length > 0;
+                if (!esValido) {
+                    e.preventDefault();
+                    $inputLetras.addClass('is-invalid');
+                    $inputLetras.focus();
+                }
+            });
+        }
+    });
 
 
 </script>
