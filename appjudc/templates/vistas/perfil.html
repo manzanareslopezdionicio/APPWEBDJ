@@ -6,26 +6,28 @@
 <div class="col-md-12 content-area p-3">
     <div class="text-center">
         <h1>Perfil de usuario</h1>
+        <p class="text-muted">Bienvenido, {{ user.first_name }} {{ user.last_name }}</p>
     </div>
     <div class="container p-3 ">
         <div class="card shadow">
             <div class="card-body">
-                {% csrf_token %}
-                <form action="#" method="post" id="formActualizar" class="needs-validation" novalidate>
+                <form action="{% url 'perfil' %}" method="post" id="formActualizar" class="needs-validation" novalidate>
+                    {% csrf_token %}
                     <div class="row">
                         <div class="col-md-4 p-2">
                             <div class="form-floating">
+                                <input type="text" class="form-control" name="carnet" value="{{ user.username }}"
+                                    disabled>
                                 <label for="carnet" class="form-label">Número de carnet:</label>
-                                <input type="text" class="form-control" name="carnet" disabled>
                             </div>
                         </div>
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating">
-                                <input type="text" class="form-control mi-input" id="nombre" name="nombre"
+                                <input type="text" class="form-control mi-input" id="nombre" name="first_name"
                                     placeholder="Nombres" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
                                     title="Solo letras, espacios y guiones"
                                     oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g,'');" autofocus
-                                    required>
+                                    value="{{ user.first_name }}" required>
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <div class="invalid-feedback">Formato inválido. Use solo letras, espacios y guiones
                                 </div>
@@ -33,11 +35,11 @@
                         </div>
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating">
-
-                                <input type="text" class="form-control mi-input" id="apellido" name="apellido"
+                                <input type="text" class="form-control mi-input" id="apellido" name="last_name"
                                     placeholder="Apellidos" pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]+"
                                     title="Solo letras, espacios y guiones"
-                                    oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g,'');" required>
+                                    oninput="this.value = this.value.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g,'');"
+                                    value="{{ user.last_name }}" required>
                                 <label for="apellido" class="form-label">Apellidos:</label>
                                 <div class="invalid-feedback">Formato inválido. Use solo letras, espacios y guiones
                                 </div>
@@ -49,7 +51,7 @@
                                 <input type="email" class="form-control mi-input" id="email" name="email"
                                     placeholder="email@dominio.com"
                                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                    title="Formato de correo electrónico inválido" required>
+                                    title="Formato de correo electrónico inválido" value="{{ user.email }}" required>
                                 <label for="email" class="form-label">Correo electrónico:</label>
                                 <div class="invalid-feedback">Formato inválido. Use email@dominio.com</div>
                             </div>
@@ -57,29 +59,27 @@
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating">
                                 <input type="text" class="form-control mi-input" id="telefono" name="telefono"
-                                    placeholder="9999-9999" title="Formato: 9999-9999" required pattern="^\d{4}-\d{4}$"
-                                    required>
-                                <label for="telefono" class="form-label">Telefono:</label>
-                                <div class="invalid-feedback">Formato inválido. Use solo números</div>
+                                    placeholder="9999-9999" title="Formato: 9999-9999" pattern="^\d{4}-\d{4}$"
+                                    value="{{ perfil.telefono|default:'' }}">
+                                <label for="telefono" class="form-label">Teléfono:</label>
+                                <div class="invalid-feedback">Formato inválido. Use 9999-9999</div>
                             </div>
                         </div>
 
-                        <!-- Password Registro -->
+                        <!-- Password Registro (Opcional para cambiar) -->
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating mb-3 position-relative">
                                 <input type="password" class="form-control password-input mi-input"
-                                    id="password-registro"
-                                    title="Se requiere letra mayuscula, numeros y caracter especial"
-                                    placeholder="Contraseña" required>
-                                <label for="password-registro">Contraseña</label>
-                                <span class="password-toggle position-absolute top-25 end-0 translate-middle-y me-3"
+                                    id="password-registro" name="password-registro"
+                                    title="Dejar en blanco para mantener la contraseña actual"
+                                    placeholder="Nueva Contraseña">
+                                <label for="password-registro">Nueva Contraseña (opcional)</label>
+                                <span class="password-toggle position-absolute top-25 end-0 me-3"
                                     style="cursor:pointer;" onclick="togglePasswordRegistro()">
                                     <i class="bi bi-eye-slash-fill" id="togglePasswordRegistro"
                                         style="color:blue; font-size: 1.3rem;"></i>
                                 </span>
                                 <div class="password-strength"></div>
-                                <div class="invalid-feedback">Formato inválido. Use solo letras mayúsculas, números y
-                                    caracteres especiales</div>
                             </div>
                         </div>
 
@@ -87,41 +87,28 @@
                         <div class="col-6 col-md-4 p-2">
                             <div class="form-floating mb-3 position-relative">
                                 <input type="password" class="form-control password-input mi-input"
-                                    id="password-confirm" placeholder="Confirmar Contraseña"
-                                    title="Se requiere confirmar Contraseña" required>
-                                <label for="password-confirm">Confirmar Contraseña</label>
+                                    id="password-confirm" name="password-confirm"
+                                    placeholder="Confirmar Nueva Contraseña"
+                                    title="Dejar en blanco para mantener la contraseña actual">
+                                <label for="password-confirm">Confirmar Contraseña (opcional)</label>
                                 <span class="password-toggle position-absolute top-25 end-0 translate-middle-y me-3"
                                     style="cursor:pointer; " onclick="togglePasswordConfirm()">
                                     <i class="bi bi-eye-slash-fill" id="togglePasswordConfirm"
                                         style="color:blue; font-size:1.3rem;"></i>
                                 </span>
                                 <div class="password-strength"></div>
-                                <div class="invalid-feedback">Las contraseñas no coinciden.</div>
                             </div>
                         </div>
-                        <!--                         <div class="col-md-4 p-2">
-                            <input type="password" class="form-control mi-input" id="password" name="password"
-                                placeholder="Contraseña" title="Formato de contraseña inválido" required
-                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                                title="Formato de contraseña inválido">
-                            <label for="password" class="form-label">Password:</label>
-                        </div>
-                        <div class="col-md-4 p-2">
-                            <input type="password" class="form-control mi-input" id="passwordc" name="passwordc"
-                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                                title="Formato de contraseña inválido" required>
-                            <label for="passwordc" class="form-label">Confirmar Password:</label>
-                        </div> -->
+
                         <div class="col-12 col-md-8 p-2">
                             <div class="form-floating">
                                 <textarea class="form-control mi-input" name="direccion" id="direccion" placeholder=""
-                                    required style="height: 70px"></textarea>
+                                    style="height: 70px">{{ perfil.direccion|default:'' }}</textarea>
                                 <label for="direccion">Dirección:</label>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center p-3">
-                            <button type="submit" id="btnEnviar" class="btn btn-outline-primary"
-                                disabled>Actualizar</button>
+                            <button type="submit" id="btnEnviar" class="btn btn-outline-primary">Actualizar</button>
                         </div>
                     </div>
                 </form>
@@ -130,11 +117,55 @@
     </div>
 </div>
 <script>
+    // Funciones para toggle de contraseña
+    function togglePasswordRegistro() {
+        var pwd = document.getElementById('password-registro');
+        var icon = document.getElementById('togglePasswordRegistro');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            icon.classList.remove('bi-eye-slash-fill');
+            icon.classList.add('bi-eye-fill');
+        } else {
+            pwd.type = 'password';
+            icon.classList.remove('bi-eye-fill');
+            icon.classList.add('bi-eye-slash-fill');
+        }
+    }
+
+    function togglePasswordConfirm() {
+        var pwd = document.getElementById('password-confirm');
+        var icon = document.getElementById('togglePasswordConfirm');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            icon.classList.remove('bi-eye-slash-fill');
+            icon.classList.add('bi-eye-fill');
+        } else {
+            pwd.type = 'password';
+            icon.classList.remove('bi-eye-fill');
+            icon.classList.add('bi-eye-slash-fill');
+        }
+    }
+
+    // Validación del formulario
     (function () {
         'use strict'
         var forms = document.querySelectorAll('.needs-validation')
         Array.prototype.slice.call(forms).forEach(function (form) {
             form.addEventListener('submit', function (event) {
+                // Verificar que las contraseñas coincidan si se ingresaron
+                var pwd = document.getElementById('password-registro');
+                var pwdConfirm = document.getElementById('password-confirm');
+
+                if (pwd.value !== '' || pwdConfirm.value !== '') {
+                    if (pwd.value !== pwdConfirm.value) {
+                        pwdConfirm.setCustomValidity('Las contraseñas no coinciden');
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        pwdConfirm.setCustomValidity('');
+                    }
+                }
+
                 if (!form.checkValidity()) {
                     event.preventDefault()
                     event.stopPropagation()
@@ -144,114 +175,28 @@
         })
     })()
 
+    // Validación en tiempo real de contraseñas
     document.addEventListener('DOMContentLoaded', function () {
-        var form = document.getElementById('formActualizar')
-        var btn = document.getElementById('btnEnviar')
-        var pwd = document.getElementById('password-registro')
-        var pwdConfirm = document.getElementById('password-confirm')
+        var pwd = document.getElementById('password-registro');
+        var pwdConfirm = document.getElementById('password-confirm');
 
         function checkPasswordMatch() {
-            if (pwd && pwdConfirm) {
-                if (pwd.value !== '' || pwdConfirm.value !== '') {
-                    if (pwd.value !== pwdConfirm.value) {
-                        pwdConfirm.setCustomValidity('Las contraseñas no coinciden')
-                        return false
-                    } else {
-                        pwdConfirm.setCustomValidity('')
-                        return true
-                    }
+            if (pwd.value !== '' || pwdConfirm.value !== '') {
+                if (pwd.value !== pwdConfirm.value) {
+                    pwdConfirm.setCustomValidity('Las contraseñas no coinciden');
+                    return false;
                 } else {
-                    // si están vacías, no bloqueamos por coincidencia (pero required seguirá actuando si aplica)
-                    pwdConfirm.setCustomValidity('')
-                    return true
+                    pwdConfirm.setCustomValidity('');
+                    return true;
                 }
             }
-            return true
+            pwdConfirm.setCustomValidity('');
+            return true;
         }
 
-        function updateButtonState() {
-            // comprueba validez del formulario y coincidencia de contraseñas
-            var formValid = form.checkValidity()
-            var passwordsOk = checkPasswordMatch()
-            if (formValid && passwordsOk) {
-                btn.disabled = false
-            } else {
-                btn.disabled = true
-            }
-        }
-
-        // inicial
-        updateButtonState()
-
-        // añadir listeners a todos los inputs, selects y textareas
-        var inputs = form.querySelectorAll('input, textarea, select')
-        inputs.forEach(function (el) {
-            el.addEventListener('input', updateButtonState)
-            el.addEventListener('change', updateButtonState)
-        })
-
-        // listeners específicos para contraseñas (si existen) para mostrar feedback inmediato
-        if (pwd) pwd.addEventListener('input', function () { checkPasswordMatch(); updateButtonState() })
-        if (pwdConfirm) pwdConfirm.addEventListener('input', function () { checkPasswordMatch(); updateButtonState() })
-    })()
-
-
-
-    $(document).ready(function () {
-        var $inputLetras = $('#apellido');
-        if ($inputLetras.length) {
-
-            // Máscara: solo permitir letras en tiempo real
-            $inputLetras.on('input', function () {
-                var valor = $(this).val();
-
-                // Remover cualquier carácter que no sea letra, espacio o letra acentuada
-                var soloLetras = valor.replace(/[^A-Za-záéíóúñÁÉÍÓÚÑ\s]/g, '');
-
-                $(this).val(soloLetras);
-
-                // Validación visual en tiempo real
-                var esValido = this.checkValidity() && soloLetras.length > 0;
-                if (esValido) {
-                    $(this).removeClass('is-invalid').addClass('is-valid');
-                } else {
-                    $(this).removeClass('is-valid');
-                }
-            });
-
-            // Validación al perder el foco
-            $inputLetras.on('blur', function () {
-                var esValido = this.checkValidity() && $(this).val().length > 0;
-                $(this).toggleClass('is-invalid', !esValido);
-                $(this).toggleClass('is-valid', esValido);
-            });
-
-            // Limpiar estilos al enfocar
-            $inputLetras.on('focus', function () {
-                $(this).removeClass('is-invalid is-valid');
-            });
-
-            // Prevenir pegado de texto no válido
-            $inputLetras.on('paste', function (e) {
-                var textoPegado = (e.originalEvent || e).clipboardData.getData('text/plain');
-                if (!/^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$/.test(textoPegado)) {
-                    e.preventDefault();
-                }
-            });
-
-            // Validación en el submit
-            $inputLetras.closest('form').on('submit', function (e) {
-                var esValido = $inputLetras[0].checkValidity() && $inputLetras.val().length > 0;
-                if (!esValido) {
-                    e.preventDefault();
-                    $inputLetras.addClass('is-invalid');
-                    $inputLetras.focus();
-                }
-            });
-        }
+        if (pwd) pwd.addEventListener('input', checkPasswordMatch);
+        if (pwdConfirm) pwdConfirm.addEventListener('input', checkPasswordMatch);
     });
-
-
 </script>
 
 {% endblock %}

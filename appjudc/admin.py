@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AreaConocimiento, Carrera, Estudiante, EvaluacionArticuloCientifico, Docente
+from .models import AreaConocimiento, Carrera, Estudiante, EvaluacionArticuloCientifico, Docente, PerfilUsuario
 
 # Register your models here.
 
@@ -71,3 +71,10 @@ class EvaluacionArticuloCientificoAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+@admin.register(PerfilUsuario)
+class PerfilUsuarioAdmin(admin.ModelAdmin):
+    list_display = ['user', 'telefono', 'fecha_actualizacion']
+    search_fields = ['user__username', 'user__first_name', 'user__last_name', 'telefono']
+    readonly_fields = ['fecha_actualizacion']
+

@@ -113,8 +113,48 @@ def acercade(request):
 def organizador(request):
     return render(request, 'vistas/webapp/organizador.html')
 
+@login_required
 def perfil(request):
-    return render(request, 'vistas/perfil.html')
+    """Vista para mostrar y actualizar el perfil del usuario"""
+    from .models import PerfilUsuario
+    from .forms import PerfilUsuarioForm
+    
+    # Obtener o crear el perfil del usuario
+    perfil_usuario, created = PerfilUsuario.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        form = PerfilUsuarioForm(request.POST, instance=perfil_usuario, user=request.user)
+        if form.is_valid():
+            # Actualizar datos del User
+            request.user.first_name = form.cleaned_data['first_name']
+            request.user.last_name = form.cleaned_data['last_name']
+            request.user.email = form.cleaned_data['email']
+            request.user.save()
+            
+            # Actualizar contraseña si se proporcionó
+            password = request.POST.get('password-registro')
+            password_confirm = request.POST.get('password-confirm')
+            if password and password_confirm and password == password_confirm:
+                request.user.set_password(password)
+                request.user.save()
+                # Re-autenticar para mantener sesión
+                from django.contrib.auth import update_session_auth_hash
+                update_session_auth_hash(request, request.user)
+            
+            # Guardar el perfil
+            form.save()
+            messages.success(request, 'Perfil actualizado exitosamente')
+            return redirect('perfil')
+        else:
+            messages.error(request, 'Error al actualizar el perfil')
+    else:
+        form = PerfilUsuarioForm(instance=perfil_usuario, user=request.user)
+    
+    context = {
+        'form': form,
+        'perfil': perfil_usuario,
+    }
+    return render(request, 'vistas/perfil.html', context)
 
 def proyectoInnovacion(request):
     return render(request, 'vistas/ProyectoInnovacion.html') 

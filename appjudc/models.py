@@ -124,3 +124,20 @@ class EvaluacionArticuloCientifico(models.Model):
         return f"{self.titulo} - {self.evaluador} ({self.fecha_evaluacion})"
     
     # ********************************************************
+
+# ********************************************************
+# MODELO DE PERFIL DE USUARIO
+from django.contrib.auth.models import User
+
+class PerfilUsuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
+    telefono = models.CharField(max_length=15, blank=True, null=True, verbose_name="Teléfono")
+    direccion = models.TextField(blank=True, null=True, verbose_name="Dirección")
+    fecha_actualizacion = models.DateTimeField(auto_now=True, verbose_name="Última Actualización")
+    
+    class Meta:
+        verbose_name = "Perfil de Usuario"
+        verbose_name_plural = "Perfiles de Usuarios"
+    
+    def __str__(self):
+        return f"Perfil de {self.user.username}"
